@@ -1,28 +1,52 @@
+// Navbar.tsx - Fixed version
 "use client";
 import { useState, useEffect } from "react";
 
 export default function Navbar() {
   const [darkMode, setDarkMode] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    // Check if user has a theme preference in localStorage
-    const savedTheme = localStorage.getItem("theme");
+    setMounted(true);
     
-    // Or check for system preference if no saved preference
-    if (savedTheme === "dark" || (!savedTheme && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
-      setDarkMode(true);
-      document.documentElement.classList.add("dark");
-    } else {
-      setDarkMode(false);
-      document.documentElement.classList.remove("dark");
-    }
+    // Get initial theme
+    const savedTheme = localStorage.getItem("theme");
+    const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    
+    // Set initial state based on saved preference or system preference
+    const initialDarkMode = savedTheme 
+      ? savedTheme === "dark" 
+      : systemPrefersDark;
+    
+    setDarkMode(initialDarkMode);
+    
+    // Listen for system theme changes
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    const handleChange = (e) => {
+      // Only change if user hasn't explicitly set a preference
+      if (!localStorage.getItem("theme")) {
+        setDarkMode(e.matches);
+        if (e.matches) {
+          document.documentElement.classList.add("dark");
+          document.documentElement.setAttribute("data-theme", "dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+          document.documentElement.setAttribute("data-theme", "light");
+        }
+      }
+    };
+    
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
   }, []);
 
   // Close mobile menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (isMenuOpen && !event.target.closest('.mobile-menu-container') && !event.target.closest('.mobile-menu-button')) {
+      if (isMenuOpen && 
+          !(event.target.closest('.mobile-menu-container')) && 
+          !(event.target.closest('.mobile-menu-button'))) {
         setIsMenuOpen(false);
       }
     };
@@ -39,21 +63,23 @@ export default function Navbar() {
       document.body.style.overflow = 'unset';
     }
     
-    // Cleanup on unmount
     return () => {
       document.body.style.overflow = 'unset';
     };
   }, [isMenuOpen]);
 
   const toggleDarkMode = () => {
-    if (darkMode) {
-      setDarkMode(false);
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-    } else {
-      setDarkMode(true);
+    const newDarkMode = !darkMode;
+    setDarkMode(newDarkMode);
+    
+    if (newDarkMode) {
       document.documentElement.classList.add("dark");
+      document.documentElement.setAttribute("data-theme", "dark");
       localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      document.documentElement.setAttribute("data-theme", "light");
+      localStorage.setItem("theme", "light");
     }
   };
 
@@ -63,16 +89,30 @@ export default function Navbar() {
 
   const handleNavClick = (href) => {
     setIsMenuOpen(false);
-    // Smooth scroll to section
     const element = document.querySelector(href);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
+  // Prevent hydration mismatch
+  if (!mounted) {
+    return (
+      <nav className="bg-white dark:bg-gray-100 text-black dark:text-black mx-auto mt-6 px-6 py-4 flex justify-between items-center shadow-sm rounded-2xl max-w-6xl w-[90%] font-sans relative z-50">
+        <div className="flex items-center">
+          <div className="w-12 h-12 bg-gray-200 rounded-full animate-pulse"></div>
+        </div>
+        <div className="flex items-center space-x-4">
+          <div className="w-10 h-10 bg-gray-200 rounded-full animate-pulse"></div>
+          <div className="w-10 h-10 bg-gray-200 rounded-full animate-pulse"></div>
+        </div>
+      </nav>
+    );
+  }
+
   return (
     <>
-      <nav className="bg-white text-black mx-auto mt-6 px-6 py-4 flex justify-between items-center shadow-sm transition-all duration-300 dark:bg-gray-100 dark:text-black rounded-2xl max-w-6xl w-[90%] font-sans relative z-50">
+      <nav className="bg-white dark:bg-gray-100 text-black dark:text-black mx-auto mt-6 px-6 py-4 flex justify-between items-center shadow-sm transition-all duration-300 rounded-2xl max-w-6xl w-[90%] font-sans relative z-50">
         {/* Logo that changes based on theme */}
         <div className="flex items-center">
           {darkMode ? (
@@ -102,6 +142,10 @@ export default function Navbar() {
                 href="#home" 
                 className="hover:opacity-70 transition-all duration-300 font-medium hover:scale-105 text-sm"
                 style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavClick('#home');
+                }}
               >
                 Home
               </a>
@@ -111,6 +155,10 @@ export default function Navbar() {
                 href="#about" 
                 className="hover:opacity-70 transition-all duration-300 font-medium hover:scale-105 text-sm"
                 style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavClick('#about');
+                }}
               >
                 About
               </a>
@@ -120,6 +168,10 @@ export default function Navbar() {
                 href="#projects" 
                 className="hover:opacity-70 transition-all duration-300 font-medium hover:scale-105 text-sm"
                 style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavClick('#projects');
+                }}
               >
                 Projects
               </a>
@@ -129,6 +181,10 @@ export default function Navbar() {
                 href="#contact" 
                 className="hover:opacity-70 transition-all duration-300 font-medium hover:scale-105 text-sm"
                 style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavClick('#contact');
+                }}
               >
                 Contact
               </a>
@@ -170,11 +226,10 @@ export default function Navbar() {
           </button>
           <button
             onClick={toggleMenu}
-            className="mobile-menu-button p-2 rounded-full transition-all duration-300 hover:bg-gray-200 dark:bg-gray-900 dark:hover:bg-gray-800 hover:scale-110 active:scale-95"
+            className="mobile-menu-button p-2 rounded-full transition-all duration-300 hover:bg-gray-200 dark:hover:bg-gray-300 hover:scale-110 active:scale-95"
             aria-label="Toggle menu"
           >
             <div className="relative w-6 h-6">
-              {/* Hamburger lines with smooth animation */}
               <span className={`absolute h-0.5 w-6 bg-current transform transition-all duration-300 ease-in-out ${
                 isMenuOpen ? 'top-3 rotate-45' : 'top-1.5 rotate-0'
               }`}></span>
@@ -193,16 +248,14 @@ export default function Navbar() {
       <div className={`md:hidden fixed inset-0 z-40 transition-all duration-300 ease-in-out ${
         isMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
       }`}>
-        {/* Backdrop */}
         <div className={`absolute inset-0 bg-black/20 dark:bg-black/40 backdrop-blur-sm transition-opacity duration-300 ${
           isMenuOpen ? 'opacity-100' : 'opacity-0'
         }`}></div>
         
-        {/* Menu Container */}
         <div className={`mobile-menu-container absolute top-26 left-1/2 transform -translate-x-1/2 w-[90%] max-w-6xl transition-all duration-300 ease-out ${
           isMenuOpen ? 'translate-y-0 opacity-100 scale-100' : '-translate-y-8 opacity-0 scale-95'
         }`}>
-          <div className="bg-white dark:bg-gray-100 text-black dark:text-black rounded-2xl shadow-lg border border-gray-700 dark:border-gray-200 overflow-hidden">
+          <div className="bg-white dark:bg-gray-100 text-black dark:text-black rounded-2xl shadow-lg border border-gray-200 dark:border-gray-300 overflow-hidden">
             <div className="px-6 py-4">
               <ul className="space-y-1">
                 {[

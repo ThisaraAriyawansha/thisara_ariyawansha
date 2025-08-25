@@ -2,7 +2,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="flex flex-col items-center justify-center text-center min-h-screen bg-white text-black px-6 transition-colors duration-300 dark:bg-black dark:text-white"
+      className="flex flex-col items-center justify-center text-center min-h-screen bg-white dark:bg-black text-black dark:text-white px-6 transition-colors duration-300"
     >
       <h1 className="text-5xl md:text-6xl font-extrabold mb-6 transition-colors duration-300">
         Hi, I’m <span className="text-black dark:text-white">Thisara</span>
@@ -12,7 +12,7 @@ export default function Hero() {
       </p>
       <a
         href="#projects"
-        className="px-6 py-3 bg-black text-white rounded-lg text-lg font-medium transition-all duration-300 hover:opacity-80 dark:bg-white dark:text-white"
+        className="px-6 py-3 bg-black dark:bg-white text-white dark:text-black rounded-lg text-lg font-medium transition-all duration-300 hover:opacity-80"
       >
         View My Work
       </a>
