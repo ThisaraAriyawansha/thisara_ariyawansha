@@ -57,7 +57,7 @@ export default function Skill() {
     <>
     
       <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap" rel="stylesheet" />
-      <div className="w-full py-8 sm:py-12 bg-white dark:bg-gray-900 text-black dark:text-white font-inter font-light overflow-hidden">
+      <div className="w-full py-8 sm:py-12 bg-white dark:bg-black text-black dark:text-white font-inter font-light overflow-hidden">
             
             <h2 className="text-2xl sm:text-3xl font-bold text-center mb-4 sm:mb-4">
             Technology Skills
