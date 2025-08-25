@@ -15,7 +15,11 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Thisara | Portfolio",
   description: "Thisara's personal portfolio website showcasing projects and skills.",
+  icons: {
+    icon: "/favicon.png", // or "/favicon.ico"
+  },
 };
+
 
 export default function RootLayout({
   children,
