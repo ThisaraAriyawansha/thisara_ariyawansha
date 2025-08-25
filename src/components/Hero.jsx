@@ -52,7 +52,7 @@ const Hero = () => {
 
   return (
     <div className={darkMode ? 'dark' : ''}>
-      <div className="min-h-screen bg-white dark:bg-black transition-colors duration-300 font-apple mt-16 lg:mt-10">
+      <div className="min-h-screen bg-white dark:bg-black transition-colors duration-300 font-apple mt-16 lg:mt-10" >
         <section className="flex flex-col lg:flex-row items-center justify-between min-h-screen px-6 md:px-16 lg:px-24 py-12 gap-12">
           {/* Left Content */}
           <div className="w-full lg:w-1/2 text-center lg:text-left space-y-6 animate-fade-in-up">

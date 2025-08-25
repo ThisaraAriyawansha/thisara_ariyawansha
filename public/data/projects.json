@@ -1,0 +1,77 @@
+[
+  {
+    "id": 1,
+    "name": "E-Commerce Platform",
+    "technology": ["React", "Node.js", "MongoDB"],
+    "shortDescription": "Modern e-commerce solution with admin dashboard",
+    "longDescription": "A full-stack e-commerce platform featuring user authentication, shopping cart functionality, payment integration, and comprehensive admin dashboard. Built with modern technologies for optimal performance and user experience.",
+    "features": [
+      "User authentication and authorization",
+      "Shopping cart and checkout process",
+      "Payment gateway integration",
+      "Admin dashboard for product management",
+      "Order tracking and history",
+      "Responsive design for all devices"
+    ],
+    "githubLink": "https://github.com/thisara-ariyawansha/ecommerce-platform",
+    "driveLink": "https://drive.google.com/drive/folders/example1",
+    "logo": "/images/projects/ecommerce-logo.png",
+    "homepage": "/images/projects/ecommerce-homepage.png",
+    "screenshots": [
+      "/images/projects/ecommerce-1.png",
+      "/images/projects/ecommerce-2.png",
+      "/images/projects/ecommerce-3.png"
+    ],
+    "video": "/videos/ecommerce-demo.mp4"
+  },
+  {
+    "id": 2,
+    "name": "Task Management App",
+    "technology": ["Next.js", "TypeScript", "Prisma"],
+    "shortDescription": "Collaborative task management with real-time updates",
+    "longDescription": "A comprehensive task management application that enables teams to collaborate effectively with real-time updates, project organization, and detailed analytics. Features include drag-and-drop functionality, deadline tracking, and team communication tools.",
+    "features": [
+      "Real-time collaboration",
+      "Drag and drop task organization",
+      "Project and team management",
+      "Deadline and notification system",
+      "Progress tracking and analytics",
+      "Mobile-responsive interface"
+    ],
+    "githubLink": "https://github.com/thisara-ariyawansha/task-manager",
+    "driveLink": "https://drive.google.com/drive/folders/example2",
+    "logo": "/images/projects/taskmanager-logo.png",
+    "homepage": "/images/projects/taskmanager-homepage.png",
+    "screenshots": [
+      "/images/projects/taskmanager-1.png",
+      "/images/projects/taskmanager-2.png",
+      "/images/projects/taskmanager-3.png"
+    ],
+    "video": "/videos/taskmanager-demo.mp4"
+  },
+  {
+    "id": 3,
+    "name": "Weather Dashboard",
+    "technology": ["Vue.js", "API Integration", "Chart.js"],
+    "shortDescription": "Interactive weather dashboard with forecasting",
+    "longDescription": "An intuitive weather dashboard that provides current weather conditions, 7-day forecasts, and interactive charts showing weather trends. Features location-based weather data, favorite locations, and detailed meteorological information.",
+    "features": [
+      "Current weather conditions",
+      "7-day weather forecast",
+      "Interactive weather charts",
+      "Location-based services",
+      "Favorite locations management",
+      "Weather alerts and notifications"
+    ],
+    "githubLink": "https://github.com/thisara-ariyawansha/weather-dashboard",
+    "driveLink": "https://drive.google.com/drive/folders/example3",
+    "logo": "/images/projects/weather-logo.png",
+    "homepage": "/images/projects/weather-homepage.png",
+    "screenshots": [
+      "/images/projects/weather-1.png",
+      "/images/projects/weather-2.png",
+      "/images/projects/weather-3.png"
+    ],
+    "video": "/videos/weather-demo.mp4"
+  }
+]
