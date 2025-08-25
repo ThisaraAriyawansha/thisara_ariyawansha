@@ -1,4 +1,4 @@
-// Navbar.tsx - Fixed version
+// Navbar.tsx - Updated with gray-200 light mode background
 "use client";
 import { useState, useEffect } from "react";
 
@@ -98,7 +98,7 @@ export default function Navbar() {
   // Prevent hydration mismatch
   if (!mounted) {
     return (
-      <nav className="bg-white dark:bg-gray-100 text-black dark:text-black mx-auto mt-6 px-6 py-4 flex justify-between items-center shadow-sm rounded-2xl max-w-6xl w-[90%] font-sans relative z-50">
+      <nav className="mx-auto mt-6 px-6 py-4 flex justify-between items-center shadow-sm rounded-2xl max-w-6xl w-[90%] font-sans relative z-50" style={{ backgroundColor: darkMode ? '#000000' : '#e5e7eb', color: darkMode ? '#ffffff' : '#000000' }}>
         <div className="flex items-center">
           <div className="w-12 h-12 bg-gray-200 rounded-full animate-pulse"></div>
         </div>
@@ -112,7 +112,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="bg-white dark:bg-gray-100 text-black dark:text-black mx-auto mt-6 px-6 py-4 flex justify-between items-center shadow-sm transition-all duration-300 rounded-2xl max-w-6xl w-[90%] font-sans relative z-50">
+      <nav className="mx-auto mt-6 px-6 py-4 flex justify-between items-center shadow-sm transition-all duration-300 rounded-2xl max-w-6xl w-[90%] font-sans relative z-50" style={{ backgroundColor: darkMode ? '#000000' : '#e5e7eb', color: darkMode ? '#ffffff' : '#000000' }}>
         {/* Logo that changes based on theme */}
         <div className="flex items-center">
           {darkMode ? (
@@ -255,7 +255,7 @@ export default function Navbar() {
         <div className={`mobile-menu-container absolute top-26 left-1/2 transform -translate-x-1/2 w-[90%] max-w-6xl transition-all duration-300 ease-out ${
           isMenuOpen ? 'translate-y-0 opacity-100 scale-100' : '-translate-y-8 opacity-0 scale-95'
         }`}>
-          <div className="bg-white dark:bg-gray-100 text-black dark:text-black rounded-2xl shadow-lg border border-gray-200 dark:border-gray-300 overflow-hidden">
+          <div className="rounded-2xl shadow-lg border overflow-hidden" style={{ backgroundColor: darkMode ? '#000000' : '#e5e7eb', color: darkMode ? '#ffffff' : '#000000', borderColor: darkMode ? '#374151' : '#d1d5db' }}>
             <div className="px-6 py-4">
               <ul className="space-y-1">
                 {[
@@ -267,13 +267,23 @@ export default function Navbar() {
                   <li key={item.href}>
                     <a 
                       href={item.href}
-                      className={`block py-3 px-4 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-200 transition-all duration-200 font-medium hover:translate-x-2 transform text-sm ${
+                      className={`block py-3 px-4 rounded-xl transition-all duration-200 font-medium hover:translate-x-2 transform text-sm ${
                         isMenuOpen ? 'animate-fadeInUp' : ''
                       }`}
                       style={{ 
                         fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
                         animationDelay: `${index * 50}ms`,
-                        animationFillMode: 'both'
+                        animationFillMode: 'both',
+                        backgroundColor: 'transparent',
+                        ':hover': {
+                          backgroundColor: darkMode ? '#374151' : '#f9fafb'
+                        }
+                      }}
+                      onMouseEnter={(e) => {
+                        e.target.style.backgroundColor = darkMode ? '#374151' : '#f9fafb';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.target.style.backgroundColor = 'transparent';
                       }}
                       onClick={(e) => {
                         e.preventDefault();
