@@ -112,8 +112,14 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="mx-auto mt-6 px-6 py-4 flex justify-between items-center shadow-sm transition-all duration-300 rounded-2xl max-w-6xl w-[90%] font-sans relative z-50" style={{ backgroundColor: darkMode ? '#000000' : '#e5e7eb', color: darkMode ? '#ffffff' : '#000000' }}>
-        {/* Logo that changes based on theme */}
+      <nav
+        className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 px-6 py-4 flex justify-between items-center shadow-sm transition-all duration-300 rounded-2xl max-w-6xl w-[90%] font-sans"
+        style={{
+          backgroundColor: darkMode ? '#000000' : '#e5e7eb',
+          color: darkMode ? '#ffffff' : '#000000',
+        }}
+      >       
+   {/* Logo that changes based on theme */}
         <div className="flex items-center">
           {darkMode ? (
             <img
