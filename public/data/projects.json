@@ -1,8 +1,8 @@
 [
   {
     "id": 1,
-    "name": "NOVAST – furniture e-commerce platform",
-    "technology": ["Laravel", "MySQL", "TailwindCSS","JavaScript"],
+    "name": "NOVAST – Furniture E-commerce Platform",
+    "technology": ["Laravel", "MySQL", "TailwindCSS", "JavaScript"],
     "shortDescription": "Just built NOVAST – a modern furniture e-commerce platform with full customer & admin dashboards.",
     "longDescription": "NOVAST is a modern furniture e-commerce platform designed with two primary roles: Customer and Admin. The system provides a smooth shopping experience for customers while giving admins powerful management tools.",
     "features": [
@@ -28,7 +28,8 @@
       "/Project/Novast/Screenshot 2025-08-26 085647.png"
     ],
     "video": "/Project/Novast/NOVAST.mp4"
-  },
+  }
+  ,
   {
     "id": 2,
     "name": "Novalink Computers – computer e-commerce platform",
