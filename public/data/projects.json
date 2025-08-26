@@ -16,7 +16,7 @@
     ],
     "githubLink": "https://github.com/ThisaraAriyawansha/nuvast.git",
     "driveLink": "#",
-    "logo": "/Project/NOVALINK/logo.png",
+    "logo": "/Project/Novast/green_n.png",
     "homepage": "/Project/Novast/home.png",
     "screenshots": [
       "/Project/Novast/Screenshot 2025-08-26 085433.png",
@@ -94,58 +94,73 @@
     ]
   }
   ,
-    {
-    "id": 4,
-    "name": "NOVAST – furniture e-commerce platform",
-    "technology": ["Laravel", "MySQL", "TailwindCSS","JavaScript"],
-    "shortDescription": "Just built NOVAST – a modern furniture e-commerce platform with full customer & admin dashboards.",
-    "longDescription": "NOVAST is a modern furniture e-commerce platform designed with two primary roles: Customer and Admin. The system provides a smooth shopping experience for customers while giving admins powerful management tools.",
-    "features": [
-      "User authentication and authorization",
-      "Shopping cart and checkout process",
-      "Customer dashboard to track orders & manage account",
-      "Admin dashboard for product management",
-      "Order tracking and history",
-      "Responsive design for all devices",
-      "Sales insights with 3-month sales forecasting"
-    ],
-    "githubLink": "https://github.com/ThisaraAriyawansha/nuvast.git",
-    "driveLink": "#",
-    "logo": "/Project/Novast/green_n.png",
-    "homepage": "/Project/Novast/home.png",
-    "screenshots": [
-      "/Project/Novast/green_n.png",
-      "/Project/Novast/green_n.png",
-      "/Project/Novast/green_n.png"
-    ],
-    "video": "/videos/ecommerce-demo.mp4"
-  },
-    {
-    "id": 5,
-    "name": "NOVAST – furniture e-commerce platform",
-    "technology": ["Laravel", "MySQL", "TailwindCSS","JavaScript"],
-    "shortDescription": "Just built NOVAST – a modern furniture e-commerce platform with full customer & admin dashboards.",
-    "longDescription": "NOVAST is a modern furniture e-commerce platform designed with two primary roles: Customer and Admin. The system provides a smooth shopping experience for customers while giving admins powerful management tools.",
-    "features": [
-      "User authentication and authorization",
-      "Shopping cart and checkout process",
-      "Customer dashboard to track orders & manage account",
-      "Admin dashboard for product management",
-      "Order tracking and history",
-      "Responsive design for all devices",
-      "Sales insights with 3-month sales forecasting"
-    ],
-    "githubLink": "https://github.com/ThisaraAriyawansha/nuvast.git",
-    "driveLink": "#",
-    "logo": "/Project/Novast/green_n.png",
-    "homepage": "/Project/Novast/home.png",
-    "screenshots": [
-      "/Project/Novast/green_n.png",
-      "/Project/Novast/green_n.png",
-      "/Project/Novast/green_n.png"
-    ],
-    "video": "/videos/ecommerce-demo.mp4"
-  },
+{
+  "id": 4,
+  "name": "SmartCityNow – Clean & Green City Platform",
+  "technology": ["Vue.js", "TailwindCSS", "Node.js"],
+  "shortDescription": "SmartCityNow is a community-driven platform focused on energy saving and clean city initiatives, allowing users to share ideas, events, and report issues on an interactive map.",
+  "longDescription": "SmartCityNow is a modern web platform built with Vue.js, TailwindCSS, and Node.js, designed to promote clean and sustainable cities. Users can share posts, participate in community events, react and reply to discussions, and raise awareness about energy-saving and environmental initiatives. The platform also provides an interactive map where users can report city issues, view reported issues, and contribute ideas for improvement. Email services keep users updated with event notifications and community activities.",
+  "features": [
+    "Users can add posts about ideas and initiatives",
+    "Community events where other users can participate",
+    "Reactions and replies on posts for engagement",
+    "Interactive map to add and view reported city issues",
+    "Users can share and contribute ideas directly on the map",
+    "Email service for event updates and notifications",
+    "Mobile-responsive and community-friendly interface"
+  ],
+  "githubLink": "https://github.com/ThisaraAriyawansha/SmartCityNow.git",
+  "driveLink": "#",
+  "logo": "/Project/SmartCityNow/logo.png",
+  "homepage": "/Project/SmartCityNow/Screenshot 2025-08-26 140831.png",
+  "screenshots": [
+    "/Project/SmartCityNow/Screenshot 2025-08-26 140840.png",
+    "/Project/SmartCityNow/Screenshot 2025-08-26 140848.png",
+    "/Project/SmartCityNow/Screenshot 2025-08-26 140858.png",
+    "/Project/SmartCityNow/Screenshot 2025-08-26 140931.png",
+    "/Project/SmartCityNow/Screenshot 2025-08-26 140938.png",
+    "/Project/SmartCityNow/Screenshot 2025-08-26 140954.png",
+    "/Project/SmartCityNow/Screenshot 2025-08-26 141010.png",
+    "/Project/SmartCityNow/Screenshot 2025-08-26 141014.png"
+
+  ]
+}
+,
+{
+  "id": 5,
+  "name": "Achieve360 – Learning & Role Management System",
+  "technology": ["Laravel", "TailwindCSS", "MySQL", "JavaScript"],
+  "shortDescription": "Achieve360 is a complete learning and role management platform with multi-level access for admins, managers, teachers, and students.",
+  "longDescription": "Achieve360 is a professional education and role management system built with Laravel, TailwindCSS, MySQL, and JavaScript. The platform enables admins to manage users (admins, managers, teachers, and students) with role-based access. Admins can create courses and assign them to teachers, while students can enroll in courses, view course content, check grades, and track attendance. Teachers can update student marks and upload learning materials, while managers can monitor classes and mark attendance using QR code scanning. Achieve360 ensures an organized, transparent, and efficient academic management workflow.",
+  "features": [
+    "Role-based access for Admins, Managers, Teachers, and Students",
+    "Admin dashboard to add and manage all user roles",
+    "Course creation and assignment to teachers",
+    "Student enrollment in courses with access to course content",
+    "Teachers can add grades, update marks, and upload course materials",
+    "Managers can mark attendance using QR code system",
+    "Students can view grades, attendance, and course details",
+    "Secure authentication and responsive design"
+  ],
+  "githubLink": "https://github.com/ThisaraAriyawansha/Achieve360.git",
+  "driveLink": "#",
+  "logo": "/Project/Achieve360/logo.png",
+  "homepage": "/Project/Achieve360/logo.png",
+  "screenshots": [
+    "/Project/Achieve360/logo.png",
+    "/Project/Achieve360/logo.png",
+    "/Project/Achieve360/logo.png",
+    "/Project/Achieve360/logo.png",
+    "/Project/Achieve360/logo.png",
+    "/Project/Achieve360/logo.png",
+    "/Project/Achieve360/logo.png",
+    "/Project/Achieve360/logo.png",
+    "/Project/Achieve360/logo.png",
+    "/Project/Achieve360/logo.png",
+    "/Project/Achieve360/logo.png"
+  ]
+}
+,
     {
     "id": 6,
     "name": "NOVAST – furniture e-commerce platform",
