@@ -3,11 +3,34 @@
 import React, { useState, useEffect } from 'react';
 
 const Hero = () => {
-  const [darkMode, setDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
   const [displayText, setDisplayText] = useState('');
   const [showCursor, setShowCursor] = useState(true);
   
   const fullText = "👋 Hi! I am Thisara Ariyawansha...";
+
+  // Detect dark mode
+  useEffect(() => {
+    // Initial check for dark mode
+    const isDark = document.documentElement.classList.contains('dark') ||
+                  document.documentElement.getAttribute('data-theme') === 'dark';
+    setIsDarkMode(isDark);
+
+    // Observe changes to class or data-theme
+    const observer = new MutationObserver(() => {
+      const newIsDark = document.documentElement.classList.contains('dark') ||
+                      document.documentElement.getAttribute('data-theme') === 'dark';
+      setIsDarkMode(newIsDark);
+    });
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class', 'data-theme'],
+    });
+
+    // Cleanup observer on component unmount
+    return () => observer.disconnect();
+  }, []);
 
   // Typewriter effect
   useEffect(() => {
@@ -35,29 +58,29 @@ const Hero = () => {
 
   // Function to handle CV download
   const handleDownloadCV = () => {
-    // Create a link element
     const link = document.createElement('a');
-    
-    // Set the correct path to your CV file
     link.href = '/cv/Thisara Ariyawansha.pdf';
-    
-    // This will force the browser to download the file
     link.download = 'Thisara Ariyawansha.pdf';
-    
-    // Append to the document, trigger click, then remove
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
   };
 
   return (
-    <div className={darkMode ? 'dark' : ''}>
-      <div className="min-h-screen mt-16 transition-colors duration-300 bg-white dark:bg-black font-apple lg:mt-10" >
+    <div className={isDarkMode ? 'dark' : ''}>
+        <div
+          className={`relative overflow-hidden transition-all duration-500 ease-out min-h-screen font-apple ${
+            isDarkMode
+              ? 'bg-gradient-to-b from-gray-900 via-black to-transparent'
+              : 'bg-white'
+          }`}
+        >
+
         <section className="flex flex-col items-center justify-between min-h-screen gap-12 px-6 py-12 lg:flex-row md:px-16 lg:px-24">
           {/* Left Content */}
           <div className="w-full space-y-6 text-center lg:w-1/2 lg:text-left animate-fade-in-up">
             {/* Profile pic with greeting and blinking cursor */}
-            <div className="flex items-center justify-center gap-3 mb-6 lg:justify-start">
+            <div className="flex items-center justify-center gap-3 mt-16 mb-6 lg:justify-start lg:mt-16">
               <div className="w-12 h-12 overflow-hidden bg-indigo-100 border-2 border-indigo-200 rounded-full animate-bounce-gentle">
                 <img
                   src="./profileimage/WhatsApp Image 2025-08-25 at 13.05.03_f01399dd.jpg"
@@ -65,36 +88,63 @@ const Hero = () => {
                   className="object-cover w-full h-full"
                 />
               </div>
-              <div className="text-base font-medium text-black dark:text-white">
+              <div
+                className={`text-base font-medium ${
+                  isDarkMode ? 'text-white' : 'text-black'
+                }`}
+              >
                 <span>{displayText}</span>
-                <span className={`inline-block w-0.5 h-5 text-black dark:text-white ml-1 ${showCursor ? 'opacity-100' : 'opacity-0'} transition-opacity duration-100`}>|</span>
+                <span
+                  className={`inline-block w-0.5 h-5 ml-1 ${
+                    isDarkMode ? 'text-white' : 'text-black'
+                  } ${showCursor ? 'opacity-100' : 'opacity-0'} transition-opacity duration-100`}
+                >
+                  |
+                </span>
               </div>
+
             </div>
 
             <div className="animate-fade-in-up animation-delay-300">
-            <h1 className="text-2xl font-bold leading-tight md:text-3xl lg:text-4xl text-balck dark:text-white">
-              Full Stack <span className="text-indigo-600 dark:text-indigo-400">Developer</span>
-            </h1>
+              <h1   className={`text-2xl font-bold leading-tight md:text-3xl lg:text-4xl ${
+                  isDarkMode ? 'text-white' : 'text-black'
+                }`}>
+                Full Stack <span className="text-indigo-600 dark:text-indigo-600">Developer</span>
+              </h1>
             </div>
-            
+
             <div className="animate-fade-in-up animation-delay-500">
-            <p className="max-w-md text-sm leading-relaxed text-gray-600 dark:text-gray-300">
-              I specialize in backend development and love building scalable applications from server to UI. 
-              Currently focused on creating efficient solutions with modern technologies.
-            </p>
+              <p
+                className={`max-w-md text-sm leading-relaxed ${
+                  isDarkMode ? 'text-gray-300' : 'text-gray-600'
+                }`}
+              >
+                I specialize in backend development and love building scalable applications from server to UI. 
+                Currently focused on creating efficient solutions with modern technologies.
+              </p>
             </div>
+
 
             {/* Buttons */}
             <div className="flex flex-col gap-3 mt-6 sm:flex-row animate-fade-in-up animation-delay-700">
               <button
                 onClick={handleDownloadCV}
-                className="px-4 py-2 text-sm font-medium text-white transition-all duration-300 bg-gray-900 rounded-md shadow-md dark:bg-white dark:text-gray-900 hover:opacity-90 hover:transform hover:scale-105 hover:shadow-lg"
+                className={`px-4 py-2 text-sm font-medium text-center border rounded-md transition-all duration-300 hover:transform hover:scale-105 ${
+                  isDarkMode
+                    ? 'border-gray-600 bg-gray-900 text-white'
+                    : 'bg-black text-white'
+                }`}
               >
                 Download CV
               </button>
+
               <a
                 href="#projects"
-                className="px-4 py-2 text-sm font-medium text-center transition-all duration-300 border border-gray-300 rounded-md dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 hover:transform hover:scale-105"
+                className={`px-4 py-2 text-sm font-medium text-center border rounded-md transition-all duration-300 hover:transform hover:scale-105 ${
+                  isDarkMode
+                    ? 'border-gray-600 hover:bg-gray-800 text-white'
+                    : 'border-gray-300 hover:bg-gray-50 text-gray-900'
+                }`}
               >
                 View Projects
               </a>
@@ -102,49 +152,120 @@ const Hero = () => {
 
 
             {/* Skills */}
-            <div className="grid grid-cols-1 gap-4 mt-8 sm:grid-cols-2 animate-fade-in-up animation-delay-900">
-              <div className="p-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 dark:bg-gray-800">
-                <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200">
-                  Frontend & Backend
-                </h3>
-                <p className="mt-1 text-xs text-gray-600 dark:text-gray-400">
-                  React for modern UIs and Laravel for robust backend APIs.
-                </p>
-              </div>
+                <div className="grid grid-cols-1 gap-4 mt-8 sm:grid-cols-2 animate-fade-in-up animation-delay-900">
+                  <div
+                    className={`p-4 rounded-lg shadow-sm border ${
+                      isDarkMode
+                        ? 'bg-black border-gray-700'
+                        : 'bg-white border-gray-200'
+                    }`}
+                  >
+                    <h3
+                      className={`text-sm font-semibold ${
+                        isDarkMode ? 'text-gray-200' : 'text-gray-800'
+                      }`}
+                    >
+                      Frontend & Backend
+                    </h3>
+                    <p
+                      className={`mt-1 text-xs ${
+                        isDarkMode ? 'text-gray-400' : 'text-gray-600'
+                      }`}
+                    >
+                      React for modern UIs and Laravel for robust backend APIs.
+                    </p>
+                  </div>
 
-              <div className="p-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 dark:bg-gray-800">
-                <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200">
-                  Database & Services
-                </h3>
-                <p className="mt-1 text-xs text-gray-600 dark:text-gray-400">
-                  MySQL, email integration, and secure payment gateways.
-                </p>
-              </div>
-            </div>
+                  <div
+                    className={`p-4 rounded-lg shadow-sm border ${
+                      isDarkMode
+                        ? 'bg-black border-gray-700'
+                        : 'bg-white border-gray-200'
+                    }`}
+                  >
+                    <h3
+                      className={`text-sm font-semibold ${
+                        isDarkMode ? 'text-gray-200' : 'text-gray-800'
+                      }`}
+                    >
+                      Database & Services
+                    </h3>
+                    <p
+                      className={`mt-1 text-xs ${
+                        isDarkMode ? 'text-gray-400' : 'text-gray-600'
+                      }`}
+                    >
+                      MySQL, email integration, and secure payment gateways.
+                    </p>
+                  </div>
+                </div>
 
 
             {/* Experience Snapshot */}
-            <div className="flex justify-center gap-8 mt-10 lg:justify-start animate-fade-in-up animation-delay-1100">
-              <div className="text-center transition-all duration-300 hover:transform hover:scale-110">
-                <h2 className="text-2xl font-bold text-gray-800 md:text-3xl dark:text-white">40+</h2>
-                <p className="text-sm text-gray-500 dark:text-gray-400">Projects Built</p>
+              <div className="flex justify-center gap-8 mt-10 lg:justify-start animate-fade-in-up animation-delay-1100">
+                <div className="text-center transition-all duration-300 hover:transform hover:scale-110">
+                  <h2
+                    className={`text-2xl font-bold md:text-3xl ${
+                      isDarkMode ? 'text-white' : 'text-gray-800'
+                    }`}
+                  >
+                    40+
+                  </h2>
+                  <p
+                    className={`text-sm ${
+                      isDarkMode ? 'text-gray-400' : 'text-gray-500'
+                    }`}
+                  >
+                    Projects Built
+                  </p>
+                </div>
+
+                <div className="text-center transition-all duration-300 hover:transform hover:scale-110">
+                  <h2
+                    className={`text-2xl font-bold md:text-3xl ${
+                      isDarkMode ? 'text-white' : 'text-gray-800'
+                    }`}
+                  >
+                    3+
+                  </h2>
+                  <p
+                    className={`text-sm ${
+                      isDarkMode ? 'text-gray-400' : 'text-gray-500'
+                    }`}
+                  >
+                    Years coding Experience
+                  </p>
+                </div>
+
+                <div className="text-center transition-all duration-300 hover:transform hover:scale-110">
+                  <h2
+                    className={`text-2xl font-bold md:text-3xl ${
+                      isDarkMode ? 'text-white' : 'text-gray-800'
+                    }`}
+                  >
+                    5+
+                  </h2>
+                  <p
+                    className={`text-sm ${
+                      isDarkMode ? 'text-gray-400' : 'text-gray-500'
+                    }`}
+                  >
+                    Tech Stacks
+                  </p>
+                </div>
               </div>
-              <div className="text-center transition-all duration-300 hover:transform hover:scale-110">
-                <h2 className="text-2xl font-bold text-gray-800 md:text-3xl dark:text-white">3+</h2>
-                <p className="text-sm text-gray-500 dark:text-gray-400">Years coding Experience</p>
-              </div>
-              <div className="text-center transition-all duration-300 hover:transform hover:scale-110">
-                <h2 className="text-2xl font-bold text-gray-800 md:text-3xl dark:text-white">5+</h2>
-                <p className="text-sm text-gray-500 dark:text-gray-400">Tech Stacks</p>
-              </div>
-            </div>
+
           </div>
 
           {/* Right Content */}
           <div className="flex flex-col items-center w-full mt-8 lg:w-1/2 lg:mt-0 animate-fade-in-right">
             {/* Circular Image */}
-            <div className="w-56 h-56 overflow-hidden bg-indigo-100 border-4 border-white rounded-full shadow-xl lg:w-72 lg:h-72 dark:border-gray-800">
-              <img
+              <div
+                className={`w-56 h-56 overflow-hidden rounded-full shadow-xl border-4 lg:w-72 lg:h-72 ${
+                  isDarkMode ? 'border-gray-800' : 'border-white'
+                } bg-indigo-100`}
+              >             
+               <img
                 src="./profileimage/WhatsApp Image 2025-08-25 at 13.05.03_f01399dd.jpg"
                 alt="Thisara"
                 className="object-cover w-full h-full"
@@ -166,24 +287,23 @@ const Hero = () => {
                 Passionate about creating efficient, scalable solutions with modern web technologies.
               </p>
 
-              {/* Social Links */} 
-              <div className="flex justify-center mt-6 space-x-6"> 
-                {/* GitHub */}
-                <a 
-                  href="https://github.com/ThisaraAriyawansha" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
+              {/* Social Links */}
+              <div className="flex justify-center mt-6 space-x-6">
+                <a
+                  href="https://github.com/ThisaraAriyawansha"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-gray-500 transition-all duration-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:transform hover:scale-125"
                 >
-                  <svg 
-                    className="w-6 h-6" 
-                    fill="currentColor" 
-                    viewBox="0 0 24 24" 
+                  <svg
+                    className="w-6 h-6"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
                     aria-hidden="true"
-                  > 
-                    <path 
-                      fillRule="evenodd" 
-                      clipRule="evenodd" 
+                  >
+                    <path
+                      fillRule="evenodd"
+                      clipRule="evenodd"
                       d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 
                       0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466
                       -.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 
@@ -194,26 +314,26 @@ const Hero = () => {
                       2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 
                       0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 
                       0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 
-                      10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" 
-                    /> 
-                  </svg> 
-                </a> 
+                      10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                    />
+                  </svg>
+                </a>
 
-                <a 
-                  href="https://thisaraariyawansha.vercel.app/" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
+                <a
+                  href="https://thisaraariyawansha.vercel.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-gray-500 transition-all duration-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:transform hover:scale-125"
-                > 
-                  <svg 
-                    className="w-6 h-6" 
-                    fill="currentColor" 
-                    viewBox="0 0 24 24" 
+                >
+                  <svg
+                    className="w-6 h-6"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
                     aria-hidden="true"
-                  > 
-                    <path 
-                      fillRule="evenodd" 
-                      clipRule="evenodd" 
+                  >
+                    <path
+                      fillRule="evenodd"
+                      clipRule="evenodd"
                       d="M12 2C6.48 2 2 6.48 2 12s4.48 
                       10 10 10c5.51 0 10-4.48 10-10S17.51 2 
                       12 2zm6.605 4.61a8.502 8.502 0 011.93 
@@ -224,8 +344,8 @@ const Hero = () => {
                       0 4.154.813 5.662 2.148-.152.216-1.443 
                       1.941-4.48 3.08-1.399-2.57-2.95-4.675
                       -3.189-5A8.687 8.687 0 0112 3.475zm-3.633.803a53.896 
-                      53.896 0 013.167 4.935c-3.992 1.063-7.517 1.04-7.896 
-                      1.04a8.581 8.581 0 014.729-5.975zM3.453 
+                      53.896 0 013.167 4.935c-3.992 1.063-7.517 1.040-7.896 
+                      1.040a8.581 8.581 0 014.729-5.975zM3.453 
                       12.01v-.26c.37.01 4.512.065 8.775-1.215.25.477.477.965.694 
                       1.453-.109.033-.228.065-.336.098-4.404 
                       1.42-6.747 5.303-6.942 5.629a8.522 
@@ -235,24 +355,25 @@ const Hero = () => {
                       35.318 0 011.823 6.475 8.4 8.4 0 
                       01-3.341.684zm4.761-1.465c-.086-.52-.542-3.015-1.659-6.084 
                       2.679-.423 5.022.271 5.314.369a8.468 
-                      8.468 0 01-3.655 5.715z" 
-                    /> 
-                  </svg> 
-                </a> 
+                      8.468 0 01-3.655 5.715z"
+                    />
+                  </svg>
+                </a>
 
-                  <a 
-                    href="http://www.linkedin.com/in/thisara-ariyawansha-274263284" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="text-gray-500 transition-all duration-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:transform hover:scale-125"
+                <a
+                  href="http://www.linkedin.com/in/thisara-ariyawansha-274263284"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-500 transition-all duration-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:transform hover:scale-125"
+                >
+                  <svg
+                    className="w-6 h-6"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
                   >
-                    <svg 
-                      className="w-6 h-6" 
-                      fill="currentColor" 
-                      viewBox="0 0 24 24" 
-                      aria-hidden="true"
-                    >
-                      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.039-1.852-3.039-1.853 
+                    <path
+                      d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.039-1.852-3.039-1.853 
                               0-2.136 1.445-2.136 2.939v5.669H9.351V9h3.414v1.561h.047c.477-.9 
                               1.637-1.852 3.37-1.852 3.601 0 4.268 2.37 4.268 
                               5.455v6.288zM5.337 7.433a2.062 2.062 
@@ -261,15 +382,13 @@ const Hero = () => {
                               0H1.771C.792 0 0 .774 0 1.729v20.542C0 
                               23.227.792 24 1.771 24h20.451C23.2 
                               24 24 23.227 24 22.271V1.729C24 
-                              .774 23.2 0 22.225 0z"/>
-                    </svg>
-                  </a>
- 
+                              .774 23.2 0 22.225 0z"
+                    />
+                  </svg>
+                </a>
               </div>
-
             </div>
           </div>
-
         </section>
       </div>
 
