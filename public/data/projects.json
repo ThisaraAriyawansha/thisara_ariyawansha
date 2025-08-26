@@ -1,28 +1,29 @@
 [
   {
     "id": 1,
-    "name": "E-Commerce Platform",
-    "technology": ["React", "Node.js", "MongoDB"],
-    "shortDescription": "Modern e-commerce solution with admin dashboard",
-    "longDescription": "A full-stack e-commerce platform featuring user authentication, shopping cart functionality, payment integration, and comprehensive admin dashboard. Built with modern technologies for optimal performance and user experience.",
+    "name": "NOVAST – furniture e-commerce platform",
+    "technology": ["Laravel", "MySQL", "TailwindCSS","JavaScript"],
+    "shortDescription": "Just built NOVAST – a modern furniture e-commerce platform with full customer & admin dashboards.",
+    "longDescription": "NOVAST is a modern furniture e-commerce platform designed with two primary roles: Customer and Admin. The system provides a smooth shopping experience for customers while giving admins powerful management tools.",
     "features": [
       "User authentication and authorization",
       "Shopping cart and checkout process",
-      "Payment gateway integration",
+      "Customer dashboard to track orders & manage account",
       "Admin dashboard for product management",
       "Order tracking and history",
-      "Responsive design for all devices"
+      "Responsive design for all devices",
+      "Sales insights with 3-month sales forecasting"
     ],
-    "githubLink": "https://github.com/thisara-ariyawansha/ecommerce-platform",
-    "driveLink": "https://drive.google.com/drive/folders/example1",
-    "logo": "/images/projects/ecommerce-logo.png",
-    "homepage": "/images/projects/ecommerce-homepage.png",
+    "githubLink": "https://github.com/ThisaraAriyawansha/nuvast.git",
+    "driveLink": "#",
+    "logo": "/Project/Novast/green_n.png",
+    "homepage": "/Project/Novast/home.png",
     "screenshots": [
-      "/images/projects/ecommerce-1.png",
-      "/images/projects/ecommerce-2.png",
-      "/images/projects/ecommerce-3.png"
+      "/Project/Novast/green_n.png",
+      "/Project/Novast/green_n.png",
+      "/Project/Novast/green_n.png"
     ],
-    "video": "/videos/ecommerce-demo.mp4"
+    "video": "/Project/Novast/NOVAST.mp4"
   },
   {
     "id": 2,
@@ -46,9 +47,7 @@
       "/images/projects/taskmanager-1.png",
       "/images/projects/taskmanager-2.png",
       "/images/projects/taskmanager-3.png"
-    ],
-    "video": "/videos/taskmanager-demo.mp4"
-  },
+    ]  },
   {
     "id": 3,
     "name": "Weather Dashboard",
@@ -73,5 +72,109 @@
       "/images/projects/weather-3.png"
     ],
     "video": "/videos/weather-demo.mp4"
+  },
+    {
+    "id": 4,
+    "name": "NOVAST – furniture e-commerce platform",
+    "technology": ["Laravel", "MySQL", "TailwindCSS","JavaScript"],
+    "shortDescription": "Just built NOVAST – a modern furniture e-commerce platform with full customer & admin dashboards.",
+    "longDescription": "NOVAST is a modern furniture e-commerce platform designed with two primary roles: Customer and Admin. The system provides a smooth shopping experience for customers while giving admins powerful management tools.",
+    "features": [
+      "User authentication and authorization",
+      "Shopping cart and checkout process",
+      "Customer dashboard to track orders & manage account",
+      "Admin dashboard for product management",
+      "Order tracking and history",
+      "Responsive design for all devices",
+      "Sales insights with 3-month sales forecasting"
+    ],
+    "githubLink": "https://github.com/ThisaraAriyawansha/nuvast.git",
+    "driveLink": "#",
+    "logo": "/Project/Novast/green_n.png",
+    "homepage": "/Project/Novast/home.png",
+    "screenshots": [
+      "/Project/Novast/green_n.png",
+      "/Project/Novast/green_n.png",
+      "/Project/Novast/green_n.png"
+    ],
+    "video": "/videos/ecommerce-demo.mp4"
+  },
+    {
+    "id": 5,
+    "name": "NOVAST – furniture e-commerce platform",
+    "technology": ["Laravel", "MySQL", "TailwindCSS","JavaScript"],
+    "shortDescription": "Just built NOVAST – a modern furniture e-commerce platform with full customer & admin dashboards.",
+    "longDescription": "NOVAST is a modern furniture e-commerce platform designed with two primary roles: Customer and Admin. The system provides a smooth shopping experience for customers while giving admins powerful management tools.",
+    "features": [
+      "User authentication and authorization",
+      "Shopping cart and checkout process",
+      "Customer dashboard to track orders & manage account",
+      "Admin dashboard for product management",
+      "Order tracking and history",
+      "Responsive design for all devices",
+      "Sales insights with 3-month sales forecasting"
+    ],
+    "githubLink": "https://github.com/ThisaraAriyawansha/nuvast.git",
+    "driveLink": "#",
+    "logo": "/Project/Novast/green_n.png",
+    "homepage": "/Project/Novast/home.png",
+    "screenshots": [
+      "/Project/Novast/green_n.png",
+      "/Project/Novast/green_n.png",
+      "/Project/Novast/green_n.png"
+    ],
+    "video": "/videos/ecommerce-demo.mp4"
+  },
+    {
+    "id": 6,
+    "name": "NOVAST – furniture e-commerce platform",
+    "technology": ["Laravel", "MySQL", "TailwindCSS","JavaScript"],
+    "shortDescription": "Just built NOVAST – a modern furniture e-commerce platform with full customer & admin dashboards.",
+    "longDescription": "NOVAST is a modern furniture e-commerce platform designed with two primary roles: Customer and Admin. The system provides a smooth shopping experience for customers while giving admins powerful management tools.",
+    "features": [
+      "User authentication and authorization",
+      "Shopping cart and checkout process",
+      "Customer dashboard to track orders & manage account",
+      "Admin dashboard for product management",
+      "Order tracking and history",
+      "Responsive design for all devices",
+      "Sales insights with 3-month sales forecasting"
+    ],
+    "githubLink": "https://github.com/ThisaraAriyawansha/nuvast.git",
+    "driveLink": "#",
+    "logo": "/Project/Novast/green_n.png",
+    "homepage": "/Project/Novast/home.png",
+    "screenshots": [
+      "/Project/Novast/green_n.png",
+      "/Project/Novast/green_n.png",
+      "/Project/Novast/green_n.png"
+    ],
+    "video": "/videos/ecommerce-demo.mp4"
+  },
+    {
+    "id": 7,
+    "name": "NOVAST – furniture e-commerce platform",
+    "technology": ["Laravel", "MySQL", "TailwindCSS","JavaScript"],
+    "shortDescription": "Just built NOVAST – a modern furniture e-commerce platform with full customer & admin dashboards.",
+    "longDescription": "NOVAST is a modern furniture e-commerce platform designed with two primary roles: Customer and Admin. The system provides a smooth shopping experience for customers while giving admins powerful management tools.",
+    "features": [
+      "User authentication and authorization",
+      "Shopping cart and checkout process",
+      "Customer dashboard to track orders & manage account",
+      "Admin dashboard for product management",
+      "Order tracking and history",
+      "Responsive design for all devices",
+      "Sales insights with 3-month sales forecasting"
+    ],
+    "githubLink": "https://github.com/ThisaraAriyawansha/nuvast.git",
+    "driveLink": "#",
+    "logo": "/Project/Novast/green_n.png",
+    "homepage": "/Project/Novast/home.png",
+    "screenshots": [
+      "/Project/Novast/green_n.png",
+      "/Project/Novast/green_n.png",
+      "/Project/Novast/green_n.png"
+    ],
+    "video": "/videos/ecommerce-demo.mp4"
   }
 ]

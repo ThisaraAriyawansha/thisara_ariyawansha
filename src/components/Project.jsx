@@ -1,15 +1,28 @@
+// app/components/ProjectsShowcase.jsx
 "use client";
 
-import React, { useState, useEffect } from 'react';
-import { X, Github, ExternalLink, Eye } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import { X, Github, ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const ProjectsShowcase = () => {
   const [projects, setProjects] = useState([]);
   const [selectedProject, setSelectedProject] = useState(null);
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [currentScreenshotIndex, setCurrentScreenshotIndex] = useState(0);
+  const modalRef = useRef(null);
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
 
-  // Fetch projects data and detect theme
   useEffect(() => {
+    // Check if mobile on initial render and window resize
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
     // Fetch projects from data/projects.json
     fetch('/data/projects.json')
       .then((response) => {
@@ -21,15 +34,15 @@ const ProjectsShowcase = () => {
       .then((data) => setProjects(data))
       .catch((error) => console.error('Error fetching projects:', error));
 
-    // Detect initial theme from document.documentElement
+    // Detect initial theme
     const isDark = document.documentElement.classList.contains('dark') ||
-                   document.documentElement.getAttribute('data-theme') === 'dark';
+                  document.documentElement.getAttribute('data-theme') === 'dark';
     setIsDarkMode(isDark);
 
     // Listen for theme changes
     const observer = new MutationObserver(() => {
       const newIsDark = document.documentElement.classList.contains('dark') ||
-                       document.documentElement.getAttribute('data-theme') === 'dark';
+                      document.documentElement.getAttribute('data-theme') === 'dark';
       setIsDarkMode(newIsDark);
     });
 
@@ -38,92 +51,161 @@ const ProjectsShowcase = () => {
       attributeFilter: ['class', 'data-theme'],
     });
 
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('resize', checkMobile);
+    };
   }, []);
+
+  // Close modal when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (modalRef.current && !modalRef.current.contains(event.target)) {
+        setSelectedProject(null);
+      }
+    };
+
+    if (selectedProject) {
+      document.addEventListener('mousedown', handleClickOutside);
+      document.body.style.overflow = 'hidden';
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.body.style.overflow = 'unset';
+    };
+  }, [selectedProject]);
+
+  const nextScreenshot = () => {
+    if (selectedProject.screenshots) {
+      setCurrentScreenshotIndex((prevIndex) => 
+        (prevIndex + 1) % selectedProject.screenshots.length
+      );
+    }
+  };
+
+  const prevScreenshot = () => {
+    if (selectedProject.screenshots) {
+      setCurrentScreenshotIndex((prevIndex) => 
+        prevIndex === 0 ? selectedProject.screenshots.length - 1 : prevIndex - 1
+      );
+    }
+  };
+
+  // Handle touch events for carousel swipe
+  const handleTouchStart = (e) => {
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStart - touchEnd > 50) {
+      // Left swipe
+      nextScreenshot();
+    } else if (touchEnd - touchStart > 50) {
+      // Right swipe
+      prevScreenshot();
+    }
+  };
 
   const ProjectCard = ({ project }) => {
     return (
-      <div className="group relative w-full h-96 perspective-1000">
-        <div className="relative w-full h-full transition-transform duration-700 transform-style-3d group-hover:rotate-y-12 group-hover:scale-105">
-          {/* Card Front */}
-          <div className={`absolute inset-0 w-full h-full rounded-lg shadow-lg border-2 transition-all duration-300 ${
-            isDarkMode 
-              ? 'bg-black border-white/20 shadow-white/10' 
-              : 'bg-white border-black/20 shadow-black/20'
-          } backface-hidden`}>
-            
-            {/* Logo Section */}
-            <div className="p-6 border-b border-gray-200 dark:border-gray-700">
-              <div className="w-16 h-16 mx-auto mb-4 bg-gray-100 dark:bg-gray-800 rounded-lg flex items-center justify-center">
-                <div className={`w-12 h-12 rounded ${
-                  isDarkMode ? 'bg-white text-black' : 'bg-black text-white'
-                } flex items-center justify-center font-bold text-xl`}>
-                  {project.name.charAt(0)}
-                </div>
+              <div
+          className="cursor-pointer group"
+          onClick={() => {
+            setSelectedProject(project);
+            setCurrentScreenshotIndex(0);
+          }}
+        >
+          <div
+            className={`relative rounded-3xl overflow-hidden transition-all duration-500 ease-out ${
+              isDarkMode
+                ? 'bg-black hover:bg-black border border-gray-600'
+                : 'bg-white hover:bg-gray-100 border border-gray-200/50 shadow-sm hover:shadow-lg'
+            }`}
+            style={{ fontFamily: '"SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}
+          >
+            {/* Image container with smooth transition */}
+            <div className="relative w-full h-48 overflow-hidden">
+              {/* Gradient overlay */}
+              <div className="absolute inset-0 z-10 transition-opacity duration-500 ease-out opacity-0 bg-gradient-to-t from-black/30 to-transparent group-hover:opacity-100"></div>
+
+              {/* Logo image with smooth fade out */}
+              <div className="absolute inset-0 flex items-center justify-center transition-all ease-out duration-600 group-hover:opacity-0 group-hover:scale-105">
+                <img
+                  src={project.logo}
+                  alt={`${project.name} logo`}
+                  className="object-contain w-3/4 transition-all ease-out h-3/4 duration-600"
+                />
               </div>
-              <h3 className={`text-xl font-bold text-center ${
-                isDarkMode ? 'text-white' : 'text-black'
-              }`}>
-                {project.name}
-              </h3>
+
+              {/* Homepage image with smooth fade in */}
+              <div className="absolute inset-0 transition-opacity ease-out opacity-0 duration-600 group-hover:opacity-100">
+                <img
+                  src={project.homepage}
+                  alt={`${project.name} homepage`}
+                  className="object-cover w-full h-full transition-transform ease-out duration-600 group-hover:scale-102"
+                />
+              </div>
             </div>
 
-            {/* Content */}
-            <div className="p-6">
-              <p className={`text-sm mb-4 leading-relaxed ${
-                isDarkMode ? 'text-gray-300' : 'text-gray-600'
-              }`}>
-                {project.shortDescription}
-              </p>
-              
-              <div className="flex flex-wrap gap-2 mb-6">
-                {project.technology.slice(0, 3).map((tech, index) => (
-                  <span
-                    key={index}
-                    className={`px-3 py-1 text-xs rounded-full border ${
-                      isDarkMode 
-                        ? 'bg-black border-white/30 text-white' 
-                        : 'bg-white border-black/30 text-black'
-                    }`}
-                  >
-                    {tech}
-                  </span>
-                ))}
+            {/* Content - Auto height based on content */}
+            <div className="flex flex-col p-6">
+              <div className="flex-grow">
+                <h3
+                  className={`text-xl font-semibold mb-2.5 transition-colors duration-300 ease-out ${
+                    isDarkMode ? 'text-white group-hover:text-gray-300' : 'text-gray-900 group-hover:text-gray-600'
+                  }`}
+                >
+                  {project.name}
+                </h3>
+
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {project.technology.slice(0, 3).map((tech, index) => (
+                    <span
+                      key={index}
+                      className={`px-2.5 py-1 text-xs font-medium rounded-full transition-all duration-300 ease-out ${
+                        isDarkMode
+                          ? 'bg-gray-800 text-gray-300 border border-gray-700/50 group-hover:bg-gray-700'
+                          : 'bg-gray-100 text-gray-700 border border-gray-200/50 group-hover:bg-gray-200'
+                      }`}
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                  {project.technology.length > 3 && (
+                    <span
+                      className={`px-2.5 py-1 text-xs rounded-full ${
+                        isDarkMode ? 'text-gray-400' : 'text-gray-500'
+                      }`}
+                    >
+                      +{project.technology.length - 3}
+                    </span>
+                  )}
+                </div>
               </div>
 
-              <button
-                onClick={() => setSelectedProject(project)}
-                className={`w-full py-2 px-4 rounded-lg border-2 transition-all duration-300 font-medium ${
-                  isDarkMode
-                    ? 'border-white text-white hover:bg-white hover:text-black'
-                    : 'border-black text-black hover:bg-black hover:text-white'
+              <div
+                className={`flex items-center text-sm font-medium transition-colors duration-300 ease-out ${
+                  isDarkMode ? 'text-gray-300 group-hover:text-gray-100' : 'text-gray-700 group-hover:text-gray-900'
                 }`}
               >
-                View More
-              </button>
-            </div>
-          </div>
-
-          {/* Card Back - Homepage Image */}
-          <div className={`absolute inset-0 w-full h-full rounded-lg shadow-lg border-2 rotate-y-180 ${
-            isDarkMode 
-              ? 'bg-black border-white/20' 
-              : 'bg-white border-black/20'
-          } backface-hidden overflow-hidden`}>
-            <div className="w-full h-full bg-gray-200 dark:bg-gray-800 flex items-center justify-center">
-              <div className={`text-center p-6 ${
-                isDarkMode ? 'text-white' : 'text-black'
-              }`}>
-                <div className="w-full h-48 bg-gray-300 dark:bg-gray-700 rounded-lg mb-4 flex items-center justify-center">
-                  <Eye size={48} className="opacity-50" />
-                </div>
-                <h4 className="font-bold mb-2">{project.name}</h4>
-                <p className="text-sm opacity-75">Homepage Preview</p>
+                View Details
+                <svg
+                  className="w-4 h-4 ml-1.5 transition-transform duration-300 ease-out group-hover:translate-x-0.5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
+                </svg>
               </div>
             </div>
           </div>
         </div>
-      </div>
     );
   };
 
@@ -131,140 +213,225 @@ const ProjectsShowcase = () => {
     if (!project) return null;
 
     return (
-      <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
-        <div className={`max-w-4xl w-full max-h-[90vh] overflow-y-auto rounded-lg border-2 ${
-          isDarkMode 
-            ? 'bg-black border-white/20' 
-            : 'bg-white border-black/20'
-        }`}>
-          {/* Modal Header */}
-          <div className={`flex items-center justify-between p-6 border-b ${
-            isDarkMode ? 'border-white/20' : 'border-black/20'
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-fade-in">
+        <div 
+          ref={modalRef}
+          className={`max-w-5xl w-full max-h-[90vh] overflow-hidden rounded-3xl shadow-2xl transform animate-scale-in flex flex-col ${
+            isDarkMode 
+              ? 'bg-black border border-zinc-800' 
+              : 'bg-white border border-gray-200'
+          }`}
+        >
+          
+          {/* Header - Fixed height */}
+          <div className={`flex items-center justify-between p-6 border-b flex-shrink-0 ${
+            isDarkMode ? 'border-zinc-800' : 'border-gray-200'
           }`}>
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-gray-100 dark:bg-gray-800 rounded-lg flex items-center justify-center">
-                <div className={`w-10 h-10 rounded ${
-                  isDarkMode ? 'bg-white text-black' : 'bg-black text-white'
-                } flex items-center justify-center font-bold`}>
-                  {project.name.charAt(0)}
-                </div>
+              <img 
+                src={project.logo} 
+                alt={`${project.name} logo`} 
+                className="object-contain w-12 h-12 p-2 rounded-xl bg-opacity-20"
+                style={{
+                  backgroundColor: isDarkMode ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.05)'
+                }}
+              />
+              <div>
+                <h2 className={`text-2xl font-bold ${
+                  isDarkMode ? 'text-white' : 'text-gray-900'
+                }`}>
+                  {project.name}
+                </h2>
+                <p className={`text-sm mt-1 ${
+                  isDarkMode ? 'text-zinc-400' : 'text-gray-600'
+                }`}>
+                  {project.shortDescription}
+                </p>
               </div>
-              <h2 className={`text-2xl font-bold ${
-                isDarkMode ? 'text-white' : 'text-black'
-              }`}>
-                {project.name}
-              </h2>
             </div>
+            
             <button
               onClick={onClose}
-              className={`p-2 rounded-lg border transition-colors ${
+              className={`p-2 rounded-full transition-all duration-300 hover:scale-110 ${
                 isDarkMode
-                  ? 'border-white/30 text-white hover:bg-white/10'
-                  : 'border-black/30 text-black hover:bg-black/10'
+                  ? 'hover:bg-zinc-800 text-zinc-400 hover:text-white'
+                  : 'hover:bg-gray-100 text-gray-500 hover:text-gray-900'
               }`}
             >
-              <X size={20} />
+              <X size={24} />
             </button>
           </div>
 
-          {/* Modal Content */}
-          <div className="p-6">
-            {/* Homepage Image */}
-            <div className="mb-6">
-              <div className="w-full h-64 bg-gray-200 dark:bg-gray-800 rounded-lg flex items-center justify-center">
-                <div className={`text-center ${
-                  isDarkMode ? 'text-white' : 'text-black'
+          {/* Content - Scrollable area */}
+          <div className="flex-grow overflow-y-auto">
+            <div className="p-6 space-y-8">
+              
+              {/* Homepage Image */}
+              <div>
+                <h3 className={`text-lg font-semibold mb-4 ${
+                  isDarkMode ? 'text-white' : 'text-gray-900'
                 }`}>
-                  <Eye size={48} className="mx-auto mb-2 opacity-50" />
-                  <p className="text-sm opacity-75">Project Homepage</p>
+                  Preview
+                </h3>
+                <div className="relative overflow-hidden rounded-xl">
+                  <img 
+                    src={project.homepage} 
+                    alt={`${project.name} homepage`} 
+                    className="object-cover w-full h-full transition-transform duration-700 hover:scale-105"
+                  />
+                  <div className="absolute inset-0 transition-opacity duration-500 opacity-0 bg-gradient-to-t from-black/20 to-transparent hover:opacity-100"></div>
                 </div>
               </div>
-            </div>
 
-            {/* Technology Stack */}
-            <div className="mb-6">
-              <h3 className={`text-lg font-semibold mb-3 ${
-                isDarkMode ? 'text-white' : 'text-black'
-              }`}>
-                Technology Stack
-              </h3>
-              <div className="flex flex-wrap gap-2">
-                {project.technology.map((tech, index) => (
-                  <span
-                    key={index}
-                    className={`px-3 py-1 text-sm rounded-full border ${
-                      isDarkMode 
-                        ? 'bg-black border-white/30 text-white' 
-                        : 'bg-white border-black/30 text-black'
-                    }`}
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            {/* Description */}
-            <div className="mb-6">
-              <h3 className={`text-lg font-semibold mb-3 ${
-                isDarkMode ? 'text-white' : 'text-black'
-              }`}>
-                Description
-              </h3>
-              <p className={`leading-relaxed ${
-                isDarkMode ? 'text-gray-300' : 'text-gray-600'
-              }`}>
-                {project.longDescription}
-              </p>
-            </div>
-
-            {/* Features */}
-            <div className="mb-6">
-              <h3 className={`text-lg font-semibold mb-3 ${
-                isDarkMode ? 'text-white' : 'text-black'
-              }`}>
-                Key Features
-              </h3>
-              <div className="grid md:grid-cols-2 gap-2">
-                {project.features.map((feature, index) => (
-                  <div key={index} className={`flex items-center gap-2 ${
-                    isDarkMode ? 'text-gray-300' : 'text-gray-600'
+              {/* Screenshots Grid (instead of carousel) */}
+              {project.screenshots && project.screenshots.length > 0 && (
+                <div>
+                  <h3 className={`text-lg font-semibold mb-4 ${
+                    isDarkMode ? 'text-white' : 'text-gray-900'
                   }`}>
-                    <div className="w-1.5 h-1.5 bg-current rounded-full"></div>
-                    <span className="text-sm">{feature}</span>
+                    Screenshots
+                  </h3>
+                  <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+                    {project.screenshots.map((screenshot, index) => (
+                      <div key={index} className="overflow-hidden rounded-lg">
+                        <img 
+                          src={screenshot} 
+                          alt={`Screenshot ${index + 1}`} 
+                          className="object-cover w-full h-40 transition-transform duration-500 hover:scale-105"
+                        />
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
-            </div>
+                </div>
+              )}
 
-            {/* Links */}
-            <div className="flex flex-wrap gap-3">
-              <a
-                href={project.githubLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`flex items-center gap-2 px-4 py-2 rounded-lg border-2 transition-all duration-300 ${
-                  isDarkMode
-                    ? 'border-white text-white hover:bg-white hover:text-black'
-                    : 'border-black text-black hover:bg-black hover:text-white'
-                }`}
-              >
-                <Github size={16} />
-                GitHub
-              </a>
-              <a
-                href={project.driveLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`flex items-center gap-2 px-4 py-2 rounded-lg border-2 transition-all duration-300 ${
-                  isDarkMode
-                    ? 'border-white text-white hover:bg-white hover:text-black'
-                    : 'border-black text-black hover:bg-black hover:text-white'
-                }`}
-              >
-                <ExternalLink size={16} />
-                Drive
-              </a>
+              {/* Video Demo */}
+              {project.video && (
+                <div className="mt-6">
+                  <h3
+                    className={`text-lg font-semibold mb-3 transition-colors duration-300 ease-out ${
+                      isDarkMode ? 'text-white' : 'text-gray-900'
+                    }`}
+                    style={{ fontFamily: '"SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}
+                  >
+                    Demo
+                  </h3>
+                  <div className={`relative overflow-hidden rounded-2xl border ${
+                    isDarkMode ? 'border-gray-800/50 bg-gray-900' : 'border-gray-200/50 bg-white'
+                  }`}>
+                    <video
+                      controls
+                      className="object-contain w-full h-auto max-h-80"
+                      poster={project.poster || project.homepage}
+                      preload="metadata"
+                    >
+                      <source src={project.video} type="video/mp4" />
+                      <source src={project.video} type="video/webm" /> {/* Fallback for WebM format */}
+                      <p className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                        Your browser does not support the video tag. Please download the video{' '}
+                        <a
+                          href={project.video}
+                          className={`underline ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}
+                        >
+                          here
+                        </a>.
+                      </p>
+                    </video>
+                  </div>
+                </div>
+              )}
+
+              <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+                {/* Technology Stack */}
+                <div>
+                  <h3 className={`text-lg font-semibold mb-4 ${
+                    isDarkMode ? 'text-white' : 'text-gray-900'
+                  }`}>
+                    Technologies
+                  </h3>
+                  <div className="flex flex-wrap gap-3">
+                    {project.technology.map((tech, index) => (
+                      <span
+                        key={index}
+                        className={`px-3 py-1.5 text-sm font-medium rounded-full border transition-all duration-300 hover:scale-105 ${
+                          isDarkMode 
+                            ? 'bg-zinc-900 text-zinc-200 border-zinc-700 hover:bg-zinc-800' 
+                            : 'bg-gray-100 text-gray-800 border-gray-300 hover:bg-gray-200'
+                        }`}
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Features */}
+                <div>
+                  <h3 className={`text-lg font-semibold mb-4 ${
+                    isDarkMode ? 'text-white' : 'text-gray-900'
+                  }`}>
+                    Features
+                  </h3>
+                  <div className="space-y-3">
+                    {project.features.map((feature, index) => (
+                      <div key={index} className="flex items-start gap-3 group">
+                        <div className={`w-2 h-2 rounded-full mt-2 flex-shrink-0 transition-all duration-300 group-hover:scale-150 ${
+                          isDarkMode ? 'bg-blue-500' : 'bg-blue-600'
+                        }`}></div>
+                        <span className={`text-sm ${
+                          isDarkMode ? 'text-zinc-300 group-hover:text-white' : 'text-gray-700 group-hover:text-gray-900'
+                        } transition-colors duration-300`}>
+                          {feature}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Description */}
+              <div>
+                <h3 className={`text-lg font-semibold mb-4 ${
+                    isDarkMode ? 'text-white' : 'text-gray-900'
+                  }`}>
+                  About
+                </h3>
+                <p className={`text-base leading-relaxed ${
+                  isDarkMode ? 'text-zinc-300' : 'text-gray-700'
+                }`}>
+                  {project.longDescription}
+                </p>
+              </div>
+
+              {/* Links - Fixed at bottom of scrollable area */}
+              <div className="flex gap-4 pt-4 pb-6">
+                <a
+                  href={project.githubLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold transition-all duration-300 hover:scale-105 ${
+                    isDarkMode
+                      ? 'bg-white text-black hover:bg-gray-100 border border-gray-300'
+                      : 'bg-black text-white hover:bg-gray-800'
+                  }`}
+                >
+                  <Github size={18} />
+                  GitHub
+                </a>
+                <a
+                  href={project.driveLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold border transition-all duration-300 hover:scale-105 ${
+                    isDarkMode
+                      ? 'border-zinc-700 text-zinc-200 hover:bg-zinc-900 hover:border-zinc-600'
+                      : 'border-gray-300 text-gray-800 hover:bg-gray-50 hover:border-gray-400'
+                  }`}
+                >
+                  <ExternalLink size={18} />
+                  Live Demo
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -273,28 +440,30 @@ const ProjectsShowcase = () => {
   };
 
   return (
-    <div className={`min-h-screen transition-colors duration-300 ${
-      isDarkMode ? 'bg-black' : 'bg-white'
+    <div className={`min-h-screen transition-colors duration-500 ${
+      isDarkMode ? 'bg-black' : 'bg-gray-50'
     }`}>
-      {/* Header */}
-      <div className="container mx-auto px-4 py-8">
-        <div className="flex items-center justify-between mb-8">
-          <h1 className={`text-3xl font-bold ${
-            isDarkMode ? 'text-white' : 'text-black'
+      <div className="px-6 py-16 mx-auto max-w-7xl">
+        <div className="mb-12 text-center">
+          <h1 className={`text-4xl font-bold mb-3 transition-colors duration-500 ${
+            isDarkMode ? 'text-white' : 'text-gray-900'
           }`}>
             Projects
           </h1>
+          <p className={`text-lg max-w-2xl mx-auto transition-colors duration-500 ${
+            isDarkMode ? 'text-zinc-400' : 'text-gray-600'
+          }`}>
+            A curated collection of my work, featuring innovative solutions and cutting-edge technologies.
+          </p>
         </div>
-
-        {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        
+        <div className={`grid gap-8 ${isMobile ? 'grid-cols-1' : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'}`}>
           {projects.map((project) => (
             <ProjectCard key={project.id} project={project} />
           ))}
         </div>
       </div>
-
-      {/* Modal */}
+      
       {selectedProject && (
         <ProjectModal 
           project={selectedProject} 
@@ -302,22 +471,23 @@ const ProjectsShowcase = () => {
         />
       )}
 
-      {/* Custom CSS for 3D effects */}
-      <style jsx>{`
-        .perspective-1000 {
-          perspective: 1000px;
+      <style jsx global>{`
+        @keyframes fade-in {
+          from { opacity: 0; }
+          to { opacity: 1; }
         }
-        .transform-style-3d {
-          transform-style: preserve-3d;
+        
+        @keyframes scale-in {
+          from { transform: scale(0.95); opacity: 0; }
+          to { transform: scale(1); opacity: 1; }
         }
-        .rotate-y-12 {
-          transform: rotateY(12deg) scale(1.05);
+        
+        .animate-fade-in {
+          animation: fade-in 0.3s ease-out forwards;
         }
-        .rotate-y-180 {
-          transform: rotateY(180deg);
-        }
-        .backface-hidden {
-          backface-visibility: hidden;
+        
+        .animate-scale-in {
+          animation: scale-in 0.3s ease-out forwards;
         }
       `}</style>
     </div>
