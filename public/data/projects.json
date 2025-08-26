@@ -60,32 +60,33 @@
       "/Project/NOVALINK/Screenshot 2025-08-26 123120.png"
     ]
   }
-,
+  ,
   {
     "id": 3,
-    "name": "Weather Dashboard",
-    "technology": ["Vue.js", "API Integration", "Chart.js"],
-    "shortDescription": "Interactive weather dashboard with forecasting",
-    "longDescription": "An intuitive weather dashboard that provides current weather conditions, 7-day forecasts, and interactive charts showing weather trends. Features location-based weather data, favorite locations, and detailed meteorological information.",
+    "name": "Planora – Event Management Tool",
+    "technology": ["React", "Node.js", "MySQL"],
+    "shortDescription": "Planora is a modern event management tool where organizers can create and manage events, while participants can explore and join events through personalized dashboards.",
+    "longDescription": "Planora is a professional event management platform built with React, Node.js, and MySQL. It enables organizers to create, manage, and track events, while participants can easily browse, register, and participate. Admins have full control over organizers, participants, and events, ensuring a smooth and secure event ecosystem.",
     "features": [
-      "Current weather conditions",
-      "7-day weather forecast",
-      "Interactive weather charts",
-      "Location-based services",
-      "Favorite locations management",
-      "Weather alerts and notifications"
+      "Organizer dashboard to create and manage events",
+      "Participant dashboard to view and join events",
+      "Admin panel to manage organizers, participants, and events",
+      "User account management for all roles",
+      "Secure authentication and role-based access",
+      "Responsive, user-friendly interface"
     ],
-    "githubLink": "https://github.com/thisara-ariyawansha/weather-dashboard",
-    "driveLink": "https://drive.google.com/drive/folders/example3",
-    "logo": "/images/projects/weather-logo.png",
-    "homepage": "/images/projects/weather-homepage.png",
+    "githubLink": "https://github.com/ThisaraAriyawansha/Planora.git",
+    "driveLink": "#",
+    "logo": "/Project/Planora/logo_p.png",
+    "homepage": "/Project/Planora/Screenshot 2025-08-26 133040.png",
     "screenshots": [
-      "/images/projects/weather-1.png",
-      "/images/projects/weather-2.png",
-      "/images/projects/weather-3.png"
-    ],
-    "video": "/videos/weather-demo.mp4"
-  },
+      "/Project/Planora/Screenshot 2025-08-26 133054.png",
+      "/Project/Planora/Screenshot 2025-08-26 133110.png",
+      "/Project/Planora/Screenshot 2025-08-26 133124.png",
+      "/Project/Planora/Screenshot 2025-08-26 133149.png"
+    ]
+  }
+  ,
     {
     "id": 4,
     "name": "NOVAST – furniture e-commerce platform",
