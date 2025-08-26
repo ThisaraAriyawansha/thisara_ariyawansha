@@ -379,7 +379,61 @@
     "/Project/Discover-Serendib/Screenshot 2025-08-26 165812.png",
     "/Project/Discover-Serendib/Screenshot 2025-08-26 165822.png"
   ]
+},
+{
+  "id": 14,
+  "name": "LawBridge – Legal Case Management System",
+  "technology": ["React", "Node.js", "Express", "MongoDB", "TailwindCSS"],
+  "shortDescription": "LawBridge is a comprehensive legal case management system allowing users to manage cases, documents, appointments, and reminders with visualized summaries.",
+  "longDescription": "LawBridge is a modern legal case management platform built with React, Node.js, Express, and MongoDB. The system allows law firms and legal professionals to efficiently manage civil, criminal, family law, and labor cases. Users can register and authenticate securely, upload and manage legal documents, schedule appointments, and set reminders. Case summaries are visualized through pie charts for easy tracking and insights, making LawBridge a complete solution for legal management.",
+  "features": [
+    "Manage different types of legal cases (Civil, Criminal, Family Law, Labor)",
+    "View detailed case information and visualized summaries using pie charts",
+    "User registration and authentication",
+    "Upload, store, and manage legal documents",
+    "Schedule and manage appointments with integrated calendar",
+    "Add and view reminders for important tasks",
+    "Responsive and user-friendly interface"
+  ],
+  "githubLink": "https://github.com/ThisaraAriyawansha/LawBridge.git",
+  "driveLink": "#",
+  "logo": "/Project/LawBridge/logo.png",
+  "homepage": "/Project/LawBridge/WhatsApp Image 2025-08-26 at 17.03.21_d597f1e1.jpg",
+  "screenshots": [
+    "/Project/LawBridge/WhatsApp Image 2025-08-26 at 17.03.21_d862e817.jpg",
+    "/Project/LawBridge/WhatsApp Image 2025-08-26 at 17.03.21_b13d1b05.jpg",
+    "/Project/LawBridge/WhatsApp Image 2025-08-26 at 17.03.21_73750519.jpg",
+    "/Project/LawBridge/WhatsApp Image 2025-08-26 at 17.03.21_1d288815.jpg"
+  ]
+},
+{
+  "id": 15,
+  "name": "ScanAttend – QR-Based Attendance Management System",
+  "technology": ["React", "React Router", "Axios", "Express.js", "Node.js", "MongoDB", "JWT", "styled-components", "qrcode.react", "react-qr-reader"],
+  "shortDescription": "ScanAttend is a web app that simplifies attendance management using QR codes, offering secure authentication, real-time tracking, and detailed reports.",
+  "longDescription": "ScanAttend is a modern attendance management platform built with React, Express.js, Node.js, and MongoDB. The system leverages QR code technology to allow users to mark attendance efficiently. Secure authentication with JWT ensures data safety, while real-time tracking, analytics, and notifications provide comprehensive oversight for educational institutions, businesses, and events. QR codes are generated per user and can be scanned easily for attendance verification.",
+  "features": [
+    "QR code generation for each user",
+    "QR code scanning to mark attendance",
+    "Secure user authentication with JWT",
+    "Real-time attendance tracking",
+    "Attendance reports and analytics",
+    "Notifications for attendance status",
+    "Responsive and user-friendly interface"
+  ],
+  "githubLink": "https://github.com/ThisaraAriyawansha/ScanAttend.git",
+  "driveLink": "#",
+  "logo": "/Project/ScanAttend/logo.png",
+  "homepage": "/Project/ScanAttend/WhatsApp Image 2025-08-26 at 17.14.11_44208bff.jpg",
+  "screenshots": [
+    "/Project/ScanAttend/WhatsApp Image 2025-08-26 at 17.14.11_7e0b5795.jpg",
+    "/Project/ScanAttend/WhatsApp Image 2025-08-26 at 17.14.11_4d3b11e9.jpg",
+    "/Project/ScanAttend/WhatsApp Image 2025-08-26 at 17.14.11_46e782ae.jpg",
+    "/Project/ScanAttend/WhatsApp Image 2025-08-26 at 17.14.11_091a407e.jpg"
+  ]
 }
+
+
 
 
 
