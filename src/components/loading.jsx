@@ -66,7 +66,7 @@ export default function ClientWrapper({ children }) {
           )}
         </button>
 
-        <div className="text-center max-w-sm w-full">
+        <div className="w-full max-w-sm text-center">
           {/* Simple spinner */}
           <div className="relative mb-8">
             <div className={`w-12 h-12 mx-auto border-2 rounded-full transition-colors duration-300 ${
@@ -104,7 +104,7 @@ export default function ClientWrapper({ children }) {
                 style={{ width: `${Math.min(progress, 100)}%` }}
               ></div>
             </div>
-            <div className="text-center mt-4">
+            <div className="mt-4 text-center">
               <span className={`text-xs font-light font-mono transition-colors duration-300 ${
                 isDark ? 'text-gray-500' : 'text-gray-400'
               }`}>
