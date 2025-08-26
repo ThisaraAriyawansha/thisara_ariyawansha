@@ -161,32 +161,37 @@
   ]
 }
 ,
-    {
-    "id": 6,
-    "name": "NOVAST – furniture e-commerce platform",
-    "technology": ["Laravel", "MySQL", "TailwindCSS","JavaScript"],
-    "shortDescription": "Just built NOVAST – a modern furniture e-commerce platform with full customer & admin dashboards.",
-    "longDescription": "NOVAST is a modern furniture e-commerce platform designed with two primary roles: Customer and Admin. The system provides a smooth shopping experience for customers while giving admins powerful management tools.",
-    "features": [
-      "User authentication and authorization",
-      "Shopping cart and checkout process",
-      "Customer dashboard to track orders & manage account",
-      "Admin dashboard for product management",
-      "Order tracking and history",
-      "Responsive design for all devices",
-      "Sales insights with 3-month sales forecasting"
-    ],
-    "githubLink": "https://github.com/ThisaraAriyawansha/nuvast.git",
-    "driveLink": "#",
-    "logo": "/Project/Novast/green_n.png",
-    "homepage": "/Project/Novast/home.png",
-    "screenshots": [
-      "/Project/Novast/green_n.png",
-      "/Project/Novast/green_n.png",
-      "/Project/Novast/green_n.png"
-    ],
-    "video": "/videos/ecommerce-demo.mp4"
-  },
+{
+  "id": 6,
+  "name": "Luminova – Smart Event Planning Platform",
+  "technology": ["Next.js", "TailwindCSS", "Express.js", "Firebase", "Nodemailer"],
+  "shortDescription": "Luminova is a sleek and responsive event planning platform for organizing, managing, and publishing events with real-time collaboration and automated email notifications.",
+  "longDescription": "Luminova is a modern event planning platform designed to make event management simple, flexible, and collaborative. With its responsive interface, users can effortlessly plan both personal and professional events—from weddings and private parties to large conferences. The platform supports real-time collaboration, customizable event settings, and event publishing for public visibility. Guests can easily be invited and managed through RSVPs, while integrated email notifications powered by Nodemailer keep everyone updated. Built with Next.js, TailwindCSS, Express.js, and Firebase, Luminova ensures a smooth and engaging experience across devices.",
+  "features": [
+    "Plan and manage personal or professional events (weddings, conferences, parties, etc.)",
+    "Real-time collaboration for event planning",
+    "Customizable event options and settings",
+    "Publish and share events with public visibility options",
+    "Event search functionality to discover and filter events",
+    "RSVP and guest management system",
+    "Automated email notifications with Nodemailer",
+    "Responsive design for desktop and mobile"
+  ],
+  "githubLink": "https://github.com/ThisaraAriyawansha/Luminova.git",
+  "driveLink": "luminova-opal.vercel.app",
+  "logo": "/Project/Luminova/logo.png",
+  "logoLight": "/Project/Luminova/logo_l.png", 
+  "logoDark": "/Project/Luminova/logo.png",
+  "homepage": "/Project/Luminova/Screenshot 2025-08-26 143534.png",
+  "screenshots": [
+    "/Project/Luminova/Screenshot 2025-08-26 143542.png",
+    "/Project/Luminova/Screenshot 2025-08-26 143554.png",
+    "/Project/Luminova/Screenshot 2025-08-26 143601.png",
+    "/Project/Luminova/Screenshot 2025-08-26 143610.png",
+    "/Project/Luminova/Screenshot 2025-08-26 143617.png"
+  ]
+}
+,
     {
     "id": 7,
     "name": "NOVAST – furniture e-commerce platform",
