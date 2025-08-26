@@ -9,6 +9,7 @@ const ProjectsShowcase = () => {
   const [selectedProject, setSelectedProject] = useState(null);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [currentScreenshotIndex, setCurrentScreenshotIndex] = useState(0);
+  const [currentProjectIndex, setCurrentProjectIndex] = useState(0); // For mobile carousel
   const modalRef = useRef(null);
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
@@ -19,10 +20,10 @@ const ProjectsShowcase = () => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
     };
-    
+
     checkMobile();
     window.addEventListener('resize', checkMobile);
-    
+
     // Fetch projects from data/projects.json
     fetch('/data/projects.json')
       .then((response) => {
@@ -78,7 +79,7 @@ const ProjectsShowcase = () => {
 
   const nextScreenshot = () => {
     if (selectedProject.screenshots) {
-      setCurrentScreenshotIndex((prevIndex) => 
+      setCurrentScreenshotIndex((prevIndex) =>
         (prevIndex + 1) % selectedProject.screenshots.length
       );
     }
@@ -86,13 +87,26 @@ const ProjectsShowcase = () => {
 
   const prevScreenshot = () => {
     if (selectedProject.screenshots) {
-      setCurrentScreenshotIndex((prevIndex) => 
+      setCurrentScreenshotIndex((prevIndex) =>
         prevIndex === 0 ? selectedProject.screenshots.length - 1 : prevIndex - 1
       );
     }
   };
 
-  // Handle touch events for carousel swipe
+  // Handle project navigation for mobile carousel
+  const nextProject = () => {
+    setCurrentProjectIndex((prevIndex) =>
+      (prevIndex + 1) % projects.length
+    );
+  };
+
+  const prevProject = () => {
+    setCurrentProjectIndex((prevIndex) =>
+      prevIndex === 0 ? projects.length - 1 : prevIndex - 1
+    );
+  };
+
+  // Handle touch events for mobile carousel
   const handleTouchStart = (e) => {
     setTouchStart(e.targetTouches[0].clientX);
   };
@@ -104,108 +118,108 @@ const ProjectsShowcase = () => {
   const handleTouchEnd = () => {
     if (touchStart - touchEnd > 50) {
       // Left swipe
-      nextScreenshot();
+      nextProject();
     } else if (touchEnd - touchStart > 50) {
       // Right swipe
-      prevScreenshot();
+      prevProject();
     }
   };
 
   const ProjectCard = ({ project }) => {
     return (
-              <div
-          className="cursor-pointer group"
-          onClick={() => {
-            setSelectedProject(project);
-            setCurrentScreenshotIndex(0);
-          }}
+      <div
+        className="cursor-pointer group"
+        onClick={() => {
+          setSelectedProject(project);
+          setCurrentScreenshotIndex(0);
+        }}
+      >
+        <div
+          className={`relative rounded-3xl overflow-hidden transition-all duration-500 ease-out ${
+            isDarkMode
+              ? 'bg-black hover:bg-black border border-gray-600'
+              : 'bg-white hover:bg-gray-100 border border-gray-200/50 shadow-sm hover:shadow-lg'
+          }`}
+          style={{ fontFamily: '"SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}
         >
-          <div
-            className={`relative rounded-3xl overflow-hidden transition-all duration-500 ease-out ${
-              isDarkMode
-                ? 'bg-black hover:bg-black border border-gray-600'
-                : 'bg-white hover:bg-gray-100 border border-gray-200/50 shadow-sm hover:shadow-lg'
-            }`}
-            style={{ fontFamily: '"SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}
-          >
-            {/* Image container with smooth transition */}
-            <div className="relative w-full h-48 overflow-hidden">
-              {/* Gradient overlay */}
-              <div className="absolute inset-0 z-10 transition-opacity duration-500 ease-out opacity-0 bg-gradient-to-t from-black/30 to-transparent group-hover:opacity-100"></div>
+          {/* Image container with smooth transition */}
+          <div className="relative w-full h-48 overflow-hidden">
+            {/* Gradient overlay */}
+            <div className="absolute inset-0 z-10 transition-opacity duration-500 ease-out opacity-0 bg-gradient-to-t from-black/30 to-transparent group-hover:opacity-100"></div>
 
-              {/* Logo image with smooth fade out */}
-              <div className="absolute inset-0 flex items-center justify-center transition-all ease-out duration-600 group-hover:opacity-0 group-hover:scale-105">
-                <img
-                  src={project.logo}
-                  alt={`${project.name} logo`}
-                  className="object-contain w-3/4 transition-all ease-out h-3/4 duration-600"
-                />
-              </div>
+            {/* Logo image with smooth fade out */}
+            <div className="absolute inset-0 flex items-center justify-center transition-all ease-out duration-600 group-hover:opacity-0 group-hover:scale-105">
+              <img
+                src={project.logo}
+                alt={`${project.name} logo`}
+                className="object-contain w-3/4 transition-all ease-out h-3/4 duration-600"
+              />
+            </div>
 
-              {/* Homepage image with smooth fade in */}
-              <div className="absolute inset-0 transition-opacity ease-out opacity-0 duration-600 group-hover:opacity-100">
-                <img
-                  src={project.homepage}
-                  alt={`${project.name} homepage`}
-                  className="object-cover w-full h-full transition-transform ease-out duration-600 group-hover:scale-102"
-                />
+            {/* Homepage image with smooth fade in */}
+            <div className="absolute inset-0 transition-opacity ease-out opacity-0 duration-600 group-hover:opacity-100">
+              <img
+                src={project.homepage}
+                alt={`${project.name} homepage`}
+                className="object-cover w-full h-full transition-transform ease-out duration-600 group-hover:scale-102"
+              />
+            </div>
+          </div>
+
+          {/* Content - Auto height based on content */}
+          <div className="flex flex-col p-6">
+            <div className="flex-grow">
+              <h3
+                className={`text-xl font-semibold mb-2.5 transition-colors duration-300 ease-out ${
+                  isDarkMode ? 'text-white group-hover:text-gray-300' : 'text-gray-900 group-hover:text-gray-600'
+                }`}
+              >
+                {project.name}
+              </h3>
+
+              <div className="flex flex-wrap gap-2 mb-4">
+                {project.technology.slice(0, 3).map((tech, index) => (
+                  <span
+                    key={index}
+                    className={`px-2.5 py-1 text-xs font-medium rounded-full transition-all duration-300 ease-out ${
+                      isDarkMode
+                        ? 'bg-gray-800 text-gray-300 border border-gray-700/50 group-hover:bg-gray-700'
+                        : 'bg-gray-100 text-gray-700 border border-gray-200/50 group-hover:bg-gray-200'
+                    }`}
+                  >
+                    {tech}
+                  </span>
+                ))}
+                {project.technology.length > 3 && (
+                  <span
+                    className={`px-2.5 py-1 text-xs rounded-full ${
+                      isDarkMode ? 'text-gray-400' : 'text-gray-500'
+                    }`}
+                  >
+                    +{project.technology.length - 3}
+                  </span>
+                )}
               </div>
             </div>
 
-            {/* Content - Auto height based on content */}
-            <div className="flex flex-col p-6">
-              <div className="flex-grow">
-                <h3
-                  className={`text-xl font-semibold mb-2.5 transition-colors duration-300 ease-out ${
-                    isDarkMode ? 'text-white group-hover:text-gray-300' : 'text-gray-900 group-hover:text-gray-600'
-                  }`}
-                >
-                  {project.name}
-                </h3>
-
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.technology.slice(0, 3).map((tech, index) => (
-                    <span
-                      key={index}
-                      className={`px-2.5 py-1 text-xs font-medium rounded-full transition-all duration-300 ease-out ${
-                        isDarkMode
-                          ? 'bg-gray-800 text-gray-300 border border-gray-700/50 group-hover:bg-gray-700'
-                          : 'bg-gray-100 text-gray-700 border border-gray-200/50 group-hover:bg-gray-200'
-                      }`}
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                  {project.technology.length > 3 && (
-                    <span
-                      className={`px-2.5 py-1 text-xs rounded-full ${
-                        isDarkMode ? 'text-gray-400' : 'text-gray-500'
-                      }`}
-                    >
-                      +{project.technology.length - 3}
-                    </span>
-                  )}
-                </div>
-              </div>
-
-              <div
-                className={`flex items-center text-sm font-medium transition-colors duration-300 ease-out ${
-                  isDarkMode ? 'text-gray-300 group-hover:text-gray-100' : 'text-gray-700 group-hover:text-gray-900'
-                }`}
+            <div
+              className={`flex items-center text-sm font-medium transition-colors duration-300 ease-out ${
+                isDarkMode ? 'text-gray-300 group-hover:text-gray-100' : 'text-gray-700 group-hover:text-gray-900'
+              }`}
+            >
+              View Details
+              <svg
+                className="w-4 h-4 ml-1.5 transition-transform duration-300 ease-out group-hover:translate-x-0.5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
               >
-                View Details
-                <svg
-                  className="w-4 h-4 ml-1.5 transition-transform duration-300 ease-out group-hover:translate-x-0.5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
-                </svg>
-              </div>
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
+              </svg>
             </div>
           </div>
         </div>
+      </div>
     );
   };
 
@@ -214,42 +228,47 @@ const ProjectsShowcase = () => {
 
     return (
       <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-fade-in">
-        <div 
+        <div
           ref={modalRef}
           className={`max-w-5xl w-full max-h-[90vh] overflow-hidden rounded-3xl shadow-2xl transform animate-scale-in flex flex-col ${
-            isDarkMode 
-              ? 'bg-black border border-zinc-800' 
+            isDarkMode
+              ? 'bg-black border border-zinc-800'
               : 'bg-white border border-gray-200'
           }`}
         >
-          
           {/* Header - Fixed height */}
-          <div className={`flex items-center justify-between p-6 border-b flex-shrink-0 ${
-            isDarkMode ? 'border-zinc-800' : 'border-gray-200'
-          }`}>
+          <div
+            className={`flex items-center justify-between p-6 border-b flex-shrink-0 ${
+              isDarkMode ? 'border-zinc-800' : 'border-gray-200'
+            }`}
+          >
             <div className="flex items-center gap-4">
-              <img 
-                src={project.logo} 
-                alt={`${project.name} logo`} 
+              <img
+                src={project.logo}
+                alt={`${project.name} logo`}
                 className="object-contain w-12 h-12 p-2 rounded-xl bg-opacity-20"
                 style={{
-                  backgroundColor: isDarkMode ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.05)'
+                  backgroundColor: isDarkMode ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.05)',
                 }}
               />
               <div>
-                <h2 className={`text-2xl font-bold ${
-                  isDarkMode ? 'text-white' : 'text-gray-900'
-                }`}>
+                <h2
+                  className={`text-2xl font-bold ${
+                    isDarkMode ? 'text-white' : 'text-gray-900'
+                  }`}
+                >
                   {project.name}
                 </h2>
-                <p className={`text-sm mt-1 ${
-                  isDarkMode ? 'text-zinc-400' : 'text-gray-600'
-                }`}>
+                <p
+                  className={`text-sm mt-1 ${
+                    isDarkMode ? 'text-zinc-400' : 'text-gray-600'
+                  }`}
+                >
                   {project.shortDescription}
                 </p>
               </div>
             </div>
-            
+
             <button
               onClick={onClose}
               className={`p-2 rounded-full transition-all duration-300 hover:scale-110 ${
@@ -265,38 +284,41 @@ const ProjectsShowcase = () => {
           {/* Content - Scrollable area */}
           <div className="flex-grow overflow-y-auto">
             <div className="p-6 space-y-8">
-              
               {/* Homepage Image */}
               <div>
-                <h3 className={`text-lg font-semibold mb-4 ${
-                  isDarkMode ? 'text-white' : 'text-gray-900'
-                }`}>
+                <h3
+                  className={`text-lg font-semibold mb-4 ${
+                    isDarkMode ? 'text-white' : 'text-gray-900'
+                  }`}
+                >
                   Preview
                 </h3>
                 <div className="relative overflow-hidden rounded-xl">
-                  <img 
-                    src={project.homepage} 
-                    alt={`${project.name} homepage`} 
+                  <img
+                    src={project.homepage}
+                    alt={`${project.name} homepage`}
                     className="object-cover w-full h-full transition-transform duration-700 hover:scale-105"
                   />
                   <div className="absolute inset-0 transition-opacity duration-500 opacity-0 bg-gradient-to-t from-black/20 to-transparent hover:opacity-100"></div>
                 </div>
               </div>
 
-              {/* Screenshots Grid (instead of carousel) */}
+              {/* Screenshots Grid */}
               {project.screenshots && project.screenshots.length > 0 && (
                 <div>
-                  <h3 className={`text-lg font-semibold mb-4 ${
-                    isDarkMode ? 'text-white' : 'text-gray-900'
-                  }`}>
+                  <h3
+                    className={`text-lg font-semibold mb-4 ${
+                      isDarkMode ? 'text-white' : 'text-gray-900'
+                    }`}
+                  >
                     Screenshots
                   </h3>
                   <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
                     {project.screenshots.map((screenshot, index) => (
                       <div key={index} className="overflow-hidden rounded-lg">
-                        <img 
-                          src={screenshot} 
-                          alt={`Screenshot ${index + 1}`} 
+                        <img
+                          src={screenshot}
+                          alt={`Screenshot ${index + 1}`}
                           className="object-cover w-full h-40 transition-transform duration-500 hover:scale-105"
                         />
                       </div>
@@ -316,9 +338,11 @@ const ProjectsShowcase = () => {
                   >
                     Demo
                   </h3>
-                  <div className={`relative overflow-hidden rounded-2xl border ${
-                    isDarkMode ? 'border-gray-800/50 bg-gray-900' : 'border-gray-200/50 bg-white'
-                  }`}>
+                  <div
+                    className={`relative overflow-hidden rounded-2xl border ${
+                      isDarkMode ? 'border-gray-800/50 bg-black' : 'border-gray-200/50 bg-white'
+                    }`}
+                  >
                     <video
                       controls
                       className="object-contain w-full h-auto max-h-80"
@@ -326,8 +350,10 @@ const ProjectsShowcase = () => {
                       preload="metadata"
                     >
                       <source src={project.video} type="video/mp4" />
-                      <source src={project.video} type="video/webm" /> {/* Fallback for WebM format */}
-                      <p className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                      <source src={project.video} type="video/webm" />
+                      <p
+                        className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}
+                      >
                         Your browser does not support the video tag. Please download the video{' '}
                         <a
                           href={project.video}
@@ -344,9 +370,11 @@ const ProjectsShowcase = () => {
               <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
                 {/* Technology Stack */}
                 <div>
-                  <h3 className={`text-lg font-semibold mb-4 ${
-                    isDarkMode ? 'text-white' : 'text-gray-900'
-                  }`}>
+                  <h3
+                    className={`text-lg font-semibold mb-4 ${
+                      isDarkMode ? 'text-white' : 'text-gray-900'
+                    }`}
+                  >
                     Technologies
                   </h3>
                   <div className="flex flex-wrap gap-3">
@@ -354,8 +382,8 @@ const ProjectsShowcase = () => {
                       <span
                         key={index}
                         className={`px-3 py-1.5 text-sm font-medium rounded-full border transition-all duration-300 hover:scale-105 ${
-                          isDarkMode 
-                            ? 'bg-zinc-900 text-zinc-200 border-zinc-700 hover:bg-zinc-800' 
+                          isDarkMode
+                            ? 'bg-zinc-900 text-zinc-200 border-zinc-700 hover:bg-zinc-800'
                             : 'bg-gray-100 text-gray-800 border-gray-300 hover:bg-gray-200'
                         }`}
                       >
@@ -367,20 +395,26 @@ const ProjectsShowcase = () => {
 
                 {/* Features */}
                 <div>
-                  <h3 className={`text-lg font-semibold mb-4 ${
-                    isDarkMode ? 'text-white' : 'text-gray-900'
-                  }`}>
+                  <h3
+                    className={`text-lg font-semibold mb-4 ${
+                      isDarkMode ? 'text-white' : 'text-gray-900'
+                    }`}
+                  >
                     Features
                   </h3>
                   <div className="space-y-3">
                     {project.features.map((feature, index) => (
                       <div key={index} className="flex items-start gap-3 group">
-                        <div className={`w-2 h-2 rounded-full mt-2 flex-shrink-0 transition-all duration-300 group-hover:scale-150 ${
-                          isDarkMode ? 'bg-blue-500' : 'bg-blue-600'
-                        }`}></div>
-                        <span className={`text-sm ${
-                          isDarkMode ? 'text-zinc-300 group-hover:text-white' : 'text-gray-700 group-hover:text-gray-900'
-                        } transition-colors duration-300`}>
+                        <div
+                          className={`w-2 h-2 rounded-full mt-2 flex-shrink-0 transition-all duration-300 group-hover:scale-150 ${
+                            isDarkMode ? 'bg-blue-500' : 'bg-blue-600'
+                          }`}
+                        ></div>
+                        <span
+                          className={`text-sm ${
+                            isDarkMode ? 'text-zinc-300 group-hover:text-white' : 'text-gray-700 group-hover:text-gray-900'
+                          } transition-colors duration-300`}
+                        >
                           {feature}
                         </span>
                       </div>
@@ -391,19 +425,23 @@ const ProjectsShowcase = () => {
 
               {/* Description */}
               <div>
-                <h3 className={`text-lg font-semibold mb-4 ${
+                <h3
+                  className={`text-lg font-semibold mb-4 ${
                     isDarkMode ? 'text-white' : 'text-gray-900'
-                  }`}>
+                  }`}
+                >
                   About
                 </h3>
-                <p className={`text-base leading-relaxed ${
-                  isDarkMode ? 'text-zinc-300' : 'text-gray-700'
-                }`}>
+                <p
+                  className={`text-base leading-relaxed ${
+                    isDarkMode ? 'text-zinc-300' : 'text-gray-700'
+                  }`}
+                >
                   {project.longDescription}
                 </p>
               </div>
 
-              {/* Links - Fixed at bottom of scrollable area */}
+              {/* Links */}
               <div className="flex gap-4 pt-4 pb-6">
                 <a
                   href={project.githubLink}
@@ -440,34 +478,103 @@ const ProjectsShowcase = () => {
   };
 
   return (
-    <div className={`min-h-screen transition-colors duration-500 ${
-      isDarkMode ? 'bg-black' : 'bg-gray-50'
-    }`}>
+    <div
+      className={`min-h-screen transition-colors duration-500 ${
+        isDarkMode ? 'bg-black' : 'bg-gray-50'
+      }`}
+    >
       <div className="px-6 py-16 mx-auto max-w-7xl">
         <div className="mb-12 text-center">
-          <h1 className={`text-4xl font-bold mb-3 transition-colors duration-500 ${
-            isDarkMode ? 'text-white' : 'text-gray-900'
-          }`}>
+          <h1
+            className={`text-4xl font-bold mb-3 transition-colors duration-500 ${
+              isDarkMode ? 'text-white' : 'text-gray-900'
+            }`}
+            style={{ fontFamily: '"SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}
+          >
             Projects
           </h1>
-          <p className={`text-lg max-w-2xl mx-auto transition-colors duration-500 ${
-            isDarkMode ? 'text-zinc-400' : 'text-gray-600'
-          }`}>
+          <p
+            className={`text-lg max-w-2xl mx-auto transition-colors duration-500 ${
+              isDarkMode ? 'text-zinc-400' : 'text-gray-600'
+            }`}
+          >
             A curated collection of my work, featuring innovative solutions and cutting-edge technologies.
           </p>
         </div>
-        
-        <div className={`grid gap-8 ${isMobile ? 'grid-cols-1' : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'}`}>
-          {projects.map((project) => (
-            <ProjectCard key={project.id} project={project} />
-          ))}
-        </div>
+
+        {isMobile ? (
+          <div
+            className="relative overflow-hidden"
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+          >
+            <div
+              className="flex transition-transform duration-500 ease-out"
+              style={{ transform: `translateX(-${currentProjectIndex * 100}%)` }}
+            >
+              {projects.map((project) => (
+                <div key={project.id} className="flex-shrink-0 w-full px-2">
+                  <ProjectCard project={project} />
+                </div>
+              ))}
+            </div>
+            {/* Navigation Arrows */}
+            <button
+              onClick={prevProject}
+              className={`absolute left-0 top-1/2 transform -translate-y-1/2 p-2 rounded-full transition-all duration-300 ${
+                isDarkMode
+                  ? 'bg-zinc-800 text-zinc-300 hover:bg-zinc-700'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              }`}
+            >
+              <ChevronLeft size={24} />
+            </button>
+            <button
+              onClick={nextProject}
+              className={`absolute right-0 top-1/2 transform -translate-y-1/2 p-2 rounded-full transition-all duration-300 ${
+                isDarkMode
+                  ? 'bg-zinc-800 text-zinc-300 hover:bg-zinc-700'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              }`}
+            >
+              <ChevronRight size={24} />
+            </button>
+            {/* Dots for Carousel */}
+            <div className="flex justify-center mt-4 space-x-2">
+              {projects.map((_, index) => (
+                <div
+                  key={index}
+                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                    index === currentProjectIndex
+                      ? isDarkMode
+                        ? 'bg-white scale-125'
+                        : 'bg-gray-900 scale-125'
+                      : isDarkMode
+                      ? 'bg-zinc-600'
+                      : 'bg-gray-300'
+                  }`}
+                ></div>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <div
+            className={`grid gap-8 ${
+              isMobile ? 'grid-cols-1' : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
+            }`}
+          >
+            {projects.map((project) => (
+              <ProjectCard key={project.id} project={project} />
+            ))}
+          </div>
+        )}
       </div>
-      
+
       {selectedProject && (
-        <ProjectModal 
-          project={selectedProject} 
-          onClose={() => setSelectedProject(null)} 
+        <ProjectModal
+          project={selectedProject}
+          onClose={() => setSelectedProject(null)}
         />
       )}
 
@@ -476,16 +583,16 @@ const ProjectsShowcase = () => {
           from { opacity: 0; }
           to { opacity: 1; }
         }
-        
+
         @keyframes scale-in {
           from { transform: scale(0.95); opacity: 0; }
           to { transform: scale(1); opacity: 1; }
         }
-        
+
         .animate-fade-in {
           animation: fade-in 0.3s ease-out forwards;
         }
-        
+
         .animate-scale-in {
           animation: scale-in 0.3s ease-out forwards;
         }
