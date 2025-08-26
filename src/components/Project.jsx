@@ -132,7 +132,7 @@ const ProjectsShowcase = () => {
         <div
           className={`relative rounded-3xl overflow-hidden transition-all duration-500 ease-out ${
             isDarkMode
-              ? 'bg-black hover:bg-zinc-900 border border-gray-600'
+              ? 'bg-black hover:bg-black border border-gray-600'
               : 'bg-white hover:bg-gray-100 border border-gray-200/50 shadow-sm hover:shadow-lg'
           }`}
           style={{ fontFamily: '"SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}
@@ -211,8 +211,14 @@ const ProjectsShowcase = () => {
   const ImagePopup = ({ src, alt, onClose }) => {
     if (!src) return null;
 
+    const handleCloseClick = (e) => {
+      console.log('Close button clicked'); // Add this line
+      e.stopPropagation();
+      onClose();
+    };
+
     return (
-      <div className="fixed inset-0 flex items-center justify-center p-4 z-60 sm:p-6 bg-black/80 backdrop-blur-sm animate-fade-in">
+      <div className="fixed inset-0 flex items-center justify-center p-4 z-60 sm:p-8 bg-black/80 backdrop-blur-sm animate-fade-in">
         <div
           ref={imagePopupRef}
           className={`relative max-w-full max-h-[90vh] rounded-2xl overflow-hidden ${
@@ -226,8 +232,8 @@ const ProjectsShowcase = () => {
             style={{ maxHeight: '90vh', maxWidth: '90vw' }}
           />
           <button
-            onClick={onClose}
-            className={`absolute top-4 right-4 p-3.5 rounded-full shadow-lg transition-all duration-300 hover:scale-110 ${
+            onClick={handleCloseClick}
+            className={`absolute top-4 right-4 z-10 p-1 rounded-full shadow-xl hidden  ${
               isDarkMode
                 ? 'bg-zinc-800/95 text-zinc-100 hover:bg-zinc-700 hover:text-white'
                 : 'bg-gray-100/95 text-gray-800 hover:bg-gray-200 hover:text-gray-900'
@@ -235,7 +241,7 @@ const ProjectsShowcase = () => {
             aria-label="Close image popup"
             style={{ fontFamily: '"SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}
           >
-            <X size={30} strokeWidth={2.75} />
+            <X size={20} strokeWidth={3} />
           </button>
         </div>
       </div>
@@ -354,7 +360,7 @@ const ProjectsShowcase = () => {
                   </h3>
                   <div
                     className={`relative overflow-hidden rounded-2xl border ${
-                      isDarkMode ? 'border-gray-800/50 bg-gray-900' : 'border-gray-200/50 bg-white'
+                      isDarkMode ? 'border-gray-800/50 bg-black' : 'border-gray-200/50 bg-white'
                     }`}
                   >
                     <video
