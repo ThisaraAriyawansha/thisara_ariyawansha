@@ -244,7 +244,63 @@
     "/Project/Ravon/Screenshot 2025-08-26 155728.png",
     "/Project/Ravon/Screenshot 2025-08-26 155734.png"
   ]
+},
+{
+  "id": 9,
+  "name": "CommUnity – Community Engagement Platform",
+  "technology": ["Laravel", "MySQL", "TailwindCSS", "JavaScript"],
+  "shortDescription": "CommUnity is a web app connecting people by sharing community opportunities on an interactive map, fostering engagement and volunteering.",
+  "longDescription": "CommUnity is a powerful platform built with Laravel and MySQL that connects local volunteers with community opportunities. Users can explore nearby initiatives, participate in meaningful volunteer work, and engage with others through a user-friendly interface. The interactive map and geolocation features make it easy to discover and contribute to projects, enhancing community collaboration across Sri Lanka.",
+  "features": [
+    "User-friendly design for easy navigation",
+    "Interactive map with geolocation capabilities",
+    "Community engagement and volunteer opportunities",
+    "Find and participate in local projects",
+    "Secure user accounts and role-based access",
+    "Responsive design for desktop and mobile devices"
+  ],
+  "githubLink": "https://github.com/ThisaraAriyawansha/CommUnity.git",
+  "driveLink": "#",
+  "logo": "/Project/CommUnity/c.png",
+  "homepage": "/Project/CommUnity/WhatsApp Image 2025-08-26 at 16.15.26_94bd523c.jpg",
+  "screenshots": [
+    "/Project/CommUnity/WhatsApp Image 2025-08-26 at 16.15.26_ef320dcb.jpg",
+    "/Project/CommUnity/WhatsApp Image 2025-08-26 at 16.15.27_0e32d8e6.jpg",
+    "/Project/CommUnity/WhatsApp Image 2025-08-26 at 16.15.27_5c3eda5f.jpg"
+  ]
+},
+{
+  "id": 10,
+  "name": "TeachWave – Online Learning Platform",
+  "technology": ["React", "Node.js", "Express.js", "MongoDB", "TailwindCSS"],
+  "shortDescription": "TeachWave is an online learning platform connecting students and instructors through courses, quizzes, live webinars, and certifications.",
+  "longDescription": "TeachWave is a comprehensive online learning platform built with React on the frontend, Node.js with Express on the backend, and MongoDB for database management. It enables instructors to upload lecture notes, manage assignments, and conduct quizzes, while students can access course content, submit assignments, participate in quizzes, and earn certificates. The platform also offers live webinars and article reading for a complete educational experience, designed for seamless learning and teaching.",
+  "features": [
+    "User authentication to securely access platform features",
+    "Lecture notes management for instructors and students",
+    "Assignment submission and tracking",
+    "Quizzes with certificate generation upon completion",
+    "Access to educational articles and resources",
+    "Live webinars for interactive learning",
+    "Responsive design for desktop and mobile devices"
+  ],
+  "githubLink": "https://github.com/ThisaraAriyawansha/TeachWave.git",
+  "driveLink": "#",
+  "logo": "/Project/TeachWave/logo.png",
+  "homepage": "/Project/TeachWave/WhatsApp Image 2025-08-26 at 16.26.19_8574657c.jpg",
+  "screenshots": [
+    "/Project/TeachWave/WhatsApp Image 2025-08-26 at 16.26.19_4ed3e553.jpg",
+    "/Project/TeachWave/WhatsApp Image 2025-08-26 at 16.26.19_27d16135.jpg",
+    "/Project/TeachWave/WhatsApp Image 2025-08-26 at 16.26.19_ee2f1e5e.jpg",
+    "/Project/TeachWave/WhatsApp Image 2025-08-26 at 16.26.19_94794cb3.jpg",
+    "/Project/TeachWave/WhatsApp Image 2025-08-26 at 16.26.19_e6576692.jpg",
+    "/Project/TeachWave/WhatsApp Image 2025-08-26 at 16.26.19_1d60e66e.jpg",
+    "/Project/TeachWave/WhatsApp Image 2025-08-26 at 16.26.19_f9f0869e.jpg",
+    "/Project/TeachWave/WhatsApp Image 2025-08-26 at 16.26.19_55462ee5.jpg"
+  ]
 }
+
+
 
 
 ]
