@@ -19,35 +19,43 @@
     "logo": "/Project/Novast/green_n.png",
     "homepage": "/Project/Novast/home.png",
     "screenshots": [
-      "/Project/Novast/green_n.png",
-      "/Project/Novast/green_n.png",
-      "/Project/Novast/green_n.png"
+      "/Project/Novast/Screenshot 2025-08-26 085433.png",
+      "/Project/Novast/Screenshot 2025-08-26 085448.png",
+      "/Project/Novast/Screenshot 2025-08-26 085506.png",
+      "/Project/Novast/Screenshot 2025-08-26 085536.png",
+      "/Project/Novast/Screenshot 2025-08-26 085602.png",
+      "/Project/Novast/Screenshot 2025-08-26 085634.png",
+      "/Project/Novast/Screenshot 2025-08-26 085647.png"
     ],
     "video": "/Project/Novast/NOVAST.mp4"
   },
   {
     "id": 2,
-    "name": "Task Management App",
-    "technology": ["Next.js", "TypeScript", "Prisma"],
-    "shortDescription": "Collaborative task management with real-time updates",
-    "longDescription": "A comprehensive task management application that enables teams to collaborate effectively with real-time updates, project organization, and detailed analytics. Features include drag-and-drop functionality, deadline tracking, and team communication tools.",
+    "name": "Novalink Computers – computer e-commerce platform",
+    "technology": ["Laravel", "MySQL", "TailwindCSS", "JavaScript", "Chatbot Integration"],
+    "shortDescription": "Just built Novalink Computers – a modern computer e-commerce platform with full customer & admin dashboards, including Build My PC and chatbot features.",
+    "longDescription": "Novalink Computers is a professional e-commerce solution designed for tech enthusiasts, combining shopping, customization, and smart assistance in one platform.",
     "features": [
-      "Real-time collaboration",
-      "Drag and drop task organization",
-      "Project and team management",
-      "Deadline and notification system",
-      "Progress tracking and analytics",
-      "Mobile-responsive interface"
+      "Browse computer products with detailed specifications and images",
+      "Build My PC – customize computer components with live pricing",
+      "Smart chatbot to guide customers and answer FAQs",
+      "Add to cart, checkout, and track orders",
+      "Customer account and dashboard management",
+      "Admin product, order, customer, blog management and sales analytics"
     ],
-    "githubLink": "https://github.com/thisara-ariyawansha/task-manager",
-    "driveLink": "https://drive.google.com/drive/folders/example2",
-    "logo": "/images/projects/taskmanager-logo.png",
-    "homepage": "/images/projects/taskmanager-homepage.png",
+    "githubLink": "https://github.com/ThisaraAriyawansha/novaLink_computers.git",
+    "driveLink": "#",
+    "logo": "/Project/NOVALINK/logo.png",
+    "logoLight": "/Project/NOVALINK/logo.png", 
+    "logoDark": "/Project/NOVALINK/N_white.png",
+    "homepage": "/Project/NOVALINK/Screenshot 2025-08-26 122907.png",
     "screenshots": [
-      "/images/projects/taskmanager-1.png",
-      "/images/projects/taskmanager-2.png",
-      "/images/projects/taskmanager-3.png"
-    ]  },
+      "/Project/NOVALINK/green_n.png",
+      "/Project/NOVALINK/green_n.png",
+      "/Project/NOVALINK/green_n.png"
+    ]
+  }
+,
   {
     "id": 3,
     "name": "Weather Dashboard",

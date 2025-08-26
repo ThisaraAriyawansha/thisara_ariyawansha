@@ -150,7 +150,7 @@ const ProjectsShowcase = () => {
             {/* Logo image with smooth fade out */}
             <div className="absolute inset-0 flex items-center justify-center transition-all ease-out duration-600 group-hover:opacity-0 group-hover:scale-105">
               <img
-                src={project.logo}
+                src={isDarkMode ? (project.logoDark || project.logo) : (project.logoLight || project.logo)}
                 alt={`${project.name} logo`}
                 className="object-contain w-3/4 transition-all ease-out h-3/4 duration-600"
               />
