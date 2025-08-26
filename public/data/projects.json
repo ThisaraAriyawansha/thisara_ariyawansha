@@ -327,7 +327,61 @@
     "/Project/MedSync-AI/Screenshot 2025-08-26 163823.png",
     "/Project/MedSync-AI/Screenshot 2025-08-26 163829.png"
   ]
+},
+{
+  "id": 12,
+  "name": "ElegancePlan – Home Design Web Application",
+  "technology": ["React", "MongoDB", "Express", "TailwindCSS"],
+  "shortDescription": "ElegancePlan is a sleek web app for designing dream homes with drag-and-drop furniture placement, customizable layouts, and saved designs.",
+  "longDescription": "ElegancePlan is a modern home design platform built with React, MongoDB, and Express. The application allows users to effortlessly design their dream home using drag-and-drop functionality to place and arrange furniture. Users can customize layouts, save designs, and revisit them at any time. ElegancePlan revolutionizes home planning with an intuitive interface, responsive design, and innovative user experience.",
+  "features": [
+    "Drag-and-drop furniture placement",
+    "Customizable layouts for each room",
+    "Save and revisit design projects",
+    "Intuitive and user-friendly interface",
+    "Responsive design for desktop and mobile",
+    "Seamless interaction with real-time updates",
+    "Optimized for performance and usability"
+  ],
+  "githubLink": "https://github.com/ThisaraAriyawansha/ElegancePlan.git",
+  "driveLink": "#",
+  "logo": "/Project/ElegancePlan/logo.png",
+  "homepage": "/Project/ElegancePlan/WhatsApp Image 2025-08-26 at 16.49.14_9f4ad71d.jpg",
+  "screenshots": [
+    "/Project/ElegancePlan/WhatsApp Image 2025-08-26 at 16.49.14_975ec757.jpg",
+    "/Project/ElegancePlan/WhatsApp Image 2025-08-26 at 16.49.14_584f42ef.jpg",
+    "/Project/ElegancePlan/WhatsApp Image 2025-08-26 at 16.49.14_55321774.jpg"
+  ]
+},
+{
+  "id": 13,
+  "name": "Discover-Serendib – Sri Lankan Tourism Platform",
+  "technology": ["Laravel", "TailwindCSS", "MySQL", "JavaScript"],
+  "shortDescription": "Discover-Serendib is an MVC-based web app that showcases Sri Lankan tourism, offering stunning destinations and unique experiences with interactive maps and travel info.",
+  "longDescription": "Discover-Serendib is a modern tourism platform built using the MVC architecture with Laravel, TailwindCSS, MySQL, and JavaScript. The application provides travelers with an interactive and user-friendly interface to explore Sri Lanka's top destinations, cultural experiences, and travel information. Interactive maps help users plan trips effectively, while detailed descriptions and guides make it easy to discover hidden gems across the country.",
+  "features": [
+    "MVC-based architecture for organized code structure",
+    "User-friendly interface for seamless navigation",
+    "Interactive maps to explore destinations",
+    "Comprehensive travel information and guides",
+    "Showcases cultural and natural attractions",
+    "Responsive design for desktop and mobile",
+    "Optimized for performance and usability"
+  ],
+  "githubLink": "https://github.com/ThisaraAriyawansha/Discover-Serendib.git",
+  "driveLink": "#",
+  "logo": "/Project/Discover-Serendib/logo.png",
+  "homepage": "/Project/Discover-Serendib/Screenshot 2025-08-26 165743.png",
+  "screenshots": [
+    "/Project/Discover-Serendib/Screenshot 2025-08-26 165751.png",
+    "/Project/Discover-Serendib/Screenshot 2025-08-26 165759.png",
+    "/Project/Discover-Serendib/Screenshot 2025-08-26 165807.png",
+    "/Project/Discover-Serendib/Screenshot 2025-08-26 165812.png",
+    "/Project/Discover-Serendib/Screenshot 2025-08-26 165822.png"
+  ]
 }
+
+
 
 
 
