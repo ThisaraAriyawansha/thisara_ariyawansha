@@ -192,30 +192,59 @@
   ]
 }
 ,
-    {
-    "id": 7,
-    "name": "NOVAST – furniture e-commerce platform",
-    "technology": ["Laravel", "MySQL", "TailwindCSS","JavaScript"],
-    "shortDescription": "Just built NOVAST – a modern furniture e-commerce platform with full customer & admin dashboards.",
-    "longDescription": "NOVAST is a modern furniture e-commerce platform designed with two primary roles: Customer and Admin. The system provides a smooth shopping experience for customers while giving admins powerful management tools.",
-    "features": [
-      "User authentication and authorization",
-      "Shopping cart and checkout process",
-      "Customer dashboard to track orders & manage account",
-      "Admin dashboard for product management",
-      "Order tracking and history",
-      "Responsive design for all devices",
-      "Sales insights with 3-month sales forecasting"
-    ],
-    "githubLink": "https://github.com/ThisaraAriyawansha/nuvast.git",
-    "driveLink": "#",
-    "logo": "/Project/Novast/green_n.png",
-    "homepage": "/Project/Novast/home.png",
-    "screenshots": [
-      "/Project/Novast/green_n.png",
-      "/Project/Novast/green_n.png",
-      "/Project/Novast/green_n.png"
-    ],
-    "video": "/videos/ecommerce-demo.mp4"
-  }
+{
+  "id": 7,
+  "name": "Fueltrix – Smart Fuel Management Platform",
+  "technology": ["React", "TailwindCSS", "Node.js", "Firebase", "Nodemailer"],
+  "shortDescription": "Fueltrix is a large-scale fuel management system for companies and fuel stations to monitor fuel usage, vehicle status, and automate fuel dispensing using QR codes.",
+  "longDescription": "Fueltrix is a professional fuel management platform built with React, TailwindCSS, Node.js, Firebase, and Nodemailer. It allows large-scale companies and fuel stations to register on the system, monitor fuel levels, track vehicles, and manage fuel pumps efficiently. Using QR code-based identification, fuel dispensing is automated and secure. Companies can view real-time fuel status, track usage, and ensure proper inventory management. Email notifications keep users updated about fuel levels, transactions, and alerts.",
+  "features": [
+    "Company and fuel station registration",
+    "Real-time monitoring of fuel pumps and vehicles",
+    "Automated fuel dispensing using QR codes",
+    "Fuel status tracking and inventory management",
+    "Email notifications for fuel transactions and alerts",
+    "Secure authentication and role-based access",
+    "Responsive dashboard for companies and fuel stations"
+  ],
+  "githubLink": "https://github.com/ThisaraAriyawansha/Fueltrix.git",
+  "driveLink": "https://fueltrix.vercel.app/",
+  "logo": "/Project/Fueltrix/Fueltixlogo.png",
+  "homepage": "/Project/Fueltrix/Screenshot 2025-08-26 144522.png",
+  "screenshots": [
+    "/Project/Fueltrix/Screenshot 2025-08-26 144528.png",
+    "/Project/Fueltrix/Screenshot 2025-08-26 144538.png",
+    "/Project/Fueltrix/Screenshot 2025-08-26 144544.png",
+    "/Project/Fueltrix/Screenshot 2025-08-26 144550.png",
+    "/Project/Fueltrix/Screenshot 2025-08-26 144603.png"
+  ]
+},
+{
+  "id": 8,
+  "name": "Ravon – Web & Mobile App Development Company",
+  "technology": ["React", "TailwindCSS"],
+  "shortDescription": "Ravon is the official website of a leading web and mobile app development company, showcasing services, portfolio, and company information.",
+  "longDescription": "Ravon is a modern and responsive website built with React and TailwindCSS for a leading web and mobile app development company. The platform highlights the company’s services, portfolio, client testimonials, and contact information. Designed with a clean and professional interface, Ravon ensures a seamless experience for visitors across devices.",
+  "features": [
+    "Responsive website for web and mobile devices",
+    "Showcase company services and solutions",
+    "Portfolio section to display past projects",
+    "Client testimonials and reviews",
+    "Contact form for inquiries",
+    "Clean and modern design using TailwindCSS",
+    "Optimized for performance and usability"
+  ],
+  "githubLink": "https://github.com/ThisaraAriyawansha/Ravon.git",
+  "driveLink": "https://ravon-one.vercel.app/",
+  "logo": "/Project/Ravon/logo.png",
+  "homepage": "/Project/Ravon/Screenshot 2025-08-26 155703.png",
+  "screenshots": [
+    "/Project/Ravon/Screenshot 2025-08-26 155715.png",
+    "/Project/Ravon/Screenshot 2025-08-26 155720.png",
+    "/Project/Ravon/Screenshot 2025-08-26 155728.png",
+    "/Project/Ravon/Screenshot 2025-08-26 155734.png"
+  ]
+}
+
+
 ]
