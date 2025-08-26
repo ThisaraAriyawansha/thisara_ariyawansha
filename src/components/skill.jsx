@@ -57,33 +57,33 @@ export default function Skill() {
     <>
     
       <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap" rel="stylesheet" />
-      <div className="w-full py-8 sm:py-12 bg-white dark:bg-black text-black dark:text-white font-inter font-light overflow-hidden">
+      <div className="w-full py-8 overflow-hidden font-light text-black bg-white sm:py-12 dark:bg-black dark:text-white font-inter">
             
-            <h2 className="text-2xl sm:text-3xl font-bold text-center mb-4 sm:mb-4">
+            <h2 className="mb-4 text-2xl font-bold text-center sm:text-3xl sm:mb-4">
             Technology Skills
             </h2>
-            <div className="w-24 h-1 mx-auto mb-8 sm:mb-12 rounded bg-gray-400"></div>
+            <div className="w-24 h-1 mx-auto mb-8 bg-gray-400 rounded sm:mb-12"></div>
 
 
         
-        <div className="relative flex overflow-hidden py-4 sm:py-6">
-          <div ref={leftMarqueeRef} className="flex whitespace-nowrap py-4 min-w-0">
+        <div className="relative flex py-4 overflow-hidden sm:py-6">
+          <div ref={leftMarqueeRef} className="flex min-w-0 py-4 whitespace-nowrap">
             {skills.map((skill, index) => (
               <div 
                 key={index} 
-                className="group inline-flex items-center justify-center mx-2 sm:mx-4 px-4 sm:px-6 py-3 sm:py-4 bg-black dark:bg-gray-800 text-white rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300 w-40 h-24 sm:w-48 sm:h-28 flex-shrink-0 border border-gray-300 dark:border-gray-600 relative"
+                className="relative inline-flex items-center justify-center flex-shrink-0 w-40 h-24 px-4 py-3 mx-2 text-white transition-transform duration-300 transform bg-black border border-gray-300 shadow-lg group sm:mx-4 sm:px-6 sm:py-4 dark:bg-gray-800 rounded-xl hover:scale-105 sm:w-48 sm:h-28 dark:border-gray-600"
               >
                 <div 
-                  className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-white dark:bg-gray-700 flex items-center justify-center flex-shrink-0"
+                  className="flex items-center justify-center flex-shrink-0 w-12 h-12 bg-white rounded-full sm:w-16 sm:h-16 dark:bg-gray-700"
                   style={{ backgroundColor: skill.color }}
                 >
                   <img 
                     src={skill.icon} 
                     alt={skill.name} 
-                    className="w-8 h-8 sm:w-12 sm:h-12 object-contain"
+                    className="object-contain w-8 h-8 sm:w-12 sm:h-12"
                   />
                 </div>
-                <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-800 dark:bg-gray-200 text-white dark:text-black text-xs font-inter font-light px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+                <div className="absolute px-2 py-1 text-xs font-light text-white transition-opacity duration-200 transform -translate-x-1/2 bg-gray-800 rounded opacity-0 pointer-events-none -top-8 left-1/2 dark:bg-gray-200 dark:text-black font-inter group-hover:opacity-100">
                   {skill.name.charAt(0).toUpperCase() + skill.name.slice(1)}
                 </div>
               </div>
@@ -91,19 +91,19 @@ export default function Skill() {
             {skills.map((skill, index) => (
               <div 
                 key={`dup-${index}`} 
-                className="group inline-flex items-center justify-center mx-2 sm:mx-4 px-4 sm:px-6 py-3 sm:py-4 bg-black dark:bg-gray-800 text-white rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300 w-40 h-24 sm:w-48 sm:h-28 flex-shrink-0 border border-gray-300 dark:border-gray-600 relative"
+                className="relative inline-flex items-center justify-center flex-shrink-0 w-40 h-24 px-4 py-3 mx-2 text-white transition-transform duration-300 transform bg-black border border-gray-300 shadow-lg group sm:mx-4 sm:px-6 sm:py-4 dark:bg-gray-800 rounded-xl hover:scale-105 sm:w-48 sm:h-28 dark:border-gray-600"
               >
                 <div 
-                  className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-white dark:bg-gray-700 flex items-center justify-center flex-shrink-0"
+                  className="flex items-center justify-center flex-shrink-0 w-12 h-12 bg-white rounded-full sm:w-16 sm:h-16 dark:bg-gray-700"
                   style={{ backgroundColor: skill.color }}
                 >
                   <img 
                     src={skill.icon} 
                     alt={skill.name} 
-                    className="w-8 h-8 sm:w-12 sm:h-12 object-contain"
+                    className="object-contain w-8 h-8 sm:w-12 sm:h-12"
                   />
                 </div>
-                <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-800 dark:bg-gray-200 text-white dark:text-black text-xs font-inter font-light px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+                <div className="absolute px-2 py-1 text-xs font-light text-white transition-opacity duration-200 transform -translate-x-1/2 bg-gray-800 rounded opacity-0 pointer-events-none -top-8 left-1/2 dark:bg-gray-200 dark:text-black font-inter group-hover:opacity-100">
                   {skill.name.charAt(0).toUpperCase() + skill.name.slice(1)}
                 </div>
               </div>
@@ -111,24 +111,24 @@ export default function Skill() {
           </div>
         </div>
 
-        <div className="relative flex overflow-hidden py-4 sm:py-6">
-          <div ref={rightMarqueeRef} className="flex whitespace-nowrap py-4 min-w-0">
+        <div className="relative flex py-4 overflow-hidden sm:py-6">
+          <div ref={rightMarqueeRef} className="flex min-w-0 py-4 whitespace-nowrap">
             {skills.slice().reverse().map((skill, index) => (
               <div 
                 key={index} 
-                className="group inline-flex items-center justify-center mx-2 sm:mx-4 px-4 sm:px-6 py-3 sm:py-4 bg-black dark:bg-gray-800 text-white rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300 w-40 h-24 sm:w-48 sm:h-28 flex-shrink-0 border border-gray-300 dark:border-gray-600 relative"
+                className="relative inline-flex items-center justify-center flex-shrink-0 w-40 h-24 px-4 py-3 mx-2 text-white transition-transform duration-300 transform bg-black border border-gray-300 shadow-lg group sm:mx-4 sm:px-6 sm:py-4 dark:bg-gray-800 rounded-xl hover:scale-105 sm:w-48 sm:h-28 dark:border-gray-600"
               >
                 <div 
-                  className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-white dark:bg-gray-700 flex items-center justify-center flex-shrink-0"
+                  className="flex items-center justify-center flex-shrink-0 w-12 h-12 bg-white rounded-full sm:w-16 sm:h-16 dark:bg-gray-700"
                   style={{ backgroundColor: skill.color }}
                 >
                   <img 
                     src={skill.icon} 
                     alt={skill.name} 
-                    className="w-8 h-8 sm:w-12 sm:h-12 object-contain"
+                    className="object-contain w-8 h-8 sm:w-12 sm:h-12"
                   />
                 </div>
-                <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-800 dark:bg-gray-200 text-white dark:text-black text-xs font-inter font-light px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+                <div className="absolute px-2 py-1 text-xs font-light text-white transition-opacity duration-200 transform -translate-x-1/2 bg-gray-800 rounded opacity-0 pointer-events-none -top-8 left-1/2 dark:bg-gray-200 dark:text-black font-inter group-hover:opacity-100">
                   {skill.name.charAt(0).toUpperCase() + skill.name.slice(1)}
                 </div>
               </div>
@@ -136,19 +136,19 @@ export default function Skill() {
             {skills.slice().reverse().map((skill, index) => (
               <div 
                 key={`dup-${index}`} 
-                className="group inline-flex items-center justify-center mx-2 sm:mx-4 px-4 sm:px-6 py-3 sm:py-4 bg-black dark:bg-gray-800 text-white rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300 w-40 h-24 sm:w-48 sm:h-28 flex-shrink-0 border border-gray-300 dark:border-gray-600 relative"
+                className="relative inline-flex items-center justify-center flex-shrink-0 w-40 h-24 px-4 py-3 mx-2 text-white transition-transform duration-300 transform bg-black border border-gray-300 shadow-lg group sm:mx-4 sm:px-6 sm:py-4 dark:bg-gray-800 rounded-xl hover:scale-105 sm:w-48 sm:h-28 dark:border-gray-600"
               >
                 <div 
-                  className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-white dark:bg-gray-700 flex items-center justify-center flex-shrink-0"
+                  className="flex items-center justify-center flex-shrink-0 w-12 h-12 bg-white rounded-full sm:w-16 sm:h-16 dark:bg-gray-700"
                   style={{ backgroundColor: skill.color }}
                 >
                   <img 
                     src={skill.icon} 
                     alt={skill.name} 
-                    className="w-8 h-8 sm:w-12 sm:h-12 object-contain"
+                    className="object-contain w-8 h-8 sm:w-12 sm:h-12"
                   />
                 </div>
-                <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-800 dark:bg-gray-200 text-white dark:text-black text-xs font-inter font-light px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+                <div className="absolute px-2 py-1 text-xs font-light text-white transition-opacity duration-200 transform -translate-x-1/2 bg-gray-800 rounded opacity-0 pointer-events-none -top-8 left-1/2 dark:bg-gray-200 dark:text-black font-inter group-hover:opacity-100">
                   {skill.name.charAt(0).toUpperCase() + skill.name.slice(1)}
                 </div>
               </div>

@@ -9,14 +9,15 @@ const ProjectsShowcase = () => {
   const [selectedProject, setSelectedProject] = useState(null);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [currentScreenshotIndex, setCurrentScreenshotIndex] = useState(0);
-  const [currentProjectIndex, setCurrentProjectIndex] = useState(0); // For mobile carousel
+  const [currentProjectIndex, setCurrentProjectIndex] = useState(0);
+  const [selectedScreenshot, setSelectedScreenshot] = useState(null);
   const modalRef = useRef(null);
+  const imagePopupRef = useRef(null);
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    // Check if mobile on initial render and window resize
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
     };
@@ -24,7 +25,6 @@ const ProjectsShowcase = () => {
     checkMobile();
     window.addEventListener('resize', checkMobile);
 
-    // Fetch projects from data/projects.json
     fetch('/data/projects.json')
       .then((response) => {
         if (!response.ok) {
@@ -35,12 +35,10 @@ const ProjectsShowcase = () => {
       .then((data) => setProjects(data))
       .catch((error) => console.error('Error fetching projects:', error));
 
-    // Detect initial theme
     const isDark = document.documentElement.classList.contains('dark') ||
                   document.documentElement.getAttribute('data-theme') === 'dark';
     setIsDarkMode(isDark);
 
-    // Listen for theme changes
     const observer = new MutationObserver(() => {
       const newIsDark = document.documentElement.classList.contains('dark') ||
                       document.documentElement.getAttribute('data-theme') === 'dark';
@@ -58,15 +56,16 @@ const ProjectsShowcase = () => {
     };
   }, []);
 
-  // Close modal when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (modalRef.current && !modalRef.current.contains(event.target)) {
+      if (selectedScreenshot && imagePopupRef.current && !imagePopupRef.current.contains(event.target)) {
+        setSelectedScreenshot(null);
+      } else if (selectedProject && modalRef.current && !modalRef.current.contains(event.target)) {
         setSelectedProject(null);
       }
     };
 
-    if (selectedProject) {
+    if (selectedProject || selectedScreenshot) {
       document.addEventListener('mousedown', handleClickOutside);
       document.body.style.overflow = 'hidden';
     }
@@ -75,7 +74,7 @@ const ProjectsShowcase = () => {
       document.removeEventListener('mousedown', handleClickOutside);
       document.body.style.overflow = 'unset';
     };
-  }, [selectedProject]);
+  }, [selectedProject, selectedScreenshot]);
 
   const nextScreenshot = () => {
     if (selectedProject.screenshots) {
@@ -93,7 +92,6 @@ const ProjectsShowcase = () => {
     }
   };
 
-  // Handle project navigation for mobile carousel
   const nextProject = () => {
     setCurrentProjectIndex((prevIndex) =>
       (prevIndex + 1) % projects.length
@@ -106,7 +104,6 @@ const ProjectsShowcase = () => {
     );
   };
 
-  // Handle touch events for mobile carousel
   const handleTouchStart = (e) => {
     setTouchStart(e.targetTouches[0].clientX);
   };
@@ -117,10 +114,8 @@ const ProjectsShowcase = () => {
 
   const handleTouchEnd = () => {
     if (touchStart - touchEnd > 50) {
-      // Left swipe
       nextProject();
     } else if (touchEnd - touchStart > 50) {
-      // Right swipe
       prevProject();
     }
   };
@@ -137,17 +132,13 @@ const ProjectsShowcase = () => {
         <div
           className={`relative rounded-3xl overflow-hidden transition-all duration-500 ease-out ${
             isDarkMode
-              ? 'bg-black hover:bg-black border border-gray-600'
+              ? 'bg-black hover:bg-zinc-900 border border-gray-600'
               : 'bg-white hover:bg-gray-100 border border-gray-200/50 shadow-sm hover:shadow-lg'
           }`}
           style={{ fontFamily: '"SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}
         >
-          {/* Image container with smooth transition */}
           <div className="relative w-full h-48 overflow-hidden">
-            {/* Gradient overlay */}
             <div className="absolute inset-0 z-10 transition-opacity duration-500 ease-out opacity-0 bg-gradient-to-t from-black/30 to-transparent group-hover:opacity-100"></div>
-
-            {/* Logo image with smooth fade out */}
             <div className="absolute inset-0 flex items-center justify-center transition-all ease-out duration-600 group-hover:opacity-0 group-hover:scale-105">
               <img
                 src={isDarkMode ? (project.logoDark || project.logo) : (project.logoLight || project.logo)}
@@ -155,8 +146,6 @@ const ProjectsShowcase = () => {
                 className="object-contain w-3/4 transition-all ease-out h-3/4 duration-600"
               />
             </div>
-
-            {/* Homepage image with smooth fade in */}
             <div className="absolute inset-0 transition-opacity ease-out opacity-0 duration-600 group-hover:opacity-100">
               <img
                 src={project.homepage}
@@ -165,8 +154,6 @@ const ProjectsShowcase = () => {
               />
             </div>
           </div>
-
-          {/* Content - Auto height based on content */}
           <div className="flex flex-col p-6">
             <div className="flex-grow">
               <h3
@@ -176,7 +163,6 @@ const ProjectsShowcase = () => {
               >
                 {project.name}
               </h3>
-
               <div className="flex flex-wrap gap-2 mb-4">
                 {project.technology.slice(0, 3).map((tech, index) => (
                   <span
@@ -201,7 +187,6 @@ const ProjectsShowcase = () => {
                 )}
               </div>
             </div>
-
             <div
               className={`flex items-center text-sm font-medium transition-colors duration-300 ease-out ${
                 isDarkMode ? 'text-gray-300 group-hover:text-gray-100' : 'text-gray-700 group-hover:text-gray-900'
@@ -223,6 +208,40 @@ const ProjectsShowcase = () => {
     );
   };
 
+  const ImagePopup = ({ src, alt, onClose }) => {
+    if (!src) return null;
+
+    return (
+      <div className="fixed inset-0 flex items-center justify-center p-4 z-60 sm:p-6 bg-black/80 backdrop-blur-sm animate-fade-in">
+        <div
+          ref={imagePopupRef}
+          className={`relative max-w-full max-h-[90vh] rounded-2xl overflow-hidden ${
+            isDarkMode ? 'border border-gray-800/50' : 'border border-gray-200/50'
+          }`}
+        >
+          <img
+            src={src}
+            alt={alt}
+            className="object-contain w-full h-full"
+            style={{ maxHeight: '90vh', maxWidth: '90vw' }}
+          />
+          <button
+            onClick={onClose}
+            className={`absolute top-4 right-4 p-3.5 rounded-full shadow-lg transition-all duration-300 hover:scale-110 ${
+              isDarkMode
+                ? 'bg-zinc-800/95 text-zinc-100 hover:bg-zinc-700 hover:text-white'
+                : 'bg-gray-100/95 text-gray-800 hover:bg-gray-200 hover:text-gray-900'
+            }`}
+            aria-label="Close image popup"
+            style={{ fontFamily: '"SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}
+          >
+            <X size={30} strokeWidth={2.75} />
+          </button>
+        </div>
+      </div>
+    );
+  };
+
   const ProjectModal = ({ project, onClose }) => {
     if (!project) return null;
 
@@ -236,7 +255,6 @@ const ProjectsShowcase = () => {
               : 'bg-white border border-gray-200'
           }`}
         >
-          {/* Header - Fixed height */}
           <div
             className={`flex items-center justify-between p-6 border-b flex-shrink-0 ${
               isDarkMode ? 'border-zinc-800' : 'border-gray-200'
@@ -244,7 +262,7 @@ const ProjectsShowcase = () => {
           >
             <div className="flex items-center gap-4">
               <img
-                src={project.logo}
+                src={isDarkMode ? (project.logoDark || project.logo) : (project.logoLight || project.logo)}
                 alt={`${project.name} logo`}
                 className="object-contain w-12 h-12 p-2 rounded-xl bg-opacity-20"
                 style={{
@@ -268,23 +286,19 @@ const ProjectsShowcase = () => {
                 </p>
               </div>
             </div>
-
             <button
               onClick={onClose}
               className={`p-2 rounded-full transition-all duration-300 hover:scale-110 ${
                 isDarkMode
                   ? 'hover:bg-zinc-800 text-zinc-400 hover:text-white'
                   : 'hover:bg-gray-100 text-gray-500 hover:text-gray-900'
-              }`}
+              } ${selectedScreenshot ? 'hidden' : ''}`}
             >
               <X size={24} />
             </button>
           </div>
-
-          {/* Content - Scrollable area */}
           <div className="flex-grow overflow-y-auto">
             <div className="p-6 space-y-8">
-              {/* Homepage Image */}
               <div>
                 <h3
                   className={`text-lg font-semibold mb-4 ${
@@ -302,8 +316,6 @@ const ProjectsShowcase = () => {
                   <div className="absolute inset-0 transition-opacity duration-500 opacity-0 bg-gradient-to-t from-black/20 to-transparent hover:opacity-100"></div>
                 </div>
               </div>
-
-              {/* Screenshots Grid */}
               {project.screenshots && project.screenshots.length > 0 && (
                 <div>
                   <h3
@@ -315,7 +327,11 @@ const ProjectsShowcase = () => {
                   </h3>
                   <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
                     {project.screenshots.map((screenshot, index) => (
-                      <div key={index} className="overflow-hidden rounded-lg">
+                      <div
+                        key={index}
+                        className="overflow-hidden rounded-lg cursor-pointer"
+                        onClick={() => setSelectedScreenshot(screenshot)}
+                      >
                         <img
                           src={screenshot}
                           alt={`Screenshot ${index + 1}`}
@@ -326,8 +342,6 @@ const ProjectsShowcase = () => {
                   </div>
                 </div>
               )}
-
-              {/* Video Demo */}
               {project.video && (
                 <div className="mt-6">
                   <h3
@@ -340,7 +354,7 @@ const ProjectsShowcase = () => {
                   </h3>
                   <div
                     className={`relative overflow-hidden rounded-2xl border ${
-                      isDarkMode ? 'border-gray-800/50 bg-black' : 'border-gray-200/50 bg-white'
+                      isDarkMode ? 'border-gray-800/50 bg-gray-900' : 'border-gray-200/50 bg-white'
                     }`}
                   >
                     <video
@@ -366,9 +380,7 @@ const ProjectsShowcase = () => {
                   </div>
                 </div>
               )}
-
               <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-                {/* Technology Stack */}
                 <div>
                   <h3
                     className={`text-lg font-semibold mb-4 ${
@@ -392,8 +404,6 @@ const ProjectsShowcase = () => {
                     ))}
                   </div>
                 </div>
-
-                {/* Features */}
                 <div>
                   <h3
                     className={`text-lg font-semibold mb-4 ${
@@ -422,8 +432,6 @@ const ProjectsShowcase = () => {
                   </div>
                 </div>
               </div>
-
-              {/* Description */}
               <div>
                 <h3
                   className={`text-lg font-semibold mb-4 ${
@@ -440,8 +448,6 @@ const ProjectsShowcase = () => {
                   {project.longDescription}
                 </p>
               </div>
-
-              {/* Links */}
               <div className="flex gap-4 pt-4 pb-6">
                 <a
                   href={project.githubLink}
@@ -501,7 +507,6 @@ const ProjectsShowcase = () => {
             A curated collection of my work, featuring innovative solutions and cutting-edge technologies.
           </p>
         </div>
-
         {isMobile ? (
           <div
             className="relative overflow-hidden"
@@ -519,7 +524,6 @@ const ProjectsShowcase = () => {
                 </div>
               ))}
             </div>
-            {/* Navigation Arrows */}
             <button
               onClick={prevProject}
               className={`absolute left-0 top-1/2 transform -translate-y-1/2 p-2 rounded-full transition-all duration-300 ${
@@ -540,7 +544,6 @@ const ProjectsShowcase = () => {
             >
               <ChevronRight size={24} />
             </button>
-            {/* Dots for Carousel */}
             <div className="flex justify-center mt-4 space-x-2">
               {projects.map((_, index) => (
                 <div
@@ -570,29 +573,31 @@ const ProjectsShowcase = () => {
           </div>
         )}
       </div>
-
       {selectedProject && (
         <ProjectModal
           project={selectedProject}
           onClose={() => setSelectedProject(null)}
         />
       )}
-
+      {selectedScreenshot && (
+        <ImagePopup
+          src={selectedScreenshot}
+          alt="Enlarged screenshot"
+          onClose={() => setSelectedScreenshot(null)}
+        />
+      )}
       <style jsx global>{`
         @keyframes fade-in {
           from { opacity: 0; }
           to { opacity: 1; }
         }
-
         @keyframes scale-in {
           from { transform: scale(0.95); opacity: 0; }
           to { transform: scale(1); opacity: 1; }
         }
-
         .animate-fade-in {
           animation: fade-in 0.3s ease-out forwards;
         }
-
         .animate-scale-in {
           animation: scale-in 0.3s ease-out forwards;
         }
