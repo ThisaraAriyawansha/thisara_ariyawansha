@@ -52,17 +52,17 @@ const Hero = () => {
 
   return (
     <div className={darkMode ? 'dark' : ''}>
-      <div className="min-h-screen bg-white dark:bg-black transition-colors duration-300 font-apple mt-16 lg:mt-10" >
-        <section className="flex flex-col lg:flex-row items-center justify-between min-h-screen px-6 md:px-16 lg:px-24 py-12 gap-12">
+      <div className="min-h-screen mt-16 transition-colors duration-300 bg-white dark:bg-black font-apple lg:mt-10" >
+        <section className="flex flex-col items-center justify-between min-h-screen gap-12 px-6 py-12 lg:flex-row md:px-16 lg:px-24">
           {/* Left Content */}
-          <div className="w-full lg:w-1/2 text-center lg:text-left space-y-6 animate-fade-in-up">
+          <div className="w-full space-y-6 text-center lg:w-1/2 lg:text-left animate-fade-in-up">
             {/* Profile pic with greeting and blinking cursor */}
-            <div className="flex items-center justify-center lg:justify-start gap-3 mb-6">
-              <div className="w-12 h-12 rounded-full overflow-hidden bg-indigo-100 border-2 border-indigo-200 animate-bounce-gentle">
+            <div className="flex items-center justify-center gap-3 mb-6 lg:justify-start">
+              <div className="w-12 h-12 overflow-hidden bg-indigo-100 border-2 border-indigo-200 rounded-full animate-bounce-gentle">
                 <img
                   src="./profileimage/WhatsApp Image 2025-08-25 at 13.05.03_f01399dd.jpg"
                   alt="Thisara profile"
-                  className="w-full h-full object-cover"
+                  className="object-cover w-full h-full"
                 />
               </div>
               <div className="text-base font-medium text-black dark:text-white">
@@ -72,29 +72,29 @@ const Hero = () => {
             </div>
 
             <div className="animate-fade-in-up animation-delay-300">
-            <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold leading-tight text-balck dark:text-white">
+            <h1 className="text-2xl font-bold leading-tight md:text-3xl lg:text-4xl text-balck dark:text-white">
               Full Stack <span className="text-indigo-600 dark:text-indigo-400">Developer</span>
             </h1>
             </div>
             
             <div className="animate-fade-in-up animation-delay-500">
-            <p className="text-sm text-gray-600 dark:text-gray-300 max-w-md leading-relaxed">
+            <p className="max-w-md text-sm leading-relaxed text-gray-600 dark:text-gray-300">
               I specialize in backend development and love building scalable applications from server to UI. 
               Currently focused on creating efficient solutions with modern technologies.
             </p>
             </div>
 
             {/* Buttons */}
-            <div className="flex flex-col sm:flex-row gap-3 mt-6 animate-fade-in-up animation-delay-700">
+            <div className="flex flex-col gap-3 mt-6 sm:flex-row animate-fade-in-up animation-delay-700">
               <button
                 onClick={handleDownloadCV}
-                className="px-4 py-2 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-md text-sm font-medium transition-all duration-300 hover:opacity-90 hover:transform hover:scale-105 shadow-md hover:shadow-lg"
+                className="px-4 py-2 text-sm font-medium text-white transition-all duration-300 bg-gray-900 rounded-md shadow-md dark:bg-white dark:text-gray-900 hover:opacity-90 hover:transform hover:scale-105 hover:shadow-lg"
               >
                 Download CV
               </button>
               <a
                 href="#projects"
-                className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm font-medium hover:bg-gray-50 dark:hover:bg-gray-800 transition-all duration-300 hover:transform hover:scale-105 text-center"
+                className="px-4 py-2 text-sm font-medium text-center transition-all duration-300 border border-gray-300 rounded-md dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 hover:transform hover:scale-105"
               >
                 View Projects
               </a>
@@ -102,21 +102,21 @@ const Hero = () => {
 
 
             {/* Skills */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8 animate-fade-in-up animation-delay-900">
-              <div className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm bg-white dark:bg-gray-800">
-                <h3 className="font-semibold text-sm text-gray-800 dark:text-gray-200">
+            <div className="grid grid-cols-1 gap-4 mt-8 sm:grid-cols-2 animate-fade-in-up animation-delay-900">
+              <div className="p-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 dark:bg-gray-800">
+                <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200">
                   Frontend & Backend
                 </h3>
-                <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
+                <p className="mt-1 text-xs text-gray-600 dark:text-gray-400">
                   React for modern UIs and Laravel for robust backend APIs.
                 </p>
               </div>
 
-              <div className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm bg-white dark:bg-gray-800">
-                <h3 className="font-semibold text-sm text-gray-800 dark:text-gray-200">
+              <div className="p-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 dark:bg-gray-800">
+                <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200">
                   Database & Services
                 </h3>
-                <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
+                <p className="mt-1 text-xs text-gray-600 dark:text-gray-400">
                   MySQL, email integration, and secure payment gateways.
                 </p>
               </div>
@@ -124,36 +124,36 @@ const Hero = () => {
 
 
             {/* Experience Snapshot */}
-            <div className="flex justify-center lg:justify-start gap-8 mt-10 animate-fade-in-up animation-delay-1100">
-              <div className="text-center hover:transform hover:scale-110 transition-all duration-300">
-                <h2 className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-white">40+</h2>
+            <div className="flex justify-center gap-8 mt-10 lg:justify-start animate-fade-in-up animation-delay-1100">
+              <div className="text-center transition-all duration-300 hover:transform hover:scale-110">
+                <h2 className="text-2xl font-bold text-gray-800 md:text-3xl dark:text-white">40+</h2>
                 <p className="text-sm text-gray-500 dark:text-gray-400">Projects Built</p>
               </div>
-              <div className="text-center hover:transform hover:scale-110 transition-all duration-300">
-                <h2 className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-white">3+</h2>
+              <div className="text-center transition-all duration-300 hover:transform hover:scale-110">
+                <h2 className="text-2xl font-bold text-gray-800 md:text-3xl dark:text-white">3+</h2>
                 <p className="text-sm text-gray-500 dark:text-gray-400">Years coding Experience</p>
               </div>
-              <div className="text-center hover:transform hover:scale-110 transition-all duration-300">
-                <h2 className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-white">5+</h2>
+              <div className="text-center transition-all duration-300 hover:transform hover:scale-110">
+                <h2 className="text-2xl font-bold text-gray-800 md:text-3xl dark:text-white">5+</h2>
                 <p className="text-sm text-gray-500 dark:text-gray-400">Tech Stacks</p>
               </div>
             </div>
           </div>
 
           {/* Right Content */}
-          <div className="w-full lg:w-1/2 flex flex-col items-center mt-8 lg:mt-0 animate-fade-in-right">
+          <div className="flex flex-col items-center w-full mt-8 lg:w-1/2 lg:mt-0 animate-fade-in-right">
             {/* Circular Image */}
-            <div className="w-56 h-56 lg:w-72 lg:h-72 rounded-full overflow-hidden bg-indigo-100 shadow-xl border-4 border-white dark:border-gray-800">
+            <div className="w-56 h-56 overflow-hidden bg-indigo-100 border-4 border-white rounded-full shadow-xl lg:w-72 lg:h-72 dark:border-gray-800">
               <img
                 src="./profileimage/WhatsApp Image 2025-08-25 at 13.05.03_f01399dd.jpg"
                 alt="Thisara"
-                className="w-full h-full object-cover"
+                className="object-cover w-full h-full"
               />
             </div>
 
             {/* Additional Content Below Image */}
-            <div className="text-center max-w-sm mt-8 animate-fade-in-up animation-delay-1000">
-              <h3 className="text-base font-semibold text-gray-800 dark:text-white mb-3 hidden">
+            <div className="max-w-sm mt-8 text-center animate-fade-in-up animation-delay-1000">
+              <h3 className="hidden mb-3 text-base font-semibold text-gray-800 dark:text-white">
                 Currently Working With
               </h3>
               <div className="flex flex-wrap justify-center gap-2">
@@ -162,18 +162,18 @@ const Hero = () => {
                 <span className="px-3 py-1.5 bg-gray-100 dark:bg-gray-800 rounded-full text-xs text-gray-700 dark:text-gray-300 hover:bg-indigo-100 dark:hover:bg-indigo-900 transition-all duration-300 hover:transform hover:scale-105">Mysql</span>
                 <span className="px-3 py-1.5 bg-gray-100 dark:bg-gray-800 rounded-full text-xs text-gray-700 dark:text-gray-300 hover:bg-indigo-100 dark:hover:bg-indigo-900 transition-all duration-300 hover:transform hover:scale-105">Tailwind</span>
               </div>
-              <p className="mt-4 text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
+              <p className="mt-4 text-xs leading-relaxed text-gray-600 dark:text-gray-400">
                 Passionate about creating efficient, scalable solutions with modern web technologies.
               </p>
 
               {/* Social Links */} 
-              <div className="flex justify-center space-x-6 mt-6"> 
+              <div className="flex justify-center mt-6 space-x-6"> 
                 {/* GitHub */}
                 <a 
                   href="https://github.com/ThisaraAriyawansha" 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className="text-gray-500 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all duration-300 hover:transform hover:scale-125"
+                  className="text-gray-500 transition-all duration-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:transform hover:scale-125"
                 >
                   <svg 
                     className="w-6 h-6" 
@@ -203,7 +203,7 @@ const Hero = () => {
                   href="https://thisaraariyawansha.vercel.app/" 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className="text-gray-500 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all duration-300 hover:transform hover:scale-125"
+                  className="text-gray-500 transition-all duration-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:transform hover:scale-125"
                 > 
                   <svg 
                     className="w-6 h-6" 
@@ -244,7 +244,7 @@ const Hero = () => {
                     href="http://www.linkedin.com/in/thisara-ariyawansha-274263284" 
                     target="_blank" 
                     rel="noopener noreferrer" 
-                    className="text-gray-500 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all duration-300 hover:transform hover:scale-125"
+                    className="text-gray-500 transition-all duration-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:transform hover:scale-125"
                   >
                     <svg 
                       className="w-6 h-6" 
