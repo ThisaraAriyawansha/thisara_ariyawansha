@@ -39,10 +39,32 @@ export default function Skill() {
     { name: "Laravel", icon: "/icons/Laravel.webp", color: "white" }
   ];
 
-    const [darkMode, setDarkMode] = useState(false);
-  
+  const [isDarkMode, setIsDarkMode] = useState(false);
   const leftMarqueeRef = useRef(null);
   const rightMarqueeRef = useRef(null);
+
+  // Detect dark mode
+  useEffect(() => {
+    // Initial check for dark mode
+    const isDark = document.documentElement.classList.contains('dark') ||
+                  document.documentElement.getAttribute('data-theme') === 'dark';
+    setIsDarkMode(isDark);
+
+    // Observe changes to class or data-theme
+    const observer = new MutationObserver(() => {
+      const newIsDark = document.documentElement.classList.contains('dark') ||
+                      document.documentElement.getAttribute('data-theme') === 'dark';
+      setIsDarkMode(newIsDark);
+    });
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class', 'data-theme'],
+    });
+
+    // Cleanup observer on component unmount
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     if (leftMarqueeRef.current && rightMarqueeRef.current) {
@@ -52,26 +74,28 @@ export default function Skill() {
   }, []);
 
   return (
-        <div className={darkMode ? 'dark' : ''}>
-
-    <>
-    
+    <div className={isDarkMode ? 'dark' : ''}>
       <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap" rel="stylesheet" />
-      <div className="w-full py-8 overflow-hidden font-light text-black bg-white sm:py-12 dark:bg-black dark:text-white font-inter">
-            
-            <h2 className="mb-4 text-2xl font-bold text-center sm:text-3xl sm:mb-4">
-            Technology Skills
-            </h2>
-            <div className="w-24 h-1 mx-auto mb-8 bg-gray-400 rounded sm:mb-12"></div>
+        <div
+          className={`w-full py-8 overflow-hidden font-light sm:py-12 font-inter ${
+            isDarkMode ? 'bg-black text-white' : 'bg-white text-black'
+          }`}
+        >
+        <h2 className="mb-4 text-2xl font-bold text-center sm:text-3xl sm:mb-4">
+          Technology Skills
+        </h2>
+        <div
+          className={`w-24 h-1 mx-auto mb-8 rounded sm:mb-12 ${
+            isDarkMode ? 'bg-gray-100' : 'bg-gray-900'
+          }`}
+        ></div>
 
-
-        
         <div className="relative flex py-4 overflow-hidden sm:py-6">
           <div ref={leftMarqueeRef} className="flex min-w-0 py-4 whitespace-nowrap">
             {skills.map((skill, index) => (
               <div 
                 key={index} 
-                className="relative inline-flex items-center justify-center flex-shrink-0 w-40 h-24 px-4 py-3 mx-2 text-white transition-transform duration-300 transform bg-black border border-gray-300 shadow-lg group sm:mx-4 sm:px-6 sm:py-4 dark:bg-gray-800 rounded-xl hover:scale-105 sm:w-48 sm:h-28 dark:border-gray-600"
+                className="relative inline-flex items-center justify-center flex-shrink-0 w-40 h-24 px-4 py-3 mx-2 text-white transition-transform duration-300 transform bg-black border border-gray-300 shadow-lg group sm:mx-4 sm:px-6 sm:py-4 rounded-xl hover:scale-105 sm:w-48 sm:h-28 dark:border-gray-600"
               >
                 <div 
                   className="flex items-center justify-center flex-shrink-0 w-12 h-12 bg-white rounded-full sm:w-16 sm:h-16 dark:bg-gray-700"
@@ -116,7 +140,7 @@ export default function Skill() {
             {skills.slice().reverse().map((skill, index) => (
               <div 
                 key={index} 
-                className="relative inline-flex items-center justify-center flex-shrink-0 w-40 h-24 px-4 py-3 mx-2 text-white transition-transform duration-300 transform bg-black border border-gray-300 shadow-lg group sm:mx-4 sm:px-6 sm:py-4 dark:bg-gray-800 rounded-xl hover:scale-105 sm:w-48 sm:h-28 dark:border-gray-600"
+                className="relative inline-flex items-center justify-center flex-shrink-0 w-40 h-24 px-4 py-3 mx-2 text-white transition-transform duration-300 transform bg-black border border-gray-300 shadow-lg group sm:mx-4 sm:px-6 sm:py-4 rounded-xl hover:scale-105 sm:w-48 sm:h-28 dark:border-gray-600"
               >
                 <div 
                   className="flex items-center justify-center flex-shrink-0 w-12 h-12 bg-white rounded-full sm:w-16 sm:h-16 dark:bg-gray-700"
@@ -172,7 +196,6 @@ export default function Skill() {
           }
         `}</style>
       </div>
-    </>
     </div>
   );
 }
