@@ -298,7 +298,37 @@
     "/Project/TeachWave/WhatsApp Image 2025-08-26 at 16.26.19_f9f0869e.jpg",
     "/Project/TeachWave/WhatsApp Image 2025-08-26 at 16.26.19_55462ee5.jpg"
   ]
+},
+{
+  "id": 11,
+  "name": "MedSync-AI – AI-Powered Medical Management System",
+  "technology": ["React", "Node.js", "Python (AI Model)", "TailwindCSS", "MongoDB"],
+  "shortDescription": "MedSync-AI is a medical management platform where admins, doctors, and pharmacy staff can manage patients, predict illnesses using AI, and issue suitable medicines.",
+  "longDescription": "MedSync-AI is a professional healthcare management platform built with React on the frontend, Node.js on the backend, and Python for AI-based disease prediction. Admins can manage doctors, patients, and pharmacy staff with role-based access. Doctors can select patients, input their details, predict illnesses, get detailed sickness descriptions, and recommend suitable medicines. Pharmacy staff can then issue the prescribed medicine. The AI model helps predict diseases accurately, making the system efficient, reliable, and intelligent.",
+  "features": [
+    "Admin dashboard to manage doctors, patients, and pharmacy staff",
+    "Doctor dashboard to select patients and add patient details",
+    "AI-based disease prediction with detailed sickness description",
+    "Recommendation of suitable medicines based on prediction",
+    "Pharmacy staff can issue prescribed medicines",
+    "Secure authentication and role-based access control",
+    "Responsive and user-friendly interface"
+  ],
+  "githubLink": "#",
+  "driveLink": "#",
+  "logo": "/Project/MedSync-AI/logo.png",
+  "homepage": "/Project/MedSync-AI/Screenshot 2025-08-26 163623.png",
+  "screenshots": [
+    "/Project/MedSync-AI/Screenshot 2025-08-26 163721.png",
+    "/Project/MedSync-AI/Screenshot 2025-08-26 163728.png",
+    "/Project/MedSync-AI/Screenshot 2025-08-26 163735.png",
+    "/Project/MedSync-AI/Screenshot 2025-08-26 163800.png",
+    "/Project/MedSync-AI/Screenshot 2025-08-26 163817.png",
+    "/Project/MedSync-AI/Screenshot 2025-08-26 163823.png",
+    "/Project/MedSync-AI/Screenshot 2025-08-26 163829.png"
+  ]
 }
+
 
 
 
