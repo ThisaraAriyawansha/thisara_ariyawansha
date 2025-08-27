@@ -97,7 +97,7 @@ export default function About() {
                 lineHeight: '1.5'
               }}
             >
-                I'm Thisara Ariyawansha, a passionate Full-Stack Developer specializing in building modern web applications. My journey combines hands-on development experience with a strong foundation in both frontend and backend technologies, enabling me to create scalable and efficient digital solutions.
+                I&apos;m Thisara Ariyawansha, a passionate Full-Stack Developer specializing in building modern web applications. My journey combines hands-on development experience with a strong foundation in both frontend and backend technologies, enabling me to create scalable and efficient digital solutions.
             </p>
           </div>
         </div>
