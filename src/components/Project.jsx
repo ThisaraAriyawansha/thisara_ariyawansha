@@ -132,6 +132,7 @@ const ProjectsShowcase = () => {
         onClick={() => handleProjectCardClick(project)}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
+        
       >
         <div
           className={`relative rounded-3xl overflow-hidden transition-all duration-500 ease-out ${
@@ -508,7 +509,7 @@ const ProjectsShowcase = () => {
   };
 
   return (
-    <div
+    <div id="projects"
       className={`min-h-screen transition-colors duration-500 ${
         isDarkMode ? 'bg-black' : 'bg-gray-50'
       }`}

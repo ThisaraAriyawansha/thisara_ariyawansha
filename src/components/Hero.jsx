@@ -67,7 +67,7 @@ const Hero = () => {
   };
 
   return (
-    <div className={isDarkMode ? 'dark' : ''}>
+    <div className={isDarkMode ? 'dark' : ''} id="home">
         <div
           className={`relative overflow-hidden transition-all duration-500 ease-out min-h-screen font-apple ${
             isDarkMode

@@ -87,13 +87,31 @@ export default function Navbar() {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const handleNavClick = (href) => {
-    setIsMenuOpen(false);
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+    const handleNavClick = (href) => {
+      setIsMenuOpen(false);
+
+      const element = document.querySelector(href);
+      if (!element) return;
+
+      const targetPosition = element.getBoundingClientRect().top + window.pageYOffset;
+      const startPosition = window.pageYOffset;
+      const distance = targetPosition - startPosition;
+      const duration = 2500; // duration in ms (increase for slower scroll)
+      let start = null;
+
+      const step = (timestamp) => {
+        if (!start) start = timestamp;
+        const progress = timestamp - start;
+        const percent = Math.min(progress / duration, 1); // 0 to 1
+        window.scrollTo(0, startPosition + distance * percent);
+        if (progress < duration) {
+          window.requestAnimationFrame(step);
+        }
+      };
+
+      window.requestAnimationFrame(step);
+    };
+
 
   // Prevent hydration mismatch
   if (!mounted) {
