@@ -88,17 +88,23 @@ export default function About() {
             >
               About Me
             </h2>
-            <p 
-              className={`text-xs sm:text-sm md:text-base leading-relaxed max-w-xl sm:max-w-2xl mx-auto ${
-                isDarkMode ? "text-gray-300" : "text-gray-600"
-              }`}
-              style={{ 
-                fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
-                lineHeight: '1.5'
-              }}
-            >
-                I&apos;m Thisara Ariyawansha, a passionate Full-Stack Developer specializing in building modern web applications. My journey combines hands-on development experience with a strong foundation in both frontend and backend technologies, enabling me to create scalable and efficient digital solutions.
-            </p>
+              <p 
+                className={`text-xs sm:text-sm md:text-base leading-relaxed max-w-xl sm:max-w-2xl mx-auto ${
+                  isDarkMode ? "text-gray-300" : "text-gray-600"
+                }`}
+                style={{ 
+                  fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+                  lineHeight: '1.5'
+                }}
+              >
+                I’m <strong>Thisara Ariyawansha</strong> from Matara. I have successfully completed a 
+                <strong> Diploma</strong> and a <strong>Higher National Diploma in Software Engineering</strong> 
+                with <strong>distinction passes</strong> at the National Institute of Business Management (NIBM). 
+                I also completed an <strong>internship as a Web Developer at Silicon Radon Networks (Pvt) Ltd</strong>, 
+                where I gained valuable industry experience. I am passionate about <strong>Full-Stack Development</strong> 
+                and enjoy creating scalable, modern, and efficient digital solutions. 
+              </p>
+
           </div>
         </div>
 
