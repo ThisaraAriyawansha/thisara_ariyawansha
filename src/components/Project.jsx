@@ -1,4 +1,3 @@
-// app/components/ProjectsShowcase.jsx
 "use client";
 
 import { useState, useEffect, useRef } from 'react';
@@ -16,6 +15,8 @@ const ProjectsShowcase = () => {
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
+
+
 
   useEffect(() => {
     const checkMobile = () => {
@@ -137,7 +138,7 @@ const ProjectsShowcase = () => {
           }`}
           style={{ fontFamily: '"SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}
         >
-          <div className="relative w-full h-48 overflow-hidden">
+          <div className={`relative w-full overflow-hidden ${isMobile ? 'h-44' : 'h-48'}`}>
             <div className="absolute inset-0 z-10 transition-opacity duration-500 ease-out opacity-0 bg-gradient-to-t from-black/30 to-transparent group-hover:opacity-100"></div>
             <div className="absolute inset-0 flex items-center justify-center transition-all ease-out duration-600 group-hover:opacity-0 group-hover:scale-105">
               <img
@@ -154,17 +155,17 @@ const ProjectsShowcase = () => {
               />
             </div>
           </div>
-          <div className="flex flex-col p-6">
+          <div className={`flex flex-col ${isMobile ? 'p-4' : 'p-6'}`}>
             <div className="flex-grow">
               <h3
-                className={`text-xl font-semibold mb-2.5 transition-colors duration-300 ease-out ${
+                className={`${isMobile ? 'text-lg' : 'text-xl'} font-semibold mb-2.5 transition-colors duration-300 ease-out ${
                   isDarkMode ? 'text-white group-hover:text-gray-300' : 'text-gray-900 group-hover:text-gray-600'
                 }`}
               >
                 {project.name}
               </h3>
-              <div className="flex flex-wrap gap-2 mb-4">
-                {project.technology.slice(0, 3).map((tech, index) => (
+              <div className={`flex flex-wrap gap-2 ${isMobile ? 'mb-3' : 'mb-4'}`}>
+                {project.technology.slice(0, isMobile ? 2 : 3).map((tech, index) => (
                   <span
                     key={index}
                     className={`px-2.5 py-1 text-xs font-medium rounded-full transition-all duration-300 ease-out ${
@@ -176,13 +177,13 @@ const ProjectsShowcase = () => {
                     {tech}
                   </span>
                 ))}
-                {project.technology.length > 3 && (
+                {project.technology.length > (isMobile ? 2 : 3) && (
                   <span
                     className={`px-2.5 py-1 text-xs rounded-full ${
                       isDarkMode ? 'text-gray-400' : 'text-gray-500'
                     }`}
                   >
-                    +{project.technology.length - 3}
+                    +{project.technology.length - (isMobile ? 2 : 3)}
                   </span>
                 )}
               </div>
@@ -212,7 +213,6 @@ const ProjectsShowcase = () => {
     if (!src) return null;
 
     const handleCloseClick = (e) => {
-      console.log('Close button clicked'); // Add this line
       e.stopPropagation();
       onClose();
     };
@@ -233,13 +233,12 @@ const ProjectsShowcase = () => {
           />
           <button
             onClick={handleCloseClick}
-            className={`absolute top-4 right-4 z-10 p-1 rounded-full shadow-xl hidden  ${
+            className={`absolute top-4 right-4 z-10 p-2 rounded-full shadow-xl transition-all duration-300 hover:scale-110 hidden ${
               isDarkMode
                 ? 'bg-zinc-800/95 text-zinc-100 hover:bg-zinc-700 hover:text-white'
                 : 'bg-gray-100/95 text-gray-800 hover:bg-gray-200 hover:text-gray-900'
             }`}
             aria-label="Close image popup"
-            style={{ fontFamily: '"SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}
           >
             <X size={20} strokeWidth={3} />
           </button>
@@ -252,39 +251,40 @@ const ProjectsShowcase = () => {
     if (!project) return null;
 
     return (
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-fade-in">
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80 backdrop-blur-sm animate-fade-in">
         <div
           ref={modalRef}
-          className={`max-w-5xl w-full max-h-[90vh] overflow-hidden rounded-3xl shadow-2xl transform animate-scale-in flex flex-col ${
+          className={`max-w-5xl w-full max-h-[95vh] sm:max-h-[90vh] overflow-hidden rounded-2xl sm:rounded-3xl shadow-2xl transform animate-scale-in flex flex-col ${
             isDarkMode
               ? 'bg-black border border-zinc-800'
               : 'bg-white border border-gray-200'
           }`}
         >
+          {/* Modal Header - Mobile optimized */}
           <div
-            className={`flex items-center justify-between p-6 border-b flex-shrink-0 ${
+            className={`flex items-center justify-between p-4 sm:p-6 border-b flex-shrink-0 ${
               isDarkMode ? 'border-zinc-800' : 'border-gray-200'
             }`}
           >
-            <div className="flex items-center gap-4">
+            <div className="flex items-center flex-1 min-w-0 gap-3 sm:gap-4">
               <img
-                src={isDarkMode ? (project.logoDark || project.logo) : (project.logoLight || project.logo)}
+                src={project.logo}
                 alt={`${project.name} logo`}
-                className="object-contain w-12 h-12 p-2 rounded-xl bg-opacity-20"
+                className="flex-shrink-0 object-contain w-10 h-10 p-1 rounded-lg sm:w-12 sm:h-12 sm:p-2 sm:rounded-xl bg-opacity-20"
                 style={{
                   backgroundColor: isDarkMode ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.05)',
                 }}
               />
-              <div>
+              <div className="flex-1 min-w-0">
                 <h2
-                  className={`text-2xl font-bold ${
+                  className={`text-xl sm:text-2xl font-bold truncate ${
                     isDarkMode ? 'text-white' : 'text-gray-900'
                   }`}
                 >
                   {project.name}
                 </h2>
                 <p
-                  className={`text-sm mt-1 ${
+                  className={`text-xs sm:text-sm mt-0.5 sm:mt-1 line-clamp-1 ${
                     isDarkMode ? 'text-zinc-400' : 'text-gray-600'
                   }`}
                 >
@@ -294,20 +294,23 @@ const ProjectsShowcase = () => {
             </div>
             <button
               onClick={onClose}
-              className={`p-2 rounded-full transition-all duration-300 hover:scale-110 ${
+              className={`p-2 rounded-full transition-all duration-300 hover:scale-110 flex-shrink-0 ml-2 ${
                 isDarkMode
                   ? 'hover:bg-zinc-800 text-zinc-400 hover:text-white'
                   : 'hover:bg-gray-100 text-gray-500 hover:text-gray-900'
               } ${selectedScreenshot ? 'hidden' : ''}`}
             >
-              <X size={24} />
+              <X size={isMobile ? 20 : 24} />
             </button>
           </div>
+
+          {/* Modal Content - Better mobile scrolling */}
           <div className="flex-grow overflow-y-auto">
-            <div className="p-6 space-y-8">
+            <div className="p-4 space-y-6 sm:p-6 sm:space-y-8">
+              {/* Preview Section */}
               <div>
                 <h3
-                  className={`text-lg font-semibold mb-4 ${
+                  className={`text-base sm:text-lg font-semibold mb-3 sm:mb-4 ${
                     isDarkMode ? 'text-white' : 'text-gray-900'
                   }`}
                 >
@@ -317,38 +320,41 @@ const ProjectsShowcase = () => {
                   <img
                     src={project.homepage}
                     alt={`${project.name} homepage`}
-                    className="object-cover w-full h-full transition-transform duration-700 hover:scale-105"
+                    className="object-cover w-full h-48 transition-transform duration-700 sm:h-64 md:h-80 hover:scale-105"
                   />
                   <div className="absolute inset-0 transition-opacity duration-500 opacity-0 bg-gradient-to-t from-black/20 to-transparent hover:opacity-100"></div>
                 </div>
               </div>
+
+              {/* Screenshots Section */}
               {project.screenshots && project.screenshots.length > 0 && (
                 <div>
                   <h3
-                    className={`text-lg font-semibold mb-4 ${
+                    className={`text-base sm:text-lg font-semibold mb-3 sm:mb-4 ${
                       isDarkMode ? 'text-white' : 'text-gray-900'
                     }`}
                   >
                     Screenshots
                   </h3>
-                  <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+                  <div className="grid grid-cols-2 gap-3 sm:grid-cols-2 md:grid-cols-3 sm:gap-4">
                     {project.screenshots.map((screenshot, index) => (
                       <div
                         key={index}
-                        className="overflow-hidden rounded-lg cursor-pointer"
+                        className="overflow-hidden rounded-lg cursor-pointer aspect-video"
                         onClick={() => setSelectedScreenshot(screenshot)}
                       >
                         <img
                           src={screenshot}
                           alt={`Screenshot ${index + 1}`}
-                          className="object-cover w-full h-40 transition-transform duration-500 hover:scale-105"
+                          className="object-cover w-full h-full transition-transform duration-500 hover:scale-105"
                         />
                       </div>
                     ))}
                   </div>
                 </div>
               )}
-              {project.video && (
+
+                            {project.video && (
                 <div className="mt-6">
                   <h3
                     className={`text-lg font-semibold mb-3 transition-colors duration-300 ease-out ${
@@ -386,20 +392,21 @@ const ProjectsShowcase = () => {
                   </div>
                 </div>
               )}
-              <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+
+              {/* Technologies and Features - Mobile optimized grid */}
+              <div className="grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2">
                 <div>
                   <h3
-                    className={`text-lg font-semibold mb-4 ${
+                    className={`text-base sm:text-lg font-semibold mb-3 sm:mb-4 ${
                       isDarkMode ? 'text-white' : 'text-gray-900'
                     }`}
                   >
                     Technologies
                   </h3>
-                  <div className="flex flex-wrap gap-3">
                     {project.technology.map((tech, index) => (
                       <span
                         key={index}
-                        className={`px-3 py-1.5 text-sm font-medium rounded-full border transition-all duration-300 hover:scale-105 ${
+                        className={`px-2.5 sm:px-3 py-1 sm:py-1.5 text-xs sm:text-sm font-medium rounded-full border transition-all duration-300 hover:scale-105 ${
                           isDarkMode
                             ? 'bg-zinc-900 text-zinc-200 border-zinc-700 hover:bg-zinc-800'
                             : 'bg-gray-100 text-gray-800 border-gray-300 hover:bg-gray-200'
@@ -412,22 +419,22 @@ const ProjectsShowcase = () => {
                 </div>
                 <div>
                   <h3
-                    className={`text-lg font-semibold mb-4 ${
+                    className={`text-base sm:text-lg font-semibold mb-3 sm:mb-4 ${
                       isDarkMode ? 'text-white' : 'text-gray-900'
                     }`}
                   >
                     Features
                   </h3>
-                  <div className="space-y-3">
+                  <div className="space-y-2 sm:space-y-3">
                     {project.features.map((feature, index) => (
                       <div key={index} className="flex items-start gap-3 group">
                         <div
-                          className={`w-2 h-2 rounded-full mt-2 flex-shrink-0 transition-all duration-300 group-hover:scale-150 ${
+                          className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full mt-1.5 sm:mt-2 flex-shrink-0 transition-all duration-300 group-hover:scale-150 ${
                             isDarkMode ? 'bg-blue-500' : 'bg-blue-600'
                           }`}
                         ></div>
                         <span
-                          className={`text-sm ${
+                          className={`text-xs sm:text-sm ${
                             isDarkMode ? 'text-zinc-300 group-hover:text-white' : 'text-gray-700 group-hover:text-gray-900'
                           } transition-colors duration-300`}
                         >
@@ -438,28 +445,32 @@ const ProjectsShowcase = () => {
                   </div>
                 </div>
               </div>
+
+              {/* About Section */}
               <div>
                 <h3
-                  className={`text-lg font-semibold mb-4 ${
+                  className={`text-base sm:text-lg font-semibold mb-3 sm:mb-4 ${
                     isDarkMode ? 'text-white' : 'text-gray-900'
                   }`}
                 >
                   About
                 </h3>
                 <p
-                  className={`text-base leading-relaxed ${
+                  className={`text-sm sm:text-base leading-relaxed ${
                     isDarkMode ? 'text-zinc-300' : 'text-gray-700'
                   }`}
                 >
                   {project.longDescription}
                 </p>
               </div>
-              <div className="flex gap-4 pt-4 pb-6">
+
+              {/* Action Buttons - Mobile optimized */}
+              <div className="flex flex-col gap-3 pt-4 pb-6 sm:flex-row sm:gap-4">
                 <a
                   href={project.githubLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold transition-all duration-300 hover:scale-105 ${
+                  className={`flex items-center justify-center gap-2 px-4 sm:px-5 py-3 rounded-xl text-sm font-semibold transition-all duration-300 hover:scale-105 ${
                     isDarkMode
                       ? 'bg-white text-black hover:bg-gray-100 border border-gray-300'
                       : 'bg-black text-white hover:bg-gray-800'
@@ -472,7 +483,7 @@ const ProjectsShowcase = () => {
                   href={project.driveLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold border transition-all duration-300 hover:scale-105 ${
+                  className={`flex items-center justify-center gap-2 px-4 sm:px-5 py-3 rounded-xl text-sm font-semibold border transition-all duration-300 hover:scale-105 ${
                     isDarkMode
                       ? 'border-zinc-700 text-zinc-200 hover:bg-zinc-900 hover:border-zinc-600'
                       : 'border-gray-300 text-gray-800 hover:bg-gray-50 hover:border-gray-400'
@@ -495,7 +506,8 @@ const ProjectsShowcase = () => {
         isDarkMode ? 'bg-black' : 'bg-gray-50'
       }`}
     >
-      <div className="px-6 py-16 mx-auto max-w-7xl">
+      <div className="px-4 py-12 mx-auto sm:px-6 sm:py-16 max-w-7xl">
+        {/* Header */}
         <div className="mb-12 text-center">
           <h1
             className={`text-4xl font-bold mb-3 transition-colors duration-500 ${
@@ -513,61 +525,82 @@ const ProjectsShowcase = () => {
             A curated collection of my work, featuring innovative solutions and cutting-edge technologies.
           </p>
         </div>
+
+        {/* Projects Display */}
         {isMobile ? (
-          <div
-            className="relative overflow-hidden"
-            onTouchStart={handleTouchStart}
-            onTouchMove={handleTouchMove}
-            onTouchEnd={handleTouchEnd}
-          >
+          // Mobile carousel with improved UX
+          <div className="relative">
             <div
-              className="flex transition-transform duration-500 ease-out"
-              style={{ transform: `translateX(-${currentProjectIndex * 100}%)` }}
+              className="relative overflow-hidden"
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
             >
-              {projects.map((project) => (
-                <div key={project.id} className="flex-shrink-0 w-full px-2">
-                  <ProjectCard project={project} />
-                </div>
-              ))}
+              <div
+                className="flex transition-transform duration-500 ease-out"
+                style={{ transform: `translateX(-${currentProjectIndex * 100}%)` }}
+              >
+                {projects.map((project) => (
+                  <div key={project.id} className="flex-shrink-0 w-full px-2">
+                    <ProjectCard project={project} />
+                  </div>
+                ))}
+              </div>
             </div>
+
+            {/* Navigation buttons with better mobile positioning */}
             <button
               onClick={prevProject}
-              className={`absolute left-0 top-1/2 transform -translate-y-1/2 p-2 rounded-full transition-all duration-300 ${
+              className={`absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-1 p-2 sm:p-3 rounded-full transition-all duration-300 shadow-lg backdrop-blur-sm ${
                 isDarkMode
-                  ? 'bg-zinc-800 text-zinc-300 hover:bg-zinc-700'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  ? 'bg-zinc-900/90 text-zinc-300 hover:bg-zinc-800 border border-zinc-700'
+                  : 'bg-white/90 text-gray-700 hover:bg-gray-100 border border-gray-200'
               }`}
+              disabled={projects.length <= 1}
             >
-              <ChevronLeft size={24} />
+              <ChevronLeft size={isMobile ? 20 : 24} />
             </button>
             <button
               onClick={nextProject}
-              className={`absolute right-0 top-1/2 transform -translate-y-1/2 p-2 rounded-full transition-all duration-300 ${
+              className={`absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-1 p-2 sm:p-3 rounded-full transition-all duration-300 shadow-lg backdrop-blur-sm ${
                 isDarkMode
-                  ? 'bg-zinc-800 text-zinc-300 hover:bg-zinc-700'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  ? 'bg-zinc-900/90 text-zinc-300 hover:bg-zinc-800 border border-zinc-700'
+                  : 'bg-white/90 text-gray-700 hover:bg-gray-100 border border-gray-200'
               }`}
+              disabled={projects.length <= 1}
             >
-              <ChevronRight size={24} />
+              <ChevronRight size={isMobile ? 20 : 24} />
             </button>
-            <div className="flex justify-center mt-4 space-x-2">
+
+            {/* Pagination dots with better mobile styling */}
+            <div className="flex justify-center mt-6 space-x-2">
               {projects.map((_, index) => (
-                <div
+                <button
                   key={index}
-                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  onClick={() => setCurrentProjectIndex(index)}
+                  className={`w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full transition-all duration-300 ${
                     index === currentProjectIndex
                       ? isDarkMode
-                        ? 'bg-white scale-125'
-                        : 'bg-gray-900 scale-125'
+                        ? 'bg-white scale-125 shadow-lg'
+                        : 'bg-gray-900 scale-125 shadow-lg'
                       : isDarkMode
-                      ? 'bg-zinc-600'
-                      : 'bg-gray-300'
+                      ? 'bg-zinc-600 hover:bg-zinc-500'
+                      : 'bg-gray-300 hover:bg-gray-400'
                   }`}
-                ></div>
+                  aria-label={`Go to project ${index + 1}`}
+                />
               ))}
+            </div>
+
+            {/* Project counter for mobile */}
+            <div className={`text-center mt-4 text-sm ${
+              isDarkMode ? 'text-zinc-400' : 'text-gray-500'
+            }`}>
+              {currentProjectIndex + 1} of {projects.length}
             </div>
           </div>
         ) : (
+          // Desktop grid layout - unchanged
           <div
             className={`grid gap-8 ${
               isMobile ? 'grid-cols-1' : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
@@ -579,6 +612,8 @@ const ProjectsShowcase = () => {
           </div>
         )}
       </div>
+
+      {/* Modals */}
       {selectedProject && (
         <ProjectModal
           project={selectedProject}
@@ -592,6 +627,8 @@ const ProjectsShowcase = () => {
           onClose={() => setSelectedScreenshot(null)}
         />
       )}
+
+      {/* Custom Styles */}
       <style jsx global>{`
         @keyframes fade-in {
           from { opacity: 0; }
@@ -599,13 +636,36 @@ const ProjectsShowcase = () => {
         }
         @keyframes scale-in {
           from { transform: scale(0.95); opacity: 0; }
-          to { transform: scale(1); opacity: 1; }
+          to { transform: 1; opacity: 1; }
         }
         .animate-fade-in {
           animation: fade-in 0.3s ease-out forwards;
         }
         .animate-scale-in {
           animation: scale-in 0.3s ease-out forwards;
+        }
+        .line-clamp-1 {
+          overflow: hidden;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 1;
+        }
+        .line-clamp-2 {
+          overflow: hidden;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2;
+        }
+        /* Better mobile touch targets */
+        @media (max-width: 768px) {
+          .cursor-pointer {
+            -webkit-tap-highlight-color: transparent;
+          }
+        }
+        /* Smooth scrolling for modal content */
+        .overflow-y-auto {
+          scroll-behavior: smooth;
+          -webkit-overflow-scrolling: touch;
         }
       `}</style>
     </div>
