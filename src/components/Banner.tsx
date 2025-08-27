@@ -5,7 +5,7 @@ const Banner = () => {
     <div
       className="relative w-full h-[300px] md:h-[400px] lg:h-[500px] flex items-center justify-center text-center text-white bg-cover bg-center"
       style={{
-        backgroundImage: "url('/othreimages/bg.jpg')",
+        backgroundImage: "url('/otherimages/bg.jpg')",
         backgroundAttachment: "fixed",
       }}
     >
@@ -19,7 +19,10 @@ const Banner = () => {
 
         <div className="w-20 sm:w-24 md:w-32 h-[1px] bg-gray-300 mx-auto mb-3 md:mb-4"></div>
 
-        <h1 className="text-2xl font-light sm:text-3xl md:text-4xl lg:text-5xl">
+        <h1
+          className="text-2xl font-light sm:text-3xl md:text-4xl lg:text-5xl"
+          style={{ fontFamily: `-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif` }}
+        >
           Full-Stack Development. End-to-End Solutions.
         </h1>
       </div>
