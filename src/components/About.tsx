@@ -67,7 +67,7 @@ export default function About() {
   ];
 
   return (
-    <section
+    <section id="about"
       className={`min-h-screen transition-all duration-700 ease-out ${
         isDarkMode 
           ? "bg-black" 
