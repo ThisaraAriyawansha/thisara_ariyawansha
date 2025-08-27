@@ -74,12 +74,12 @@ export default function About() {
           : "bg-white"
       }`}
     >
-      <div className="pt-32 pb-16">
+      <div className="pt-6 pb-6 md:pt-8 md:pb-8">
         {/* About Me Introduction */}
-        <div className="max-w-4xl px-4 mx-auto mb-12 sm:px-6 lg:px-8 sm:mb-16 lg:mb-20">
+        <div className="max-w-4xl px-4 mx-auto mb-8 sm:mb-10 md:mb-12 sm:px-6 lg:px-8">
           <div className="text-center">
             <h2 
-              className={`text-xl sm:text-2xl lg:text-3xl font-light mb-4 sm:mb-6 ${
+              className={`text-lg sm:text-xl md:text-2xl font-light mb-3 sm:mb-4 md:mb-5 ${
                 isDarkMode ? "text-white" : "text-black"
               }`}
               style={{ 
@@ -89,12 +89,12 @@ export default function About() {
               About Me
             </h2>
             <p 
-              className={`text-sm sm:text-base lg:text-lg leading-relaxed max-w-xl sm:max-w-2xl mx-auto ${
+              className={`text-xs sm:text-sm md:text-base leading-relaxed max-w-xl sm:max-w-2xl mx-auto ${
                 isDarkMode ? "text-gray-300" : "text-gray-600"
               }`}
               style={{ 
                 fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
-                lineHeight: '1.6'
+                lineHeight: '1.5'
               }}
             >
                 I'm Thisara Ariyawansha, a passionate Full-Stack Developer specializing in building modern web applications. My journey combines hands-on development experience with a strong foundation in both frontend and backend technologies, enabling me to create scalable and efficient digital solutions.
@@ -104,25 +104,25 @@ export default function About() {
 
         {/* Main Content Grid */}
         <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 gap-4 xl:grid-cols-12 sm:gap-6 lg:gap-8 xl:gap-12">
+          <div className="grid grid-cols-1 gap-3 md:gap-4 xl:grid-cols-12 sm:gap-4 lg:gap-6 xl:gap-8">
             
             {/* Left Side - Years Navigator */}
             <div className="order-2 xl:col-span-3 xl:order-1">
-              <div className="xl:sticky xl:top-32">
+              <div className="xl:sticky xl:top-28">
                 <h2 
-                  className={`text-xs sm:text-sm font-medium tracking-widest mb-3 sm:mb-4 lg:mb-6 xl:mb-8 ${
+                  className={`text-xs font-medium tracking-widest mb-2 sm:mb-3 md:mb-4 ${
                     isDarkMode ? "text-gray-500" : "text-gray-400"
                   }`}
                   style={{ letterSpacing: '0.2em' }}
                 >
                   TIMELINE
                 </h2>
-                <div className="grid grid-cols-3 gap-1 sm:grid-cols-4 md:grid-cols-7 xl:grid-cols-1 sm:gap-2 xl:gap-2">
+                <div className="grid grid-cols-3 gap-1 sm:grid-cols-4 md:grid-cols-7 xl:grid-cols-1 sm:gap-1.5 xl:gap-1.5">
                   {timeline.map((item, index) => (
                     <button
                       key={index}
                       onClick={() => setSelectedItem(index)}
-                      className={`text-center xl:text-left px-1 sm:px-2 xl:px-4 py-1.5 sm:py-2 xl:py-3 rounded-md sm:rounded-lg xl:rounded-xl transition-all duration-300 ${
+                      className={`text-center xl:text-left px-1 sm:px-1.5 xl:px-3 py-1 sm:py-1.5 xl:py-2 rounded-md sm:rounded-md xl:rounded-lg transition-all duration-300 ${
                         selectedItem === index
                           ? isDarkMode
                             ? "bg-white text-black"
@@ -133,7 +133,7 @@ export default function About() {
                       }`}
                     >
                       <div 
-                        className="text-sm font-light sm:text-base lg:text-lg xl:text-2xl tabular-nums"
+                        className="text-xs font-light sm:text-sm md:text-base tabular-nums"
                         style={{ 
                           fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif'
                         }}
@@ -148,10 +148,10 @@ export default function About() {
 
             {/* Right Side - Content Display */}
             <div className="order-1 xl:col-span-9 xl:order-2">
-              <div className="min-h-[300px] sm:min-h-[350px] lg:min-h-[400px] xl:min-h-[500px] flex items-center">
+              <div className="min-h-[250px] sm:min-h-[280px] md:min-h-[320px] lg:min-h-[350px] xl:min-h-[400px] flex items-center">
                 <div className="w-full">
                   {/* Large Year Display */}
-                  <div className={`text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-ultralight mb-3 sm:mb-4 lg:mb-6 ${
+                  <div className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-ultralight mb-2 sm:mb-3 md:mb-4 ${
                     isDarkMode ? "text-gray-700" : "text-gray-300"
                   }`}
                   style={{ 
@@ -164,20 +164,20 @@ export default function About() {
                   </div>
 
                   {/* Content Card */}
-                  <div className={`relative p-3 sm:p-4 lg:p-6 xl:p-8 rounded-xl sm:rounded-2xl lg:rounded-3xl border transition-all duration-500 ${
+                  <div className={`relative p-3 sm:p-3 md:p-4 lg:p-5 xl:p-6 rounded-lg sm:rounded-xl md:rounded-xl lg:rounded-2xl border transition-all duration-500 ${
                     isDarkMode 
                       ? "bg-gray-950/50 border-gray-800" 
                       : "bg-gray-50/50 border-gray-200"
                   }`}>
                     {/* Floating dot indicator */}
                     <div 
-                      className={`absolute -top-1 -left-1 sm:-top-1.5 sm:-left-1.5 lg:-top-2 lg:-left-2 w-2.5 h-2.5 sm:w-3 sm:h-3 lg:w-4 lg:h-4 rounded-full ${
+                      className={`absolute -top-1 -left-1 sm:-top-1 sm:-left-1 md:-top-1 md:-left-1 w-2 h-2 sm:w-2 sm:h-2 md:w-2.5 md:h-2.5 rounded-full ${
                         isDarkMode ? "bg-white" : "bg-black"
                       }`}
                     />
                     
                     <h3 
-                      className={`text-lg sm:text-xl lg:text-2xl xl:text-2xl font-light mb-2 sm:mb-3 lg:mb-4 leading-tight ${
+                      className={`text-base sm:text-lg md:text-xl font-light mb-1.5 sm:mb-2 md:mb-3 leading-tight ${
                         isDarkMode ? "text-white" : "text-black"
                       }`}
                       style={{ 
@@ -188,26 +188,26 @@ export default function About() {
                     </h3>
                     
                     <p 
-                      className={`text-xs sm:text-sm lg:text-base leading-relaxed ${
+                      className={`text-xs sm:text-xs md:text-sm leading-relaxed ${
                         isDarkMode ? "text-gray-300" : "text-gray-600"
                       }`}
                       style={{ 
                         fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
-                        lineHeight: '1.5'
+                        lineHeight: '1.4'
                       }}
                     >
                       {timeline[selectedItem].description}
                     </p>
 
                     {/* Progress indicator */}
-                    <div className="flex mt-3 space-x-1 sm:mt-4 lg:mt-6 lg:space-x-2">
+                    <div className="flex mt-2 sm:mt-3 md:mt-4 space-x-1 md:space-x-1.5">
                       {timeline.map((_, index) => (
                         <div
                           key={index}
-                          className={`h-0.5 sm:h-1 rounded-full transition-all duration-300 ${
+                          className={`h-0.5 sm:h-0.5 md:h-1 rounded-full transition-all duration-300 ${
                             index === selectedItem
-                              ? isDarkMode ? "bg-white w-4 sm:w-6 lg:w-8" : "bg-black w-4 sm:w-6 lg:w-8"
-                              : isDarkMode ? "bg-gray-600 w-1 sm:w-1.5 lg:w-2" : "bg-gray-300 w-1 sm:w-1.5 lg:w-2"
+                              ? isDarkMode ? "bg-white w-3 sm:w-4 md:w-5" : "bg-black w-3 sm:w-4 md:w-5"
+                              : isDarkMode ? "bg-gray-600 w-1 sm:w-1 md:w-1.5" : "bg-gray-300 w-1 sm:w-1 md:w-1.5"
                           }`}
                         />
                       ))}
