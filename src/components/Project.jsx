@@ -15,7 +15,6 @@ const ProjectsShowcase = () => {
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
-  const [isSwiping, setIsSwiping] = useState(false);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -105,36 +104,25 @@ const ProjectsShowcase = () => {
   };
 
   const handleTouchStart = (e) => {
-    setTouchStart(e.targetTouches[0].clientX);
-    setIsSwiping(false);
+    setTouchStart(e.touches[0].clientX);
   };
 
-  const handleTouchMove = (e) => {
-    setTouchEnd(e.targetTouches[0].clientX);
-    // If the user is moving their finger significantly, it's a swipe
-    if (Math.abs(touchStart - e.targetTouches[0].clientX) > 10) {
-      setIsSwiping(true);
-    }
-  };
-
-  const handleTouchEnd = () => {
-    if (isSwiping) {
-      if (touchStart - touchEnd > 50) {
+  const handleTouchEnd = (e) => {
+    setTouchEnd(e.changedTouches[0].clientX);
+    const diff = touchStart - touchEnd;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) {
         nextProject();
-      } else if (touchEnd - touchStart > 50) {
+      } else {
         prevProject();
       }
+      e.preventDefault(); // Prevent synthetic click if swiped
     }
-    // Reset swipe state
-    setIsSwiping(false);
   };
 
   const handleProjectCardClick = (project) => {
-    // Only open the modal if it wasn't a swipe
-    if (!isSwiping) {
-      setSelectedProject(project);
-      setCurrentScreenshotIndex(0);
-    }
+    setSelectedProject(project);
+    setCurrentScreenshotIndex(0);
   };
 
   const ProjectCard = ({ project }) => {
@@ -143,7 +131,6 @@ const ProjectsShowcase = () => {
         className="cursor-pointer group"
         onClick={() => handleProjectCardClick(project)}
         onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
       >
         <div
@@ -549,9 +536,7 @@ const ProjectsShowcase = () => {
           <div className="relative">
             <div
               className="relative overflow-hidden"
-              onTouchStart={handleTouchStart}
-              onTouchMove={handleTouchMove}
-              onTouchEnd={handleTouchEnd}
+              // Removed onTouchMove as it's no longer needed
             >
               <div
                 className="flex transition-transform duration-500 ease-out"
