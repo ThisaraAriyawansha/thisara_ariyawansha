@@ -6,6 +6,7 @@ import Skill from "@/components/skill";
 import Project from "@/components/Project";
 import Banner from "@/components/Banner";
 import About from "@/components/About";
+import Contact from "@/components/Contact";
 
 
 
@@ -20,6 +21,7 @@ export default function Home() {
       <Skill />
       <Project />
       <About />
+      <Contact />
       <Footer />
     </ClientWrapper>
   );
