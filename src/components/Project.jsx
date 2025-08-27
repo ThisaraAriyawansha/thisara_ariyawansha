@@ -483,19 +483,22 @@ const ProjectsShowcase = () => {
                   <Github size={18} />
                   GitHub
                 </a>
-                <a
-                  href={project.driveLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`flex items-center justify-center gap-2 px-4 sm:px-5 py-3 rounded-xl text-sm font-semibold border transition-all duration-300 hover:scale-105 ${
-                    isDarkMode
-                      ? 'border-zinc-700 text-zinc-200 hover:bg-zinc-900 hover:border-zinc-600'
-                      : 'border-gray-300 text-gray-800 hover:bg-gray-50 hover:border-gray-400'
-                  }`}
-                >
-                  <ExternalLink size={18} />
-                  Live Demo
-                </a>
+                {project.driveLink && (
+                  <a
+                    href={project.driveLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`flex items-center justify-center gap-2 px-4 sm:px-5 py-3 rounded-xl text-sm font-semibold border transition-all duration-300 hover:scale-105 ${
+                      isDarkMode
+                        ? 'border-zinc-700 text-zinc-200 hover:bg-zinc-900 hover:border-zinc-600'
+                        : 'border-gray-300 text-gray-800 hover:bg-gray-50 hover:border-gray-400'
+                    }`}
+                  >
+                    <ExternalLink size={18} />
+                    Live Demo
+                  </a>
+                )}
+
               </div>
             </div>
           </div>
