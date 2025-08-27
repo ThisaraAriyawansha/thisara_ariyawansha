@@ -15,8 +15,7 @@ const ProjectsShowcase = () => {
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
-
-
+  const [isSwiping, setIsSwiping] = useState(false);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -107,17 +106,34 @@ const ProjectsShowcase = () => {
 
   const handleTouchStart = (e) => {
     setTouchStart(e.targetTouches[0].clientX);
+    setIsSwiping(false);
   };
 
   const handleTouchMove = (e) => {
     setTouchEnd(e.targetTouches[0].clientX);
+    // If the user is moving their finger significantly, it's a swipe
+    if (Math.abs(touchStart - e.targetTouches[0].clientX) > 10) {
+      setIsSwiping(true);
+    }
   };
 
   const handleTouchEnd = () => {
-    if (touchStart - touchEnd > 50) {
-      nextProject();
-    } else if (touchEnd - touchStart > 50) {
-      prevProject();
+    if (isSwiping) {
+      if (touchStart - touchEnd > 50) {
+        nextProject();
+      } else if (touchEnd - touchStart > 50) {
+        prevProject();
+      }
+    }
+    // Reset swipe state
+    setIsSwiping(false);
+  };
+
+  const handleProjectCardClick = (project) => {
+    // Only open the modal if it wasn't a swipe
+    if (!isSwiping) {
+      setSelectedProject(project);
+      setCurrentScreenshotIndex(0);
     }
   };
 
@@ -125,10 +141,10 @@ const ProjectsShowcase = () => {
     return (
       <div
         className="cursor-pointer group"
-        onClick={() => {
-          setSelectedProject(project);
-          setCurrentScreenshotIndex(0);
-        }}
+        onClick={() => handleProjectCardClick(project)}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
       >
         <div
           className={`relative rounded-3xl overflow-hidden transition-all duration-500 ease-out ${
@@ -354,7 +370,7 @@ const ProjectsShowcase = () => {
                 </div>
               )}
 
-                            {project.video && (
+              {project.video && (
                 <div className="mt-6">
                   <h3
                     className={`text-lg font-semibold mb-3 transition-colors duration-300 ease-out ${
