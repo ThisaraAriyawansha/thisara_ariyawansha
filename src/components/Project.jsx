@@ -403,6 +403,7 @@ const ProjectsShowcase = () => {
                   >
                     Technologies
                   </h3>
+                  <div className="flex flex-wrap gap-2 sm:gap-3">
                     {project.technology.map((tech, index) => (
                       <span
                         key={index}
