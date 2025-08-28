@@ -7,6 +7,8 @@ import Project from "@/components/Project";
 import Banner from "@/components/Banner";
 import About from "@/components/About";
 import Contact from "@/components/Contact";
+import Landing from "@/components/Landing";
+
 
 
 

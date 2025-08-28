@@ -1,134 +1,254 @@
 "use client";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+
+// Define theme object with customizable globe colors
+const themes = {
+  light: {
+    background: '#ffffff', // White
+    text: '#000000', // Black
+    subText: '#6b7280', // Gray-500
+    progressBarBg: '#e5e7eb', // Gray-200
+    progressBarFill: '#000000', // Black
+    globeWireframe: 0x374151, // Blue
+    globePoints: 0x4b5563, // Red
+    ring: 'border-black/20',
+    ringSecondary: 'border-black/15',
+  },
+  dark: {
+    background: '#000000', // Black
+    text: '#ffffff', // White
+    subText: '#d1d5db', // Gray-300
+    progressBarBg: '#374151', // Gray-700
+    progressBarFill: '#ffffff', // White
+    globeWireframe: 0x60a5fa, // Lighter blue
+    globePoints: 0xf87171, // Lighter red
+    ring: 'border-white/20',
+    ringSecondary: 'border-white/15',
+  },
+};
 
 export default function ClientWrapper({ children }) {
   const [isLoading, setIsLoading] = useState(true);
   const [progress, setProgress] = useState(0);
-  const [isDark, setIsDark] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const canvasRef = useRef(null);
+  const sceneRef = useRef(null);
+  const rendererRef = useRef(null);
+  const globeRef = useRef(null);
+  const animationIdRef = useRef(null);
 
+  // Select current theme based on isDarkMode
+  const currentTheme = isDarkMode ? themes.dark : themes.light;
+
+  // Detect dark mode
   useEffect(() => {
-    // Check system preference
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    setIsDark(prefersDark);
+    const isDark = document.documentElement.classList.contains('dark') ||
+                  document.documentElement.getAttribute('data-theme') === 'dark';
+    setIsDarkMode(isDark);
 
-    // Listen for system theme changes
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    const handleChange = (e) => setIsDark(e.matches);
-    mediaQuery.addEventListener('change', handleChange);
+    const observer = new MutationObserver(() => {
+      const newIsDark = document.documentElement.classList.contains('dark') ||
+                       document.documentElement.getAttribute('data-theme') === 'dark';
+      setIsDarkMode(newIsDark);
+    });
 
-    // Progress animation
-    const progressTimer = setInterval(() => {
-      setProgress(prev => {
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class', 'data-theme'],
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  // Initialize Three.js scene
+  useEffect(() => {
+    const initThreeJS = async () => {
+      const THREE = await import('three');
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
+      const renderer = new THREE.WebGLRenderer({
+        canvas: canvasRef.current,
+        alpha: true,
+        antialias: true,
+      });
+
+      const setCanvasSize = () => {
+        const canvas = canvasRef.current;
+        const size = Math.min(window.innerWidth * 0.8, 600);
+        renderer.setSize(size, size);
+        camera.aspect = 1;
+        camera.updateProjectionMatrix();
+      };
+
+      setCanvasSize();
+      renderer.setClearColor(0x000000, 0);
+
+      const geometry = new THREE.SphereGeometry(1, 32, 32);
+      const material = new THREE.MeshBasicMaterial({
+        color: currentTheme.globeWireframe,
+        wireframe: true,
+        transparent: true,
+        opacity: 0.8,
+      });
+
+      const globe = new THREE.Mesh(geometry, material);
+      scene.add(globe);
+
+      const pointGeometry = new THREE.SphereGeometry(0.02, 8, 8);
+      const pointMaterial = new THREE.MeshBasicMaterial({
+        color: currentTheme.globePoints,
+      });
+
+      const points = [];
+      for (let i = 0; i < 20; i++) {
+        const point = new THREE.Mesh(pointGeometry, pointMaterial.clone());
+        const phi = Math.acos(-1 + (2 * Math.random()));
+        const theta = Math.random() * Math.PI * 2;
+
+        point.position.x = 1.01 * Math.sin(phi) * Math.cos(theta);
+        point.position.y = 1.01 * Math.cos(phi);
+        point.position.z = 1.01 * Math.sin(phi) * Math.sin(theta);
+
+        points.push(point);
+        scene.add(point);
+      }
+
+      camera.position.z = 2.5;
+
+      sceneRef.current = scene;
+      rendererRef.current = renderer;
+      globeRef.current = { globe, points };
+
+      const animate = () => {
+        animationIdRef.current = requestAnimationFrame(animate);
+        if (globe && points) {
+          globe.rotation.y += 0.005;
+          globe.rotation.x += 0.002;
+
+          points.forEach((point, index) => {
+            point.material.opacity = 0.5 + 0.5 * Math.sin(Date.now() * 0.003 + index);
+          });
+        }
+        renderer.render(scene, camera);
+      };
+
+      animate();
+
+      const handleResize = () => setCanvasSize();
+      window.addEventListener('resize', handleResize);
+
+      return () => {
+        window.removeEventListener('resize', handleResize);
+      };
+    };
+
+    initThreeJS();
+
+    const progressInterval = setInterval(() => {
+      setProgress((prev) => {
         if (prev >= 100) {
-          clearInterval(progressTimer);
+          clearInterval(progressInterval);
           return 100;
         }
         return prev + Math.random() * 10;
       });
-    }, 150);
+    }, 300);
 
-    // Main loading timer
-    const timer = setTimeout(() => {
+    const completeTimer = setTimeout(() => {
       setIsLoading(false);
-    }, 2000);
+    }, 3000);
 
     return () => {
-      clearTimeout(timer);
-      clearInterval(progressTimer);
-      mediaQuery.removeEventListener('change', handleChange);
+      clearTimeout(completeTimer);
+      clearInterval(progressInterval);
+      if (animationIdRef.current) {
+        cancelAnimationFrame(animationIdRef.current);
+      }
+      if (rendererRef.current) {
+        rendererRef.current.dispose();
+      }
     };
   }, []);
 
+  // Update globe and points colors on theme change
+  useEffect(() => {
+    if (globeRef.current) {
+      globeRef.current.globe.material.color.set(currentTheme.globeWireframe);
+      globeRef.current.points.forEach((point) => {
+        point.material.color.set(currentTheme.globePoints);
+      });
+    }
+  }, [isDarkMode]);
+
   if (isLoading) {
     return (
-      <div className={`min-h-screen flex items-center justify-center p-4 transition-colors duration-300 ${
-        isDark ? 'bg-black' : 'bg-white'
-      }`}>
-        {/* Theme toggle button */}
-        <button
-          onClick={() => setIsDark(!isDark)}
-          className={`absolute top-6 right-6 p-2 rounded-full transition-all duration-300 hover:scale-110 ${
-            isDark 
-              ? 'bg-white/10 text-white hover:bg-white/20' 
-              : 'bg-black/10 text-black hover:bg-black/20'
-          }`}
-          aria-label="Toggle theme"
-        >
-          {isDark ? (
-            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 18c-3.3 0-6-2.7-6-6s2.7-6 6-6 6 2.7 6 6-2.7 6-6 6zm0-10c-2.2 0-4 1.8-4 4s1.8 4 4 4 4-1.8 4-4-1.8-4-4-4z"/>
-              <path d="M12 1l3 6h-6zM12 23l-3-6h6zM4.2 4.2l4.2 4.2-1.4 1.4L2.8 5.6zM19.8 19.8l-4.2-4.2 1.4-1.4 4.2 4.2zM1 12l6-3v6zM23 12l-6 3v-6zM4.2 19.8l4.2-4.2 1.4 1.4-4.2 4.2zM19.8 4.2l-4.2 4.2-1.4-1.4 4.2-4.2z"/>
-            </svg>
-          ) : (
-            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
-            </svg>
-          )}
-        </button>
-
-        <div className="w-full max-w-sm text-center">
-          {/* Simple spinner */}
+      <div
+        className="fixed inset-0 z-50 flex items-center justify-center"
+        style={{ backgroundColor: currentTheme.background }}
+      >
+        <div className="w-full max-w-2xl px-6 text-center">
           <div className="relative mb-8">
-            <div className={`w-12 h-12 mx-auto border-2 rounded-full transition-colors duration-300 ${
-              isDark ? 'border-gray-800' : 'border-gray-200'
-            }`}>
-              <div className={`w-full h-full border-2 border-transparent rounded-full animate-spin transition-colors duration-300 ${
-                isDark ? 'border-t-white' : 'border-t-black'
-              }`}></div>
-            </div>
-          </div>
-
-          {/* Loading text */}
-          <h2 className={`text-xl font-light mb-2 tracking-wide transition-colors duration-300 ${
-            isDark ? 'text-white' : 'text-black'
-          }`}>
-            Loading
-          </h2>
-          
-          {/* Subtitle */}
-          <p className={`text-sm mb-8 font-light transition-colors duration-300 ${
-            isDark ? 'text-gray-400' : 'text-gray-500'
-          }`}>
-            Please wait...
-          </p>
-
-          {/* Progress bar */}
-          <div className="w-full max-w-xs mx-auto">
-            <div className={`h-0.5 rounded-full overflow-hidden transition-colors duration-300 ${
-              isDark ? 'bg-black' : 'bg-gray-100'
-            }`}>
-              <div 
-                className={`h-full rounded-full transition-all duration-300 ease-out ${
-                  isDark ? 'bg-white' : 'bg-black'
-                }`}
-                style={{ width: `${Math.min(progress, 100)}%` }}
+            <canvas
+              ref={canvasRef}
+              className="mx-auto w-[min(80vw,400px)] h-[min(80vw,400px)]"
+              style={{
+                maxWidth: '400px',
+                maxHeight: '400px',
+                backgroundColor: currentTheme.background,
+              }}
+            />
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+              <div
+                className={`absolute border rounded-full animate-ping ${currentTheme.ring}`}
+                style={{ width: '110%', height: '110%', animationDelay: '0.5s' }}
+              ></div>
+              <div
+                className={`absolute border rounded-full animate-ping ${currentTheme.ringSecondary}`}
+                style={{ width: '120%', height: '120%', animationDelay: '1s' }}
               ></div>
             </div>
-            <div className="mt-4 text-center">
-              <span className={`text-xs font-light font-mono transition-colors duration-300 ${
-                isDark ? 'text-gray-500' : 'text-gray-400'
-              }`}>
-                {Math.round(Math.min(progress, 100))}%
-              </span>
-            </div>
           </div>
 
-          {/* Simple dots */}
-          <div className="flex justify-center space-x-1.5 mt-8">
-            <div className={`w-1.5 h-1.5 rounded-full animate-pulse transition-colors duration-300 ${
-              isDark ? 'bg-white' : 'bg-black'
-            }`}></div>
-            <div className={`w-1.5 h-1.5 rounded-full animate-pulse delay-200 transition-colors duration-300 ${
-              isDark ? 'bg-white' : 'bg-black'
-            }`}></div>
-            <div className={`w-1.5 h-1.5 rounded-full animate-pulse delay-400 transition-colors duration-300 ${
-              isDark ? 'bg-white' : 'bg-black'
-            }`}></div>
+          <h2
+            className="mb-4 text-3xl font-medium tracking-wider"
+            style={{ color: currentTheme.text }}
+          >
+            Hi, I'm Thisara Ariyawansha
+          </h2>
+          <p
+            className="mb-6 text-base font-light"
+            style={{ color: currentTheme.subText }}
+          >
+            Welcome to my portfolio. I am a passionate software engineer specializing in full-stack development, creating efficient and elegant digital solutions.
+          </p>
+
+          <div className="w-full max-w-md mx-auto mb-8">
+            <div
+              className="h-1.5 rounded-full overflow-hidden"
+              style={{ backgroundColor: currentTheme.progressBarBg }}
+            >
+              <div
+                className="h-full transition-all duration-500 rounded-full"
+                style={{ width: `${progress}%`, backgroundColor: currentTheme.progressBarFill }}
+              ></div>
+            </div>
+            <div className="flex justify-between mt-2">
+              <span className="text-xs" style={{ color: currentTheme.subText }}>
+                Initializing
+              </span>
+              <span className="text-xs" style={{ color: currentTheme.subText }}>
+                {Math.round(progress)}%
+              </span>
+              <span className="text-xs" style={{ color: currentTheme.subText }}>
+                Complete
+              </span>
+            </div>
           </div>
         </div>
       </div>
     );
   }
 
-  return <>{children}</>;
+  return children;
 }
