@@ -117,7 +117,7 @@ export default function About() {
                       className={`text-center xl:text-left px-1 sm:px-1.5 xl:px-3 py-1 sm:py-1.5 xl:py-2 rounded-md sm:rounded-md xl:rounded-lg transition-all duration-300 ${
                         selectedItem === index
                           ? isDarkMode
-                            ? "bg-white text-black"
+                            ? "bg-gray-900 text-black"
                             : "bg-black text-white"
                           : isDarkMode
                             ? "text-gray-400 hover:text-white hover:bg-gray-900"
