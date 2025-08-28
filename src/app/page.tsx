@@ -8,6 +8,11 @@ import Banner from "@/components/Banner";
 import About from "@/components/About";
 import Contact from "@/components/Contact";
 import Landing from "@/components/Landing";
+import Innovation from "@/components/Innovation";
+import Experience from "@/components/experience";
+import AboutMe from "@/components/AboutMe";
+
+
 
 
 
@@ -21,7 +26,10 @@ export default function Home() {
       <Hero />
       <Banner />
       <Skill />
+      <Innovation />
       <Project />
+      <Experience />
+      <AboutMe />
       <About />
       <Contact />
       <Footer />

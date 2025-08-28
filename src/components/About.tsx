@@ -79,7 +79,7 @@ export default function About() {
         <div className="max-w-4xl px-4 mx-auto mb-8 sm:mb-10 md:mb-12 sm:px-6 lg:px-8">
           <div className="text-center">
             <h2 
-              className={`text-lg sm:text-xl md:text-2xl font-light  ${
+              className={`text-lg sm:text-xl md:text-2xl font-light mb-3 sm:mb-4 md:mb-5 ${
                 isDarkMode ? "text-white" : "text-black"
               }`}
               style={{ 
