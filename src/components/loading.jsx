@@ -13,6 +13,7 @@ const themes = {
     globePoints: 0x4b5563, // Red
     ring: 'border-black/20',
     ringSecondary: 'border-black/15',
+    codeAccent: '#2563eb', // Blue for code elements
   },
   dark: {
     background: '#000000', // Black
@@ -24,6 +25,7 @@ const themes = {
     globePoints: 0xf87171, // Lighter red
     ring: 'border-white/20',
     ringSecondary: 'border-white/15',
+    codeAccent: '#3b82f6', // Blue for code elements
   },
 };
 
@@ -184,17 +186,17 @@ export default function ClientWrapper({ children }) {
   if (isLoading) {
     return (
       <div
-        className="fixed inset-0 z-50 flex items-center justify-center"
+        className="fixed inset-0 z-50 flex items-center justify-center font-mono"
         style={{ backgroundColor: currentTheme.background }}
       >
-        <div className="w-full max-w-2xl px-6 text-center">
-          <div className="relative mb-8">
+        <div className="w-full max-w-2xl px-4 text-center">
+          <div className="relative mb-6">
             <canvas
               ref={canvasRef}
-              className="mx-auto w-[min(80vw,400px)] h-[min(80vw,400px)]"
+              className="mx-auto w-[min(70vw,350px)] h-[min(70vw,350px)]"
               style={{
-                maxWidth: '400px',
-                maxHeight: '400px',
+                maxWidth: '350px',
+                maxHeight: '350px',
                 backgroundColor: currentTheme.background,
               }}
             />
@@ -210,22 +212,23 @@ export default function ClientWrapper({ children }) {
             </div>
           </div>
 
+          {/* Updated with smaller font sizes */}
           <h2
-            className="mb-4 text-3xl font-medium tracking-wider"
-            style={{ color: currentTheme.text }}
+            className="mb-3 text-xl font-medium md:text-2xl"
+            style={{ color: currentTheme.codeAccent }}
           >
-            Hi, I'm Thisara Ariyawansha
+            console.log("<span style={{ color: currentTheme.text }}>Hello, I'm Thisara Ariyawansha</span>");
           </h2>
           <p
-            className="mb-6 text-base font-light"
+            className="mb-4 text-sm font-light md:text-base"
             style={{ color: currentTheme.subText }}
           >
-            Welcome to my portfolio. I am a passionate software engineer specializing in full-stack development, creating efficient and elegant digital solutions.
+            // Full Stack Developer specializing in modern web technologies
           </p>
 
-          <div className="w-full max-w-md mx-auto mb-8">
+          <div className="w-full max-w-md mx-auto mb-6">
             <div
-              className="h-1.5 rounded-full overflow-hidden"
+              className="h-1 overflow-hidden rounded-full"
               style={{ backgroundColor: currentTheme.progressBarBg }}
             >
               <div
@@ -233,17 +236,23 @@ export default function ClientWrapper({ children }) {
                 style={{ width: `${progress}%`, backgroundColor: currentTheme.progressBarFill }}
               ></div>
             </div>
-            <div className="flex justify-between mt-2">
-              <span className="text-xs" style={{ color: currentTheme.subText }}>
-                Initializing
-              </span>
-              <span className="text-xs" style={{ color: currentTheme.subText }}>
-                {Math.round(progress)}%
-              </span>
-              <span className="text-xs" style={{ color: currentTheme.subText }}>
-                Complete
-              </span>
+            <div className="flex justify-between mt-1.5 text-[10px] md:text-xs" style={{ color: currentTheme.subText }}>
+              <span>$ loading.init()</span>
+              <span>{Math.round(progress)}%</span>
+              <span>{progress === 100 ? "ready" : "compiling"}</span>
             </div>
+          </div>
+
+          {/* Additional coder element with smaller font */}
+          <div 
+            className="inline-block px-2 py-1 text-[10px] md:text-xs rounded"
+            style={{ 
+              backgroundColor: isDarkMode ? 'rgba(59, 130, 246, 0.1)' : 'rgba(37, 99, 235, 0.1)',
+              color: currentTheme.codeAccent,
+              border: `1px solid ${currentTheme.codeAccent}20`
+            }}
+          >
+            <span style={{ color: currentTheme.codeAccent }}>npm run</span> dev
           </div>
         </div>
       </div>
