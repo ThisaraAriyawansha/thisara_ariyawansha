@@ -101,8 +101,7 @@ export default function About() {
                 <strong> Diploma</strong> and a <strong>Higher National Diploma in Software Engineering</strong> 
                 with <strong>distinction passes</strong> at the National Institute of Business Management (NIBM). 
                 I also completed an <strong>internship as a Web Developer at Silicon Radon Networks (Pvt) Ltd</strong>, 
-                where I gained valuable industry experience. I am passionate about <strong>Full-Stack Development</strong> 
-                and enjoy creating scalable, modern, and efficient digital solutions. 
+                where I gained valuable industry experience. I am passionate about <strong>Full-Stack Development</strong> and enjoy creating scalable, modern, and efficient digital solutions. 
               </p>
 
           </div>
