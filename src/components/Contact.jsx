@@ -58,7 +58,7 @@ export default function Contact() {
   };
 
   return (
-    <section
+    <section id="contact"
       className={`min-h-screen transition-all duration-700 ease-out relative overflow-hidden ${
         isDarkMode 
           ? "bg-black" 

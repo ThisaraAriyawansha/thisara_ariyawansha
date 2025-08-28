@@ -79,7 +79,7 @@ export default function About() {
         <div className="max-w-4xl px-4 mx-auto mb-8 sm:mb-10 md:mb-12 sm:px-6 lg:px-8">
           <div className="text-center">
             <h2 
-              className={`text-lg sm:text-xl md:text-2xl font-light mb-3 sm:mb-4 md:mb-5 ${
+              className={`text-lg sm:text-xl md:text-2xl font-light  ${
                 isDarkMode ? "text-white" : "text-black"
               }`}
               style={{ 
@@ -88,6 +88,14 @@ export default function About() {
             >
               About Me
             </h2>
+
+            {/* Centered line under the text */}
+            <div 
+              className={`w-16 h-[2px] rounded-full mb-6 mx-auto ${
+                isDarkMode ? "bg-white" : "bg-black"
+              }`}
+            />
+
               <p 
                 className={`text-xs sm:text-sm md:text-base leading-relaxed max-w-xl sm:max-w-2xl mx-auto ${
                   isDarkMode ? "text-gray-300" : "text-gray-600"
