@@ -71,7 +71,7 @@ export default function AboutMe() {
             <p className={`max-w-xl mx-auto text-base leading-relaxed px-4 py-2 rounded-lg ${
               isDarkMode ? ' text-white' : ' text-black'
             }`}>
-              Software Engineering graduate from Matara, passionate about Full-Stack Development
+                Undergraduate Software Engineering student from Matara, passionate about Full-Stack Development and building modern, scalable web applications.
             </p>
           </div>
 
