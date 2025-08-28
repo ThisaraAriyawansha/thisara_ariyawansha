@@ -511,7 +511,7 @@ const ProjectsShowcase = () => {
   return (
     <div id="projects"
       className={`min-h-screen transition-colors duration-500 ${
-        isDarkMode ? 'bg-black' : 'bg-gray-50'
+        isDarkMode ? 'bg-black' : 'bg-white'
       }`}
     >
       <div className="px-4 py-12 mx-auto sm:px-6 sm:py-16 max-w-7xl">
