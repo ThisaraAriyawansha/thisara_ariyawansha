@@ -43,20 +43,19 @@ export default function About() {
       description: "Completed a Diploma in English at ESOFT Metro Campus, enhancing communication skills.",
     },
     {
-    year: 2021,
-    title: "Advanced Level (A/L) – Technology Stream",
-    description: "Studied Technology Stream subjects: SFT, ET, and ICT, achieving strong results and excelling in technical and scientific skills."
-    },      
-
-    {
-    year: 2023,
-    title: "Diploma in Software Engineering",
-    description: "Completed the Diploma in Software Engineering at NIBM with distinction, gaining a strong foundation in software development principles and practices."
+      year: 2021,
+      title: "Advanced Level (A/L) – Technology Stream",
+      description: "Completed A/Ls in the Technology Stream with strong academic performance: SFT – A, ICT – B, and ET – B. Developed a solid foundation in technical and analytical skills."
     },
     {
-    year: 2025,
-    title: "Higher National Diploma in Software Engineering",
-    description: "Successfully completed the Higher National Diploma in Software Engineering at NIBM with distinction, deepening expertise in advanced software engineering concepts and practical applications."
+      year: 2023,
+      title: "Diploma in Software Engineering",
+      description: "Completed the Diploma in Software Engineering at NIBM with distinction (GPA 3.9+), building a strong foundation in programming, databases, and software development principles."
+    },
+    {
+      year: 2025,
+      title: "Higher National Diploma in Software Engineering",
+      description: "Successfully completed the Higher National Diploma in Software Engineering at NIBM with distinction (GPA 3.8+), strengthening advanced knowledge in full-stack development, software design patterns, and real-world applications."
     }
     ,
     {
