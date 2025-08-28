@@ -58,7 +58,7 @@ export default function AboutMe() {
   ];
 
   return (
-    <section className={`min-h-screen py-20 ${isDarkMode ? 'bg-black' : 'bg-white'} transition-colors duration-300`}>
+    <section id="about" className={`min-h-screen py-20 ${isDarkMode ? 'bg-black' : 'bg-white'} transition-colors duration-300`}>
       <div className="container px-6 mx-auto">
         <div className="max-w-6xl mx-auto">
           
