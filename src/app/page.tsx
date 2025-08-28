@@ -9,7 +9,7 @@ import About from "@/components/About";
 import Contact from "@/components/Contact";
 import Landing from "@/components/Landing";
 import Innovation from "@/components/Innovation";
-import Experience from "@/components/experience";
+import Experience from "@/components/Experience";
 import AboutMe from "@/components/AboutMe";
 
 
