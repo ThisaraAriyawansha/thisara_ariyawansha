@@ -233,7 +233,7 @@ export default function AboutMe() {
                 <a
                 href="#contact"
                 className={`px-6 py-2 text-sm text-white transition-colors duration-200 rounded-full ${
-                    isDarkMode ? 'bg-gray-950 hover:bg-gray-700' : 'bg-black hover:bg-gray-800'
+                    isDarkMode ? 'bg-gray-800 hover:bg-gray-700' : 'bg-black hover:bg-gray-800'
                 }`}
                 >
                 Let's Connect

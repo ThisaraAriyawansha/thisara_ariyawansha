@@ -68,7 +68,7 @@ export default function About() {
 
   return (
     <section id="about"
-      className={`min-h-screen transition-all duration-700 ease-out ${
+      className={` transition-all duration-700 ease-out ${
         isDarkMode 
           ? "bg-black" 
           : "bg-white"
@@ -76,41 +76,20 @@ export default function About() {
     >
       <div className="pt-6 pb-6 md:pt-8 md:pb-8">
         {/* About Me Introduction */}
-        <div className="max-w-4xl px-4 mx-auto mb-8 sm:mb-10 md:mb-12 sm:px-6 lg:px-8">
+        <div className="max-w-4xl px-4 mx-auto sm:px-6 lg:px-8">
           <div className="text-center">
             <h2 
-              className={`text-lg sm:text-xl md:text-2xl font-light mb-3 sm:mb-4 md:mb-5 ${
+              className={`text-lg sm:text-xl md:text-2xl font-light   ${
                 isDarkMode ? "text-white" : "text-black"
               }`}
               style={{ 
                 fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif'
               }}
             >
-              About Me
+              TIMELINE
             </h2>
+            <div className={`w-16 h-px mx-auto mb-6 ${isDarkMode ? "bg-gray-500" : "bg-gray-500"}`} />
 
-            {/* Centered line under the text */}
-            <div 
-              className={`w-16 h-[2px] rounded-full mb-6 mx-auto ${
-                isDarkMode ? "bg-white" : "bg-black"
-              }`}
-            />
-
-              <p 
-                className={`text-xs sm:text-sm md:text-base leading-relaxed max-w-xl sm:max-w-2xl mx-auto ${
-                  isDarkMode ? "text-gray-300" : "text-gray-600"
-                }`}
-                style={{ 
-                  fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
-                  lineHeight: '1.5'
-                }}
-              >
-                I’m <strong>Thisara Ariyawansha</strong> from Matara. I have successfully completed a 
-                <strong> Diploma</strong> and a <strong>Higher National Diploma in Software Engineering</strong> 
-                with <strong>distinction passes</strong> at the National Institute of Business Management (NIBM). 
-                I also completed an <strong>internship as a Web Developer at Silicon Radon Networks (Pvt) Ltd</strong>, 
-                where I gained valuable industry experience. I am passionate about <strong>Full-Stack Development</strong> and enjoy creating scalable, modern, and efficient digital solutions. 
-              </p>
 
           </div>
         </div>
