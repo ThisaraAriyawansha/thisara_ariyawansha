@@ -46,7 +46,7 @@ export default function Innovation() {
       <div className="absolute inset-0">
         <div 
           className={`absolute rounded-full w-80 h-80 blur-3xl ${
-            isDarkMode ? 'bg-gray-100 opacity-30' : 'bg-gray-900 opacity-70'
+            isDarkMode ? 'bg-gray-100 opacity-30' : 'bg-gray-900 opacity-40'
           }`}
           style={{
             left: mousePosition.x / 20 + 'px',
