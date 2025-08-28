@@ -26,7 +26,7 @@ const Banner = () => {
           className="inline-block px-4 py-2 mt-4 text-sm font-medium text-white transition-colors duration-300 ease-in-out bg-transparent border border-white rounded-full sm:px-6 sm:py-3 sm:text-base hover:bg-white/10"
         
         >
-          Explore Our Work
+          Explore My Work
         </a>
       </div>
     </div>
