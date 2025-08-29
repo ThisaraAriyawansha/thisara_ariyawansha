@@ -9,8 +9,8 @@ const themes = {
     subText: '#6b7280', // Gray-500
     progressBarBg: '#e5e7eb', // Gray-200
     progressBarFill: '#000000', // Black
-    globeWireframe: 0x374151, // Blue
-    globePoints: 0x4b5563, // Red
+    globeWireframe: '#6b7280', // Blue
+    globePoints: '#6b7280', // Red
     ring: 'border-black/20',
     ringSecondary: 'border-black/15',
     codeAccent: '#2563eb', // Blue for code elements
@@ -21,8 +21,8 @@ const themes = {
     subText: '#d1d5db', // Gray-300
     progressBarBg: '#374151', // Gray-700
     progressBarFill: '#ffffff', // White
-    globeWireframe: 0x60a5fa, // Lighter blue
-    globePoints: 0xf87171, // Lighter red
+    globeWireframe: '#6b7280', // Lighter blue
+    globePoints: '#6b7280', // Lighter red
     ring: 'border-white/20',
     ringSecondary: 'border-white/15',
     codeAccent: '#3b82f6', // Blue for code elements
@@ -217,7 +217,7 @@ export default function ClientWrapper({ children }) {
             className="mb-3 text-xl font-medium md:text-2xl"
             style={{ color: currentTheme.codeAccent }}
           >
-            console.log("<span style={{ color: currentTheme.text }}>Hello, I'm Thisara Ariyawansha</span>");
+            <span style={{ color: currentTheme.text }}>console.log("Hello, I'm Thisara Ariyawansha");</span>
           </h2>
           <p
             className="mb-4 text-sm font-light md:text-base"
