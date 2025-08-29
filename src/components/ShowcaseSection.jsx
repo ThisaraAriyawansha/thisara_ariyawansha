@@ -56,36 +56,37 @@ const ShowcaseSection = () => {
   }, []);
 
   return (
-    <section id="projects" className="relative flex flex-col items-center justify-center min-h-[250px] sm:min-h-[250px] md:min-h-[250px] lg:min-h-[400px] xl:min-h-[400px] max-h-[450px] px-4 py-8 bg-black overflow-hidden">
+    <section className="relative flex flex-col items-center justify-center min-h-[250px] sm:min-h-[250px] md:min-h-[250px] lg:min-h-[400px] xl:min-h-[400px] max-h-[450px] px-4 py-8 bg-black overflow-hidden">
       
-      {/* Subtle Coding Background */}
+      {/* Animated Code Background */}
       <div className="absolute inset-0 pointer-events-none">
-        {/* Very Subtle Matrix Lines */}
+        {/* Matrix-style vertical lines */}
         <div className="absolute inset-0">
-          {[...Array(6)].map((_, i) => (
+          {[...Array(8)].map((_, i) => (
             <div
               key={`line-${i}`}
-              className="absolute w-px bg-gradient-to-b from-transparent via-green-700 to-transparent"
+              className="absolute w-px bg-gradient-to-b from-transparent via-green-500/20 to-transparent"
               style={{
-                left: `${(i + 1) * 16.5}%`,
+                left: `${(i + 1) * 12.5}%`,
                 height: '100%',
-                animation: `pulse ${3 + i * 0.8}s ease-in-out infinite alternate`,
+                animation: `pulse ${2 + i * 0.5}s ease-in-out infinite alternate`,
               }}
             />
           ))}
         </div>
 
-        {/* Distant Floating Code (away from center) */}
-        {codeSnippets.filter((_, i) => i < 8).map((snippet) => (
+        {/* Floating Code Snippets */}
+        {codeSnippets.map((snippet) => (
           <div
             key={snippet.id}
             className="absolute font-mono text-green-700 select-none whitespace-nowrap"
             style={{
-              left: `${snippet.x > 50 ? snippet.x + 20 : snippet.x - 20}%`,
-              top: `${snippet.y > 50 ? snippet.y + 15 : snippet.y - 15}%`,
-              opacity: snippet.opacity * 0.3,
-              fontSize: `${snippet.size * 0.7}rem`,
-              animation: `float ${snippet.duration * 1.5}s linear infinite`,
+              left: `${snippet.x}%`,
+              top: `${snippet.y}%`,
+              opacity: snippet.opacity,
+              fontSize: `${snippet.size}rem`,
+              transform: `scale(${snippet.size})`,
+              animation: `float ${snippet.duration}s linear infinite`,
               animationDelay: `${snippet.delay}s`,
             }}
           >
@@ -93,36 +94,53 @@ const ShowcaseSection = () => {
           </div>
         ))}
 
-        {/* Minimal Circuit Pattern */}
-        <div className="absolute inset-0 opacity-5">
+        {/* Binary Rain Effect */}
+        <div className="absolute inset-0">
+          {[...Array(15)].map((_, i) => (
+            <div
+              key={`binary-${i}`}
+              className="absolute font-mono text-xs select-none text-blue-500/20"
+              style={{
+                left: `${Math.random() * 100}%`,
+                animation: `binaryRain ${8 + Math.random() * 4}s linear infinite`,
+                animationDelay: `${Math.random() * 5}s`,
+              }}
+            >
+              {Math.random() > 0.5 ? '1' : '0'}
+            </div>
+          ))}
+        </div>
+
+        {/* Circuit Board Pattern */}
+        <div className="absolute inset-0 opacity-10">
           <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
             <defs>
-              <pattern id="circuit" x="0" y="0" width="25" height="25" patternUnits="userSpaceOnUse">
+              <pattern id="circuit" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
                 <path
-                  d="M0 12.5 L25 12.5 M12.5 0 L12.5 25"
-                  stroke="rgba(34, 197, 94, 0.2)"
-                  strokeWidth="0.3"
+                  d="M0 10 L20 10 M10 0 L10 20 M5 5 L15 15 M15 5 L5 15"
+                  stroke="rgba(34, 197, 94, 0.3)"
+                  strokeWidth="0.5"
                   fill="none"
                 />
-                <circle cx="12.5" cy="12.5" r="0.8" fill="rgba(34, 197, 94, 0.3)" />
+                <circle cx="10" cy="10" r="1" fill="rgba(34, 197, 94, 0.5)" />
               </pattern>
             </defs>
             <rect width="100%" height="100%" fill="url(#circuit)" />
           </svg>
         </div>
 
-        {/* Few Glowing Dots in Corners */}
+        {/* Glowing Particles */}
         <div className="absolute inset-0">
-          {[...Array(6)].map((_, i) => (
+          {[...Array(12)].map((_, i) => (
             <div
               key={`particle-${i}`}
-              className="absolute w-1 h-1 rounded-full bg-cyan-700"
+              className="absolute w-1 h-1 rounded-full bg-cyan-900 opacity-60"
               style={{
-                left: i % 2 === 0 ? `${Math.random() * 20}%` : `${80 + Math.random() * 20}%`,
-                top: i % 3 === 0 ? `${Math.random() * 25}%` : `${75 + Math.random() * 25}%`,
-                animation: `glow ${4 + Math.random() * 3}s ease-in-out infinite alternate`,
-                animationDelay: `${Math.random() * 4}s`,
-                boxShadow: '0 0 8px currentColor',
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                animation: `glow ${3 + Math.random() * 2}s ease-in-out infinite alternate`,
+                animationDelay: `${Math.random() * 3}s`,
+                boxShadow: '0 0 10px currentColor',
               }}
             />
           ))}
@@ -146,7 +164,7 @@ const ShowcaseSection = () => {
         </h1>
 
         {/* Subtitle */}
-        <p className="max-w-xl px-4 py-2 mt-4 text-sm text-center text-gray-700 sm:text-base md:text-base lg:text-lg">
+        <p className="max-w-xl px-4 py-2 mt-4 text-sm text-center text-gray-600 sm:text-base md:text-base lg:text-lg">
           A curated collection of my work, featuring innovative solutions and cutting-edge technologies.
         </p>
       </div>
