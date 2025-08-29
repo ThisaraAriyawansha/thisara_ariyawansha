@@ -510,7 +510,7 @@ const ProjectsShowcase = () => {
 
   return (
     <div 
-      className={`min-h-screen transition-colors duration-500 ${
+      className={` transition-colors duration-500 ${
         isDarkMode ? 'bg-black' : 'bg-white'
       }`}
     >
@@ -537,7 +537,7 @@ const ProjectsShowcase = () => {
         {/* Projects Display */}
         {isMobile ? (
           // Mobile carousel with improved UX
-          <div className="relative">
+          <div className="relative ">
             <div
               className="relative overflow-hidden"
               // Removed onTouchMove as it's no longer needed
