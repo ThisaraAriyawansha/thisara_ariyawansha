@@ -56,7 +56,7 @@ const ShowcaseSection = () => {
   }, []);
 
   return (
-    <section className="relative flex flex-col items-center justify-center min-h-[250px] sm:min-h-[250px] md:min-h-[250px] lg:min-h-[400px] xl:min-h-[400px] max-h-[450px] px-4 py-8 bg-black overflow-hidden">
+    <section id="projects" className="relative flex flex-col items-center justify-center min-h-[250px] sm:min-h-[250px] md:min-h-[250px] lg:min-h-[400px] xl:min-h-[400px] max-h-[450px] px-4 py-8 bg-black overflow-hidden">
       
       {/* Subtle Coding Background */}
       <div className="absolute inset-0 pointer-events-none">

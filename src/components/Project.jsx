@@ -509,7 +509,7 @@ const ProjectsShowcase = () => {
   };
 
   return (
-    <div id="projects"
+    <div 
       className={`min-h-screen transition-colors duration-500 ${
         isDarkMode ? 'bg-black' : 'bg-white'
       }`}

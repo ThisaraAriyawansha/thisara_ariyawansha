@@ -5,7 +5,7 @@ const Banner = () => {
     <div
       className="relative flex items-center justify-center w-full text-center text-white bg-center bg-cover h-[200px] sm:h-[300px] md:h-[400px] lg:h-[500px]"
       style={{
-        backgroundImage: "url('/otherimages/bg.jpg')",
+        backgroundImage: "url('/otherimages/pexels-kevin-ku-92347-577585.jpg')",
         backgroundAttachment: "fixed",
         backgroundSize: "cover",
         backgroundPosition: "center",
