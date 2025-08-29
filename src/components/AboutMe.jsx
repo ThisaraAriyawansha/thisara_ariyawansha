@@ -80,33 +80,55 @@ export default function AboutMe() {
             
             {/* Left Side - Image Placeholder */}
             <div className="relative">
-              <div className={`relative max-w-sm mx-auto overflow-hidden aspect-square rounded-xl lg:max-w-none ${
-                isDarkMode ? 'bg-gray-700' : 'bg-gray-100'
-              }`}>
-                <img 
-                  src="/otherimages/modern-languages-web-programming-web-development-design-and-coding-M17GRE.jpg" 
+              <div
+                className={`relative max-w-sm mx-auto overflow-hidden aspect-square rounded-xl lg:max-w-none ${
+                  isDarkMode ? "bg-gray-700" : "bg-gray-100"
+                }`}
+              >
+                <img
+                  src={
+                    isDarkMode
+                      ? "/otherimages/7587df77ef521cf98057d0028ee983f1.gif" // Dark mode image
+                      : "/otherimages/7587df77ef521cf98057d0028ee983f1.gif" // Light mode image
+                  }
                   alt="Thisara Ariyawansha - Full Stack Developer"
                   className="object-cover object-center w-full h-full"
                 />
-                
+
                 {/* Decorative Elements */}
-                <div className={`absolute w-4 h-4 rounded-full -top-2 -right-2 hidden ${
-                  isDarkMode ? 'bg-yellow-400' : 'bg-black'
-                }`}></div>
-                <div className={`absolute w-3 h-3 rounded-full -bottom-2 -left-2 ${
-                  isDarkMode ? 'bg-gray-500' : 'bg-gray-800'
-                }`}></div>
+                <div
+                  className={`absolute w-4 h-4 rounded-full -top-2 -right-2 hidden ${
+                    isDarkMode ? "bg-yellow-400" : "bg-black"
+                  }`}
+                ></div>
+                <div
+                  className={`absolute w-3 h-3 rounded-full -bottom-2 -left-2 ${
+                    isDarkMode ? "bg-gray-500" : "bg-gray-800"
+                  }`}
+                ></div>
               </div>
+
               
               {/* Floating Fun Fact */}
-              <div className={`absolute hidden max-w-xs p-3 transform -translate-y-1/2 border rounded-lg shadow-lg -right-2 top-1/2 lg:block ${
-                isDarkMode ? 'bg-black border-gray-700 text-white' : 'bg-white border-gray-200 text-black'
-              }`}>
-                <div className={`mb-1 text-xs ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Fun Fact:</div>
-                <div className="text-sm font-medium transition-all duration-500">
-                  {facts[currentFact]}
+                <div
+                  className={`absolute hidden max-w-xs p-3 transform -translate-y-1/2 border rounded-lg shadow-lg -right-2 top-1/2 ${
+                    isDarkMode
+                      ? "bg-black border-gray-700 text-white"
+                      : "bg-white border-gray-200 text-black"
+                  }`}
+                >
+                  <div
+                    className={`mb-1 text-xs ${
+                      isDarkMode ? "text-gray-400" : "text-gray-600"
+                    }`}
+                  >
+                    Fun Fact:
+                  </div>
+                  <div className="text-sm font-medium transition-all duration-500">
+                    {facts[currentFact]}
+                  </div>
                 </div>
-              </div>
+
             </div>
 
             {/* Right Side - Content */}

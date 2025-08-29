@@ -95,7 +95,7 @@ export default function Skill() {
             {skills.map((skill, index) => (
               <div 
                 key={index} 
-                className="relative inline-flex items-center justify-center flex-shrink-0 w-40 h-24 px-4 py-3 mx-2 text-white transition-transform duration-300 transform bg-black border border-gray-300 shadow-lg group sm:mx-4 sm:px-6 sm:py-4 rounded-xl hover:scale-105 sm:w-48 sm:h-28 dark:border-gray-600"
+                className="relative inline-flex items-center justify-center flex-shrink-0 w-40 h-24 px-4 py-3 mx-2 text-white transition-transform duration-300 transform bg-black border border-gray-700 shadow-lg group sm:mx-4 sm:px-6 sm:py-4 rounded-xl hover:scale-105 sm:w-48 sm:h-28 dark:border-gray-600"
               >
                 <div 
                   className="flex items-center justify-center flex-shrink-0 w-12 h-12 bg-white rounded-full sm:w-16 sm:h-16 dark:bg-gray-700"
@@ -115,7 +115,7 @@ export default function Skill() {
             {skills.map((skill, index) => (
               <div 
                 key={`dup-${index}`} 
-                className="relative inline-flex items-center justify-center flex-shrink-0 w-40 h-24 px-4 py-3 mx-2 text-white transition-transform duration-300 transform bg-black border border-gray-300 shadow-lg group sm:mx-4 sm:px-6 sm:py-4 dark:bg-gray-800 rounded-xl hover:scale-105 sm:w-48 sm:h-28 dark:border-gray-600"
+                className="relative inline-flex items-center justify-center flex-shrink-0 w-40 h-24 px-4 py-3 mx-2 text-white transition-transform duration-300 transform bg-black border border-gray-700 shadow-lg group sm:mx-4 sm:px-6 sm:py-4 dark:bg-gray-800 rounded-xl hover:scale-105 sm:w-48 sm:h-28 dark:border-gray-600"
               >
                 <div 
                   className="flex items-center justify-center flex-shrink-0 w-12 h-12 bg-white rounded-full sm:w-16 sm:h-16 dark:bg-gray-700"
@@ -140,7 +140,7 @@ export default function Skill() {
             {skills.slice().reverse().map((skill, index) => (
               <div 
                 key={index} 
-                className="relative inline-flex items-center justify-center flex-shrink-0 w-40 h-24 px-4 py-3 mx-2 text-white transition-transform duration-300 transform bg-black border border-gray-300 shadow-lg group sm:mx-4 sm:px-6 sm:py-4 rounded-xl hover:scale-105 sm:w-48 sm:h-28 dark:border-gray-600"
+                className="relative inline-flex items-center justify-center flex-shrink-0 w-40 h-24 px-4 py-3 mx-2 text-white transition-transform duration-300 transform bg-black border border-gray-700 shadow-lg group sm:mx-4 sm:px-6 sm:py-4 rounded-xl hover:scale-105 sm:w-48 sm:h-28 dark:border-gray-600"
               >
                 <div 
                   className="flex items-center justify-center flex-shrink-0 w-12 h-12 bg-white rounded-full sm:w-16 sm:h-16 dark:bg-gray-700"

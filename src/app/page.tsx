@@ -12,6 +12,7 @@ import Innovation from "@/components/Innovation";
 import Experience from "@/components/Experience";
 import AboutMe from "@/components/AboutMe";
 import ShowcaseSection from "@/components/ShowcaseSection";
+import Banner2 from "@/components/Banner2";
 
 
 
@@ -32,6 +33,7 @@ export default function Home() {
       <ShowcaseSection />
       <Project />
       <Experience />
+      <Banner2 />
       <AboutMe />
       <About />
       <Contact />
