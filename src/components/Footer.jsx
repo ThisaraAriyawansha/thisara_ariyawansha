@@ -5,6 +5,7 @@ export default function Footer() {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isVisible, setIsVisible] = useState(false);
+  const [showScrollTop, setShowScrollTop] = useState(false);
   const footerRef = useRef(null);
 
   // Detect dark mode
@@ -26,6 +27,48 @@ export default function Footer() {
 
     return () => observer.disconnect();
   }, []);
+
+  // Enhanced scroll detection for scroll-to-top button
+  useEffect(() => {
+    let ticking = false;
+    
+    const handleScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+          setShowScrollTop(scrollPosition > 300);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    // Add scroll event with passive flag for better performance
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Enhanced smooth scroll to top function
+  const scrollToTop = () => {
+    // First try the modern smooth scroll
+    if ('scrollBehavior' in document.documentElement.style) {
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'smooth'
+      });
+    } else {
+      // Fallback for older browsers with custom smooth scroll
+      const scrollToTopSmooth = () => {
+        const currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
+        if (currentScroll > 0) {
+          window.requestAnimationFrame(scrollToTopSmooth);
+          window.scrollTo(0, currentScroll - (currentScroll / 8));
+        }
+      };
+      scrollToTopSmooth();
+    }
+  };
 
   // Mouse tracking for interactive effects
   useEffect(() => {
@@ -115,6 +158,56 @@ export default function Footer() {
           : `radial-gradient(circle at ${mousePosition.x}% ${mousePosition.y}%, rgba(128, 128, 128, 0.05) 0%, transparent 50%), linear-gradient(135deg, #ffffff 0%, #f5f5f5 50%, #ffffff 100%)`,
       }}
     >
+      {/* Scroll to Top Button */}
+      <button
+        onClick={scrollToTop}
+        className={`fixed bottom-4 right-4 sm:bottom-6 sm:right-6 lg:bottom-8 lg:right-8 z-50 w-10 h-10 sm:w-11 sm:h-11 lg:w-12 lg:h-12 rounded-full border-2 backdrop-blur-md transition-all duration-500 transform ${
+          showScrollTop
+            ? 'translate-y-0 opacity-100 scale-100'
+            : 'translate-y-16 opacity-0 scale-50 pointer-events-none'
+        } ${
+          isDarkMode
+            ? 'bg-gray-800/80 border-gray-600 hover:bg-gray-700/90 hover:border-gray-500 text-white shadow-xl shadow-black/20'
+            : 'bg-white/80 border-gray-300 hover:bg-white/90 hover:border-gray-400 text-black shadow-xl shadow-black/10'
+        } hover:scale-110 hover:-translate-y-1 group`}
+        aria-label="Scroll to top"
+      >
+        <div className="relative flex items-center justify-center w-full h-full">
+          {/* Animated arrow */}
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            width="16" 
+            height="16"
+            viewBox="0 0 24 24" 
+            fill="none" 
+            stroke="currentColor" 
+            strokeWidth="2.5" 
+            strokeLinecap="round" 
+            strokeLinejoin="round"
+            className="w-4 h-4 sm:w-5 sm:h-5 lg:w-5 lg:h-5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:scale-110"
+          >
+            <path d="m18 15-6-6-6 6"/>
+          </svg>
+          
+          {/* Ripple effect on hover */}
+          <div className={`absolute inset-0 rounded-full transition-transform duration-300 ${
+            isDarkMode ? 'bg-white/5' : 'bg-black/5'
+          } scale-0 group-hover:scale-100 group-hover:animate-ping`}></div>
+        </div>
+        
+        {/* Tooltip */}
+        <div className={`absolute -left-16 sm:-left-18 lg:-left-20 top-1/2 transform -translate-y-1/2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg text-xs sm:text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none ${
+          isDarkMode
+            ? 'bg-gray-800 text-white border border-gray-600'
+            : 'bg-white text-black border border-gray-300 shadow-lg'
+        }`}>
+          Back to top
+          <div className={`absolute w-0 h-0 transform -translate-y-1/2 border-t-4 border-b-4 border-l-4 border-transparent top-1/2 -right-1 ${
+            isDarkMode ? 'border-l-gray-800' : 'border-l-white'
+          }`}></div>
+        </div>
+      </button>
+
       {/* Animated background particles */}
       <div className="absolute inset-0 overflow-hidden">
         {[...Array(20)].map((_, i) => (
@@ -134,22 +227,21 @@ export default function Footer() {
       </div>
 
       {/* Animated border */}
-          <div
-            className={`absolute top-0 left-0 right-0 
-              ${isDarkMode
-                ? 'bg-gradient-to-r from-transparent via-gray-400 to-transparent'
-                : 'bg-gradient-to-r from-transparent via-gray-600 to-transparent'
-              }
-              h-[2px] sm:h-[3px] md:h-[2px] lg:h-[2px]   // responsive heights
-            `}
-            style={{
-              background: isDarkMode
-                ? 'linear-gradient(90deg, transparent, rgba(156, 163, 175, 0.8), transparent)'
-                : 'linear-gradient(90deg, transparent, rgba(75, 85, 99, 0.8), transparent)',
-              animation: 'shimmer 3s ease-in-out infinite',
-            }}
-          />
-
+      <div
+        className={`absolute top-0 left-0 right-0 
+          ${isDarkMode
+            ? 'bg-gradient-to-r from-transparent via-gray-400 to-transparent'
+            : 'bg-gradient-to-r from-transparent via-gray-600 to-transparent'
+          }
+          h-[2px] sm:h-[3px] md:h-[2px] lg:h-[2px]   // responsive heights
+        `}
+        style={{
+          background: isDarkMode
+            ? 'linear-gradient(90deg, transparent, rgba(156, 163, 175, 0.8), transparent)'
+            : 'linear-gradient(90deg, transparent, rgba(75, 85, 99, 0.8), transparent)',
+          animation: 'shimmer 3s ease-in-out infinite',
+        }}
+      />
 
       <div className="relative z-10 max-w-6xl px-4 py-12 mx-auto">
         {/* Main content grid */}
