@@ -5,7 +5,7 @@ const Banner = () => {
     <div
       className="relative flex items-center justify-center w-full text-center text-white bg-center bg-cover h-[200px] sm:h-[300px] md:h-[400px] lg:h-[500px]"
       style={{
-        backgroundImage: "url('/otherimages/dbfdb0c19cf661eb47c29ac8e6d1569dcd79bc7f-1680x945.gif')",
+        backgroundImage: "url('/otherimages/9070324cdfc07c68d60eed0c39e77573.gif')",
         backgroundAttachment: "fixed",
         backgroundSize: "cover",
         backgroundPosition: "center",
@@ -17,7 +17,7 @@ const Banner = () => {
       <div className="relative z-10 max-w-4xl px-4 mx-auto sm:px-6 md:px-8">
         {/* Subtitle with modern typography and animation */}
         <p className="mb-3 text-xs font-light leading-relaxed tracking-wider uppercase sm:text-sm md:text-lg lg:text-xl md:mb-4 animate-fade-in">
-          Crafting Seamless Frontend Experiences & Scalable Backend Solutions
+          Looking for Opportunities to Build Innovative Web Solutions & Collaborate on Exciting Projects
         </p>
 
         {/* Call-to-action button with transparent background, white border, and white text */}
