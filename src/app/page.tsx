@@ -11,6 +11,8 @@ import Landing from "@/components/Landing";
 import Innovation from "@/components/Innovation";
 import Experience from "@/components/Experience";
 import AboutMe from "@/components/AboutMe";
+import ShowcaseSection from "@/components/ShowcaseSection";
+
 
 
 
@@ -27,6 +29,7 @@ export default function Home() {
       <Banner />
       <Skill />
       <Innovation />
+      <ShowcaseSection />
       <Project />
       <Experience />
       <AboutMe />

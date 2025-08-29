@@ -516,7 +516,7 @@ const ProjectsShowcase = () => {
     >
       <div className="px-4 py-12 mx-auto sm:px-6 sm:py-16 max-w-7xl">
         {/* Header */}
-        <div className="mb-12 text-center">
+        <div className="hidden mb-12 text-center">
           <h1
             className={`text-4xl font-bold mb-3 transition-colors duration-500 ${
               isDarkMode ? 'text-white' : 'text-gray-900'
