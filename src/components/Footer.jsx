@@ -134,19 +134,22 @@ export default function Footer() {
       </div>
 
       {/* Animated border */}
-      <div
-        className={`absolute top-0 left-0 right-0 h-px ${
-          isDarkMode
-            ? 'bg-gradient-to-r from-transparent via-gray-400 to-transparent'
-            : 'bg-gradient-to-r from-transparent via-gray-600 to-transparent'
-        }`}
-        style={{
-          background: isDarkMode
-            ? 'linear-gradient(90deg, transparent, rgba(156, 163, 175, 0.8), transparent)'
-            : 'linear-gradient(90deg, transparent, rgba(75, 85, 99, 0.8), transparent)',
-          animation: 'shimmer 3s ease-in-out infinite',
-        }}
-      />
+          <div
+            className={`absolute top-0 left-0 right-0 
+              ${isDarkMode
+                ? 'bg-gradient-to-r from-transparent via-gray-400 to-transparent'
+                : 'bg-gradient-to-r from-transparent via-gray-600 to-transparent'
+              }
+              h-[2px] sm:h-[3px] md:h-[2px] lg:h-[2px]   // responsive heights
+            `}
+            style={{
+              background: isDarkMode
+                ? 'linear-gradient(90deg, transparent, rgba(156, 163, 175, 0.8), transparent)'
+                : 'linear-gradient(90deg, transparent, rgba(75, 85, 99, 0.8), transparent)',
+              animation: 'shimmer 3s ease-in-out infinite',
+            }}
+          />
+
 
       <div className="relative z-10 max-w-6xl px-4 py-12 mx-auto">
         {/* Main content grid */}
@@ -233,7 +236,7 @@ export default function Footer() {
         <div className="relative mb-6">
           <div
             className={`h-px ${
-              isDarkMode ? 'bg-gray-800' : 'bg-gray-200'
+              isDarkMode ? 'bg-gray-500' : 'bg-gray-500'
             } transition-all duration-1000 ${
               isVisible ? 'scale-x-100' : 'scale-x-0'
             }`}
