@@ -276,7 +276,7 @@ export default function Navbar() {
           isMenuOpen ? 'opacity-100' : 'opacity-0'
         }`}></div>
         
-        <div className={`mobile-menu-container absolute top-26 left-1/2 transform -translate-x-1/2 w-[90%] max-w-6xl transition-all duration-300 ease-out ${
+        <div className={`mobile-menu-container absolute top-22 left-1/2 transform -translate-x-1/2 w-[90%] max-w-6xl transition-all duration-300 ease-out ${
           isMenuOpen ? 'translate-y-0 opacity-100 scale-100' : '-translate-y-8 opacity-0 scale-95'
         }`}>
           <div className="overflow-hidden border shadow-lg rounded-2xl" style={{ backgroundColor: darkMode ? '#000000' : '#e5e7eb', color: darkMode ? '#ffffff' : '#000000', borderColor: darkMode ? '#374151' : '#d1d5db' }}>

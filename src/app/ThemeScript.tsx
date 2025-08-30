@@ -1,4 +1,3 @@
-// ThemeScript.tsx - Alternative version with proper script
 "use client";
 
 export default function ThemeScript() {
@@ -7,11 +6,12 @@ export default function ThemeScript() {
     try {
       var savedTheme = localStorage.getItem("theme");
       var systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      
-      var initialTheme = savedTheme 
-        ? savedTheme 
-        : (systemPrefersDark ? "dark" : "light");
-      
+
+      // Default to "dark" if no saved theme
+      var initialTheme = savedTheme
+        ? savedTheme
+        : "dark";
+
       if (initialTheme === "dark") {
         document.documentElement.classList.add("dark");
         document.documentElement.setAttribute("data-theme", "dark");
@@ -19,7 +19,7 @@ export default function ThemeScript() {
         document.documentElement.classList.remove("dark");
         document.documentElement.setAttribute("data-theme", "light");
       }
-      
+
       if (!savedTheme) {
         localStorage.setItem("theme", initialTheme);
       }
