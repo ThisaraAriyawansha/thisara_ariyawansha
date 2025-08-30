@@ -131,7 +131,7 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 px-6 py-4 flex justify-between items-center shadow-sm transition-all duration-300 rounded-2xl max-w-6xl w-[90%] font-sans"
+        className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 px-6 py-2 lg:py-4 flex justify-between items-center shadow-sm transition-all duration-300 rounded-2xl max-w-6xl w-[90%] font-sans"
         style={{
           backgroundColor: darkMode ? '#000000' : '#e5e7eb',
           color: darkMode ? '#ffffff' : '#000000',
