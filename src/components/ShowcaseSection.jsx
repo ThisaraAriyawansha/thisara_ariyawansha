@@ -75,24 +75,26 @@ const ShowcaseSection = () => {
           ))}
         </div>
 
-        {/* Floating Code Snippets */}
-        {codeSnippets.map((snippet) => (
-          <div
-            key={snippet.id}
-            className="absolute font-mono text-green-700 select-none whitespace-nowrap"
-            style={{
-              left: `${snippet.x}%`,
-              top: `${snippet.y}%`,
-              opacity: snippet.opacity,
-              fontSize: `${snippet.size}rem`,
-              transform: `scale(${snippet.size})`,
-              animation: `float ${snippet.duration}s linear infinite`,
-              animationDelay: `${snippet.delay}s`,
-            }}
-          >
-            {snippet.text}
-          </div>
-        ))}
+        {/* Floating Code Snippets - Hidden on mobile (below md breakpoint) */}
+        <div className="hidden md:block">
+          {codeSnippets.map((snippet) => (
+            <div
+              key={snippet.id}
+              className="absolute font-mono text-green-700 select-none whitespace-nowrap"
+              style={{
+                left: `${snippet.x}%`,
+                top: `${snippet.y}%`,
+                opacity: snippet.opacity,
+                fontSize: `${snippet.size}rem`,
+                transform: `scale(${snippet.size})`,
+                animation: `float ${snippet.duration}s linear infinite`,
+                animationDelay: `${snippet.delay}s`,
+              }}
+            >
+              {snippet.text}
+            </div>
+          ))}
+        </div>
 
         {/* Binary Rain Effect */}
         <div className="absolute inset-0">
