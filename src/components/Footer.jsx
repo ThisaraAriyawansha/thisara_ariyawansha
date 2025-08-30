@@ -358,7 +358,7 @@ export default function Footer() {
                 isDarkMode ? 'text-gray-400' : 'text-gray-600'
               }`}
             >
-              Built with Next.js & Tailwind CSS
+              Code That Shapes the Future
             </span>
           </div>
         </div>
