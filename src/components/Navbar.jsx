@@ -141,7 +141,7 @@ export default function Navbar() {
         <div className="flex items-center">
           {darkMode ? (
             <img
-              src="/TA_light.png"
+              src="/TA_light_c.png"
               alt="Logo"
               width={50}
               height={50}
@@ -149,7 +149,7 @@ export default function Navbar() {
             />
           ) : (
             <img
-              src="/TA_dark.png"
+              src="/TA_dark_c.png"
               alt="Logo"
               width={50}
               height={50}
