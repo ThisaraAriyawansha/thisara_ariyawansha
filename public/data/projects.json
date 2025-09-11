@@ -1,5 +1,55 @@
 [
   {
+    "id": 16,
+    "name": "PearlStay – Full-Stack Hotel Booking System",
+    "technology": ["React.js", "TailwindCSS", "Node.js", "Express.js", "MySQL", "JWT", "bcrypt", "multer"],
+    "shortDescription": "Built PearlStay – a full-stack hotel booking system with role-based dashboards for Admin, Hotel Owners, and Customers.",
+    "longDescription": "PearlStay is a complete hotel booking platform designed with three main roles: Admin, Hotel Owner, and Customer. It enables customers to search and book hotels, owners to manage their hotels and rooms, and admins to control the entire system with powerful management tools. The system features JWT authentication, booking availability checks, image uploads, and responsive dashboards.",
+    "features": [
+      "JWT authentication & role-based access control",
+      "Hotel search and filter functionality",
+      "Customer dashboard to view bookings & manage profile",
+      "Hotel Owner dashboard for managing hotels, rooms, and bookings",
+      "Admin dashboard to manage users, hotels, rooms, and bookings",
+      "Room booking availability check with date overlap logic",
+      "Automatic booking price calculation (nights × price + adult surcharge)",
+      "Multer-based room image uploads",
+      "Responsive design with Tailwind custom color palette",
+      "About Us and Contact Us pages"
+    ],
+
+    "githubLink": "https://github.com/ThisaraAriyawansha/pearl_stay.git",
+    "driveLink": "https://pearl-stay.vercel.app/",
+    "logo": "/Project/PearlStay/plogo-Picsart-AiImageEnhancer.png",
+    "homepage": "/Project/PearlStay/Screenshot 2025-09-09 204227.png",
+    "screenshots": [
+      "/Project/PearlStay/Screenshot 2025-09-11 155501.png",
+      "/Project/PearlStay/Screenshot 2025-09-11 155511.png",
+      "/Project/PearlStay/Screenshot 2025-09-11 155518.png",
+      "/Project/PearlStay/Screenshot 2025-09-11 155524.png",
+      "/Project/PearlStay/Screenshot 2025-09-11 155537.png",
+      "/Project/PearlStay/Screenshot 2025-09-11 155547.png",
+      "/Project/PearlStay/Screenshot 2025-09-11 155603.png",
+      "/Project/PearlStay/Screenshot 2025-09-11 155614.png",
+      "/Project/PearlStay/Screenshot 2025-09-11 155626.png",
+      "/Project/PearlStay/Screenshot 2025-09-11 155631.png",
+      "/Project/PearlStay/Screenshot 2025-09-11 155649.png",
+      "/Project/PearlStay/Screenshot 2025-09-11 155711.png",      
+      "/Project/PearlStay/Screenshot 2025-09-11 155717.png",
+      "/Project/PearlStay/Screenshot 2025-09-11 155721.png",
+      "/Project/PearlStay/Screenshot 2025-09-11 155731.png",
+      "/Project/PearlStay/Screenshot 2025-09-11 155739.png",
+      "/Project/PearlStay/Screenshot 2025-09-11 155746.png",
+       "/Project/PearlStay/Screenshot 2025-09-11 155808.png",
+      "/Project/PearlStay/Screenshot 2025-09-11 155814.png",
+      "/Project/PearlStay/Screenshot 2025-09-11 155819.png",
+      "/Project/PearlStay/Screenshot 2025-09-11 155826.png"
+
+    ],
+    "video": "/Project/PearlStay/PearlStay.mp4"
+  }
+  ,
+  {
     "id": 1,
     "name": "NOVAST – Furniture E-commerce Platform",
     "technology": ["Laravel", "MySQL", "TailwindCSS", "JavaScript"],
