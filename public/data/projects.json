@@ -1,4 +1,40 @@
 [
+    {
+    "id": 17,
+    "name": "Real-Time Deepfake Detection System",
+    "technology": ["React.js", "Flask", "TensorFlow", "OpenCV", "MediaPipe", "Socket.io", "WebRTC", "Docker"],
+    "shortDescription": "Built a comprehensive real-time deepfake detection system with live video analysis, browser extension, and advanced ML models.",
+    "longDescription": "The Real-Time Deepfake Detection System is a full-stack application that provides live analysis of video streams for deepfake content. It features a React.js frontend dashboard, Flask backend API with TensorFlow models, real-time WebSocket communication, and a browser extension for video conferencing platforms. The system uses advanced computer vision and deep learning techniques to detect manipulated media with high accuracy.",
+    "features": [
+      "Real-time deepfake detection from webcam and video streams",
+      "Advanced face detection using MediaPipe",
+      "Multi-model ensemble for improved accuracy",
+      "Browser extension for Google Meet, Zoom, and Teams integration",
+      "RESTful API for image and video file analysis",
+      "Real-time WebSocket communication for live streaming",
+      "Interactive dashboard with analytics and confidence scores",
+      "Adjustable detection thresholds and sensitivity settings",
+      "Docker containerization for easy deployment",
+      "Responsive design supporting desktop and mobile devices"
+    ],
+    "githubLink": "https://github.com/yourusername/deepfake-detector.git",
+    "driveLink": "https://deepfake-detector-demo.vercel.app/",
+    "logo": "/Project/DeepfakeDetector/deepfake-logo.png",
+    "homepage": "/Project/DeepfakeDetector/dashboard-screenshot.png",
+    "screenshots": [
+      "/Project/DeepfakeDetector/screenshot-1.png",
+      "/Project/DeepfakeDetector/screenshot-2.png",
+      "/Project/DeepfakeDetector/screenshot-3.png",
+      "/Project/DeepfakeDetector/screenshot-4.png",
+      "/Project/DeepfakeDetector/screenshot-5.png",
+      "/Project/DeepfakeDetector/screenshot-6.png",
+      "/Project/DeepfakeDetector/screenshot-7.png",
+      "/Project/DeepfakeDetector/screenshot-8.png",
+      "/Project/DeepfakeDetector/screenshot-9.png",
+      "/Project/DeepfakeDetector/screenshot-10.png"
+    ],
+    "video": "/Project/DeepfakeDetector/demo-video.mp4"
+  },
   {
     "id": 16,
     "name": "PearlStay – Full-Stack Hotel Booking System",
