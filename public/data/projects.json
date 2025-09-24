@@ -9,7 +9,6 @@
       "Real-time deepfake detection from webcam and video streams",
       "Advanced face detection using MediaPipe",
       "Multi-model ensemble for improved accuracy",
-      "Browser extension for Google Meet, Zoom, and Teams integration",
       "RESTful API for image and video file analysis",
       "Real-time WebSocket communication for live streaming",
       "Interactive dashboard with analytics and confidence scores",
@@ -17,23 +16,19 @@
       "Docker containerization for easy deployment",
       "Responsive design supporting desktop and mobile devices"
     ],
-    "githubLink": "https://github.com/yourusername/deepfake-detector.git",
-    "driveLink": "https://deepfake-detector-demo.vercel.app/",
-    "logo": "/Project/DeepfakeDetector/deepfake-logo.png",
-    "homepage": "/Project/DeepfakeDetector/dashboard-screenshot.png",
+    "githubLink": "https://github.com/ThisaraAriyawansha/deepfake-detection.git",
+    "logo": "/Project/DeepfakeDetector/logo.png",
+    "homepage": "/Project/DeepfakeDetector/Screenshot 2025-09-24 200405-min.png",
     "screenshots": [
-      "/Project/DeepfakeDetector/screenshot-1.png",
-      "/Project/DeepfakeDetector/screenshot-2.png",
-      "/Project/DeepfakeDetector/screenshot-3.png",
-      "/Project/DeepfakeDetector/screenshot-4.png",
-      "/Project/DeepfakeDetector/screenshot-5.png",
-      "/Project/DeepfakeDetector/screenshot-6.png",
-      "/Project/DeepfakeDetector/screenshot-7.png",
-      "/Project/DeepfakeDetector/screenshot-8.png",
-      "/Project/DeepfakeDetector/screenshot-9.png",
-      "/Project/DeepfakeDetector/screenshot-10.png"
-    ],
-    "video": "/Project/DeepfakeDetector/demo-video.mp4"
+      "/Project/DeepfakeDetector/Screenshot 2025-09-24 202815.png",
+      "/Project/DeepfakeDetector/Screenshot 2025-09-24 202827.png",
+      "/Project/DeepfakeDetector/Screenshot 2025-09-24 202902.png",
+      "/Project/DeepfakeDetector/Screenshot 2025-09-24 200314-min.png",
+      "/Project/DeepfakeDetector/Screenshot 2025-09-24 200405-min.png",
+      "/Project/DeepfakeDetector/Screenshot 2025-09-24 200415-min.png",
+      "/Project/DeepfakeDetector/Screenshot 2025-09-24 200425-min.png",
+      "/Project/DeepfakeDetector/Screenshot 2025-09-24 200430-min.png"
+    ]
   },
   {
     "id": 16,
@@ -145,7 +140,6 @@
       "/Project/NOVALINK/Screenshot 2025-08-26 123120.png"
     ],
     "video": "/Project/NOVALINK/NovaLink Computers.mp4"
-
   }
   ,
   {
