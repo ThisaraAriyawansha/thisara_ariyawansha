@@ -1,4 +1,47 @@
 [
+      {
+      "id": 18,
+      "name": "Vueon - Video Sharing Platform",
+      "technology": ["React.js", "Node.js", "MySQL", "Express.js", "HuggingFace Transformers"],
+      "shortDescription": "A modern video sharing platform where users can upload, watch, like, comment, and subscribe to videos, with AI-powered search functionality.",
+      "longDescription": "Vueon is a full-stack video sharing platform that allows users to upload and watch videos, create channels, and interact through likes, comments, and subscriptions. Each user has a personalized dashboard to manage their uploaded videos, likes, and subscriber count, as well as update their profile information including picture, email, and password. Admins have access to manage video statuses and their own profiles. Vueon also integrates AI-powered search capabilities using HuggingFace EmbeddingService to provide intelligent video discovery.",
+      "features": [
+        "User authentication and profile management",
+        "Video upload, playback, and channel creation",
+        "Interactive features: likes, comments, and subscriptions",
+        "Personal dashboard for managing uploaded videos and stats",
+        "Admin panel for video status management",
+        "Profile updates including picture, email, and password",
+        "AI-powered semantic search using HuggingFace embeddings",
+        "Responsive frontend built with React.js",
+        "Scalable backend with Node.js and MySQL"
+      ],
+      "githubLink": "https://github.com/ThisaraAriyawansha/vueon.git",
+      "driveLink": "https://vueon.vercel.app/",
+      "logo": "/Project/Vueon/logo1.png",
+      "homepage": "/Project/Vueon/Screenshot 2025-09-22 203321.png",
+      "screenshots": [
+        "/Project/Vueon/Screenshot 2025-10-03 120513.png",
+        "/Project/Vueon/Screenshot 2025-10-03 120528.png",
+        "/Project/Vueon/Screenshot 2025-10-03 120538.png",
+        "/Project/Vueon/Screenshot 2025-10-03 120546.png",
+        "/Project/Vueon/Screenshot 2025-10-03 120554.png",
+        "/Project/Vueon/Screenshot 2025-10-03 120602.png",
+        "/Project/Vueon/Screenshot 2025-10-03 120613.png",
+        "/Project/Vueon/Screenshot 2025-10-03 120622.png",
+        "/Project/Vueon/Screenshot 2025-10-03 120628.png",
+        "/Project/Vueon/Screenshot 2025-10-03 120636.png",
+        "/Project/Vueon/Screenshot 2025-10-03 120642.png",
+        "/Project/Vueon/Screenshot 2025-10-03 120645.png",
+        "/Project/Vueon/Screenshot 2025-10-03 120658.png",
+        "/Project/Vueon/Screenshot 2025-10-03 120706.png",
+        "/Project/Vueon/Screenshot 2025-10-03 120714.png",
+        "/Project/Vueon/Screenshot 2025-10-03 120718.png",
+        "/Project/Vueon/Screenshot 2025-10-03 120745.png",
+        "/Project/Vueon/Screenshot 2025-10-03 120752.png"
+      ],
+      "video": "/Project/Vueon/Vueon.mp4"
+    },
     {
     "id": 17,
     "name": "Real-Time Deepfake Detection System",
