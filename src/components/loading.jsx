@@ -5,15 +5,33 @@ import { useState, useEffect } from 'react';
 export default function ClientWrapper({ children }) {
   const [isLoading, setIsLoading] = useState(true);
   const [progress, setProgress] = useState(0);
+  const [shouldShowLoader, setShouldShowLoader] = useState(false);
 
   useEffect(() => {
+    // Check if the loading screen has been shown in this session
+    const hasShownLoader = sessionStorage.getItem('hasShownLoader');
+    
+    if (hasShownLoader) {
+      // If already shown, skip the loading screen
+      setIsLoading(false);
+      setShouldShowLoader(false);
+      return;
+    }
+
+    // Show loader for first time in session
+    setShouldShowLoader(true);
+
     // Simulate loading progress
     const progressInterval = setInterval(() => {
       setProgress(prev => {
         if (prev >= 100) {
           clearInterval(progressInterval);
           // Add a slight delay before hiding the loader
-          setTimeout(() => setIsLoading(false), 500);
+          setTimeout(() => {
+            setIsLoading(false);
+            // Mark that loader has been shown
+            sessionStorage.setItem('hasShownLoader', 'true');
+          }, 500);
           return 100;
         }
         // Smooth progress increment with variable speed
@@ -25,7 +43,7 @@ export default function ClientWrapper({ children }) {
     return () => clearInterval(progressInterval);
   }, []);
 
-  if (isLoading) {
+  if (isLoading && shouldShowLoader) {
     return (
       <div className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden bg-black">
         {/* Animated background grid */}

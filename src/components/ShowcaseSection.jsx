@@ -3,6 +3,9 @@ import React, { useEffect, useState } from 'react';
 
 const ShowcaseSection = () => {
   const [codeSnippets, setCodeSnippets] = useState([]);
+  const [binaryRain, setBinaryRain] = useState([]);
+  const [particles, setParticles] = useState([]);
+  const [mounted, setMounted] = useState(false);
 
   const codeLines = [
     "const project = await buildAmazing();",
@@ -33,6 +36,27 @@ const ShowcaseSection = () => {
   ];
 
   useEffect(() => {
+    // Generate binary rain items
+    const binaryItems = [...Array(15)].map((_, i) => ({
+      id: `binary-${i}`,
+      left: Math.random() * 100,
+      duration: 8 + Math.random() * 4,
+      delay: Math.random() * 5,
+      content: Math.random() > 0.5 ? '1' : '0'
+    }));
+    setBinaryRain(binaryItems);
+
+    // Generate particles
+    const particleItems = [...Array(12)].map((_, i) => ({
+      id: `particle-${i}`,
+      left: Math.random() * 100,
+      top: Math.random() * 100,
+      duration: 3 + Math.random() * 2,
+      delay: Math.random() * 3
+    }));
+    setParticles(particleItems);
+
+    // Generate code snippets
     const generateSnippets = () => {
       const newSnippets = [];
       for (let i = 0; i < 20; i++) {
@@ -51,6 +75,8 @@ const ShowcaseSection = () => {
     };
 
     generateSnippets();
+    setMounted(true);
+    
     const interval = setInterval(generateSnippets, 8000);
     return () => clearInterval(interval);
   }, []);
@@ -76,42 +102,46 @@ const ShowcaseSection = () => {
         </div>
 
         {/* Floating Code Snippets - Hidden on mobile (below md breakpoint) */}
-        <div className="hidden md:block">
-          {codeSnippets.map((snippet) => (
-            <div
-              key={snippet.id}
-              className="absolute font-mono text-green-700 select-none whitespace-nowrap"
-              style={{
-                left: `${snippet.x}%`,
-                top: `${snippet.y}%`,
-                opacity: snippet.opacity,
-                fontSize: `${snippet.size}rem`,
-                transform: `scale(${snippet.size})`,
-                animation: `float ${snippet.duration}s linear infinite`,
-                animationDelay: `${snippet.delay}s`,
-              }}
-            >
-              {snippet.text}
-            </div>
-          ))}
-        </div>
+        {mounted && (
+          <div className="hidden md:block">
+            {codeSnippets.map((snippet) => (
+              <div
+                key={snippet.id}
+                className="absolute font-mono text-green-700 select-none whitespace-nowrap"
+                style={{
+                  left: `${snippet.x}%`,
+                  top: `${snippet.y}%`,
+                  opacity: snippet.opacity,
+                  fontSize: `${snippet.size}rem`,
+                  transform: `scale(${snippet.size})`,
+                  animation: `float ${snippet.duration}s linear infinite`,
+                  animationDelay: `${snippet.delay}s`,
+                }}
+              >
+                {snippet.text}
+              </div>
+            ))}
+          </div>
+        )}
 
         {/* Binary Rain Effect */}
-        <div className="absolute inset-0">
-          {[...Array(15)].map((_, i) => (
-            <div
-              key={`binary-${i}`}
-              className="absolute font-mono text-xs select-none text-blue-500/20"
-              style={{
-                left: `${Math.random() * 100}%`,
-                animation: `binaryRain ${8 + Math.random() * 4}s linear infinite`,
-                animationDelay: `${Math.random() * 5}s`,
-              }}
-            >
-              {Math.random() > 0.5 ? '1' : '0'}
-            </div>
-          ))}
-        </div>
+        {mounted && (
+          <div className="absolute inset-0">
+            {binaryRain.map((item) => (
+              <div
+                key={item.id}
+                className="absolute font-mono text-xs select-none text-blue-500/20"
+                style={{
+                  left: `${item.left}%`,
+                  animation: `binaryRain ${item.duration}s linear infinite`,
+                  animationDelay: `${item.delay}s`,
+                }}
+              >
+                {item.content}
+              </div>
+            ))}
+          </div>
+        )}
 
         {/* Circuit Board Pattern */}
         <div className="absolute inset-0 opacity-10">
@@ -132,21 +162,23 @@ const ShowcaseSection = () => {
         </div>
 
         {/* Glowing Particles */}
-        <div className="absolute inset-0">
-          {[...Array(12)].map((_, i) => (
-            <div
-              key={`particle-${i}`}
-              className="absolute w-1 h-1 rounded-full bg-cyan-900 opacity-60"
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                animation: `glow ${3 + Math.random() * 2}s ease-in-out infinite alternate`,
-                animationDelay: `${Math.random() * 3}s`,
-                boxShadow: '0 0 10px currentColor',
-              }}
-            />
-          ))}
-        </div>
+        {mounted && (
+          <div className="absolute inset-0">
+            {particles.map((particle) => (
+              <div
+                key={particle.id}
+                className="absolute w-1 h-1 rounded-full bg-cyan-900 opacity-60"
+                style={{
+                  left: `${particle.left}%`,
+                  top: `${particle.top}%`,
+                  animation: `glow ${particle.duration}s ease-in-out infinite alternate`,
+                  animationDelay: `${particle.delay}s`,
+                  boxShadow: '0 0 10px currentColor',
+                }}
+              />
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Content */}

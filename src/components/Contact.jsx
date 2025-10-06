@@ -5,6 +5,8 @@ export default function Contact() {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const [blobPositions, setBlobPositions] = useState({ blob1: {}, blob2: {} });
 
   useEffect(() => {
     const isDark =
@@ -29,6 +31,20 @@ export default function Contact() {
     };
 
     window.addEventListener('mousemove', handleMouseMove);
+
+    // Generate blob positions once on mount
+    setBlobPositions({
+      blob1: {
+        left: `${Math.sin(0) * 200 + 400}px`,
+        top: `${Math.cos(0) * 100 + 200}px`
+      },
+      blob2: {
+        right: `${Math.cos(0) * 150 + 200}px`,
+        bottom: `${Math.sin(0) * 120 + 150}px`
+      }
+    });
+
+    setMounted(true);
 
     return () => {
       observer.disconnect();
@@ -65,29 +81,31 @@ export default function Contact() {
           : "bg-white"
       }`}
     >
-      <div className="absolute inset-0 overflow-hidden">
-        <div 
-          className={`absolute w-100 h-96 rounded-full blur-3xl opacity-20 animate-pulse ${
-            isDarkMode ? "bg-white" : "bg-black"
-          }`}
-          style={{
-            left: `${Math.sin(Date.now() * 0.001) * 200 + 400}px`,
-            top: `${Math.cos(Date.now() * 0.001) * 100 + 200}px`,
-            animationDuration: '4s'
-          }}
-        />
-        <div 
-          className={`absolute w-64 h-64 rounded-full blur-2xl opacity-10 animate-pulse ${
-            isDarkMode ? "bg-gray-300" : "bg-gray-700"
-          }`}
-          style={{
-            right: `${Math.cos(Date.now() * 0.0015) * 150 + 200}px`,
-            bottom: `${Math.sin(Date.now() * 0.0015) * 120 + 150}px`,
-            animationDuration: '6s',
-            animationDelay: '2s'
-          }}
-        />
-      </div>
+      {mounted && (
+        <div className="absolute inset-0 overflow-hidden">
+          <div 
+            className={`absolute w-100 h-96 rounded-full blur-3xl opacity-20 animate-pulse ${
+              isDarkMode ? "bg-white" : "bg-black"
+            }`}
+            style={{
+              left: blobPositions.blob1.left,
+              top: blobPositions.blob1.top,
+              animationDuration: '4s'
+            }}
+          />
+          <div 
+            className={`absolute w-64 h-64 rounded-full blur-2xl opacity-10 animate-pulse ${
+              isDarkMode ? "bg-gray-300" : "bg-gray-700"
+            }`}
+            style={{
+              right: blobPositions.blob2.right,
+              bottom: blobPositions.blob2.bottom,
+              animationDuration: '6s',
+              animationDelay: '2s'
+            }}
+          />
+        </div>
+      )}
 
       <div 
         className={`fixed w-4 h-4 rounded-full pointer-events-none z-10 transition-all duration-300 ${

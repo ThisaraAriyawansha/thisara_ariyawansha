@@ -6,7 +6,23 @@ export default function Footer() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isVisible, setIsVisible] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
   const footerRef = useRef(null);
+  
+  // Generate particle positions once - using useRef to persist across renders
+  const particlesRef = useRef(
+    Array.from({ length: 20 }, () => ({
+      left: Math.random() * 100,
+      top: Math.random() * 100,
+      duration: 3 + Math.random() * 4,
+      delay: Math.random() * 2,
+    }))
+  );
+
+  // Only render particles after component mounts on client
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   // Detect dark mode
   useEffect(() => {
@@ -43,14 +59,12 @@ export default function Footer() {
       }
     };
 
-    // Add scroll event with passive flag for better performance
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   // Enhanced smooth scroll to top function
   const scrollToTop = () => {
-    // First try the modern smooth scroll
     if ('scrollBehavior' in document.documentElement.style) {
       window.scrollTo({
         top: 0,
@@ -58,7 +72,6 @@ export default function Footer() {
         behavior: 'smooth'
       });
     } else {
-      // Fallback for older browsers with custom smooth scroll
       const scrollToTopSmooth = () => {
         const currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
         if (currentScroll > 0) {
@@ -173,7 +186,6 @@ export default function Footer() {
         aria-label="Scroll to top"
       >
         <div className="relative flex items-center justify-center w-full h-full">
-          {/* Animated arrow */}
           <svg 
             xmlns="http://www.w3.org/2000/svg" 
             width="16" 
@@ -189,13 +201,11 @@ export default function Footer() {
             <path d="m18 15-6-6-6 6"/>
           </svg>
           
-          {/* Ripple effect on hover */}
           <div className={`absolute inset-0 rounded-full transition-transform duration-300 ${
             isDarkMode ? 'bg-white/5' : 'bg-black/5'
           } scale-0 group-hover:scale-100 group-hover:animate-ping`}></div>
         </div>
         
-        {/* Tooltip */}
         <div className={`absolute -left-16 sm:-left-18 lg:-left-20 top-1/2 transform -translate-y-1/2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg text-xs sm:text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none ${
           isDarkMode
             ? 'bg-gray-800 text-white border border-gray-600'
@@ -210,17 +220,17 @@ export default function Footer() {
 
       {/* Animated background particles */}
       <div className="absolute inset-0 overflow-hidden">
-        {[...Array(20)].map((_, i) => (
+        {isMounted && particlesRef.current.map((particle, i) => (
           <div
             key={i}
             className={`absolute w-1 h-1 rounded-full ${
               isDarkMode ? 'bg-white/20' : 'bg-black/10'
             }`}
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animation: `float ${3 + Math.random() * 4}s ease-in-out infinite`,
-              animationDelay: `${Math.random() * 2}s`,
+              left: `${particle.left}%`,
+              top: `${particle.top}%`,
+              animation: `float ${particle.duration}s ease-in-out infinite`,
+              animationDelay: `${particle.delay}s`,
             }}
           />
         ))}
@@ -233,7 +243,7 @@ export default function Footer() {
             ? 'bg-gradient-to-r from-transparent via-gray-400 to-transparent'
             : 'bg-gradient-to-r from-transparent via-gray-600 to-transparent'
           }
-          h-[2px] sm:h-[3px] md:h-[2px] lg:h-[2px]   // responsive heights
+          h-[2px] sm:h-[3px] md:h-[2px] lg:h-[2px]
         `}
         style={{
           background: isDarkMode
@@ -305,7 +315,6 @@ export default function Footer() {
                     {link.icon}
                   </span>
                   
-                  {/* Tooltip */}
                   <div
                     className={`absolute -top-10 left-1/2 transform -translate-x-1/2 px-2 py-1 rounded text-xs opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none ${
                       isDarkMode
