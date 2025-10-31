@@ -1,5 +1,48 @@
 [
-
+        {
+        "id": 20,
+        "name": "GRAVIX - Clothing E-Commerce Platform",
+        "technology": ["Next.js", "Node.js", "Express", "MySQL", "Tailwind CSS"],
+        "shortDescription": "A modern clothing e-commerce web platform with full product, variant, and order management. Built using Next.js and Node.js with a MySQL database.",
+        "longDescription": "GRAVIX is a full-featured e-commerce platform built for modern clothing stores. It allows administrators to manage products, product variants (size, color, price, and stock), orders, and users from a centralized admin panel. Customers can browse products, select variants, add items to cart, checkout, and manage their orders from a personalized user dashboard. The project leverages Next.js for the responsive frontend, Node.js/Express for RESTful backend APIs, and MySQL for robust data management. Tailwind CSS ensures a clean, modern, and fully responsive UI design.",
+        "features": [
+          "Responsive frontend built with Next.js and Tailwind CSS",
+          "Product and variant management (size, color, price, discount, stock)",
+          "Admin CRUD operations for products, variants, users, and orders",
+          "Secure authentication with JWT and role-based access control",
+          "Shopping cart and checkout system",
+          "User dashboard for managing orders and profile settings",
+          "Order status management for admins (pending, processing, shipped, completed)",
+          "Dynamic product listing with category filtering and featured products",
+          "RESTful API built with Node.js and Express",
+          "MySQL database for structured data storage"
+        ],
+        "githubLink": "https://github.com/ThisaraAriyawansha/gravix.git",
+        "driveLink": "https://gravix-one.vercel.app/",
+        "logo": "/Project/Gravix/g logo.png",
+        "logoLight": "/Project/Gravix/g logo.png", 
+        "logoDark": "/Project/Gravix/g logo white.png",
+        "homepage": "/Project/Gravix/Screenshot 2025-10-31 091347.png",
+        "screenshots": [
+          "/Project/Gravix/Screenshot 2025-10-31 091356.png",
+          "/Project/Gravix/Screenshot 2025-10-31 091402.png",
+          "/Project/Gravix/Screenshot 2025-10-31 091407.png",
+          "/Project/Gravix/Screenshot 2025-10-31 091413.png",
+          "/Project/Gravix/Screenshot 2025-10-31 091422.png",
+          "/Project/Gravix/Screenshot 2025-10-31 091427.png",
+          "/Project/Gravix/Screenshot 2025-10-31 091447.png",
+          "/Project/Gravix/Screenshot 2025-10-31 091453.png",
+          "/Project/Gravix/Screenshot 2025-10-31 091508.png",
+          "/Project/Gravix/Screenshot 2025-10-31 091516.png",
+          "/Project/Gravix/Screenshot 2025-10-31 091528.png",
+          "/Project/Gravix/Screenshot 2025-10-31 091542.png",
+          "/Project/Gravix/Screenshot 2025-10-31 091551.png",
+          "/Project/Gravix/Screenshot 2025-10-31 091604.png",
+          "/Project/Gravix/Screenshot 2025-10-31 091612.png",
+          "/Project/Gravix/Screenshot 2025-10-31 091620.png"
+        ],
+        "video": "/Project/Gravix/GRAVIX.mp4"
+      },
       {
       "id": 19,
       "name": "Aerobuild Solutions - Construction Company Website",
