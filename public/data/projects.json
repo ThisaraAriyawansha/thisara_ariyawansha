@@ -1,4 +1,51 @@
 [
+          {
+          "id": 21,
+          "name": "PointSell Electronics POS System",
+          "technology": ["Laravel", "MySQL", "Tailwind CSS", "Blade"],
+          "shortDescription": "A complete POS system for electronic component shops with item, stock, billing, supplier, user, and permission management. Built using Laravel, Livewire, and MySQL.",
+          "longDescription": "PointSell Electronics POS is a full-featured point-of-sale solution designed for electronic component and spare part shops. The system allows administrators to manage items, categories, suppliers, customers, stock, and dynamic user roles (Owner, Admin, Manager, Cashier). The POS terminal supports fast billing with 80mm thermal printers, receipt generation, sales returns, and real-time stock updates. The system includes advanced permission management allowing owners to dynamically enable or disable features per user role. Built using Laravel and Livewire for smooth interaction, Tailwind CSS for clean UI, and MySQL for structured data storage, the platform provides a modern and efficient retail management experience.",
+          "features": [
+            "Item and category management",
+            "Customer management with contact details",
+            "Supplier management and purchase tracking",
+            "User management with roles: Owner, Admin, Manager, Cashier",
+            "Dynamic role and permission control",
+            "Billing system with 80mm thermal printer receipt support",
+            "Sales return and exchange handling",
+            "Real-time stock management and stock adjustments",
+            "Daily, monthly, and custom sales reports",
+            "Supplier-wise and product-wise report filtering",
+            "Secure authentication and password update system",
+            "Theme customization (logo, background colors, UI colors)",
+            "Responsive POS interface with quick-product search",
+            "Image support for products and UI branding",
+            "Activity logs and tracking for user actions"
+          ],
+          "githubLink": "https://github.com/ThisaraAriyawansha/pointsell-electronics.git",
+          "logo": "/Project/PointSell Electronics/whitelogobg.png",
+          "logoLight": "/Project/PointSell Electronics/blacklogobg.png ",
+          "logoDark": "/Project/PointSell Electronics/whitelogobg.png",
+          "homepage": "/Project/PointSell Electronics/Screenshot 2025-12-09 103158.png",
+          "screenshots": [
+            "/Project/PointSell Electronics/Screenshot 2025-12-09 103143.png",
+            "/Project/PointSell Electronics/Screenshot 2025-12-09 103354.png",
+            "/Project/PointSell Electronics/Screenshot 2025-12-09 103308.png",
+            "/Project/PointSell Electronics/Screenshot 2025-12-09 103408.png",
+            "/Project/PointSell Electronics/Screenshot 2025-12-09 103420.png",
+            "/Project/PointSell Electronics/Screenshot 2025-12-09 103425.png",
+            "/Project/PointSell Electronics/Screenshot 2025-12-09 103447.png",
+            "/Project/PointSell Electronics/Screenshot 2025-12-09 103455.png",
+            "/Project/PointSell Electronics/Screenshot 2025-12-09 103507.png",
+            "/Project/PointSell Electronics/Screenshot 2025-12-09 103513.png",
+            "/Project/PointSell Electronics/Screenshot 2025-12-09 103525.png",
+            "/Project/PointSell Electronics/Screenshot 2025-12-09 103540.png",
+            "/Project/PointSell Electronics/Screenshot 2025-12-09 103557.png",
+            "/Project/PointSell Electronics/Screenshot 2025-12-09 105226.png",
+            "/Project/PointSell Electronics/Screenshot 2025-12-09 105217.png"
+          ]
+        }
+        ,
         {
         "id": 20,
         "name": "GRAVIX - Clothing E-Commerce Platform",
