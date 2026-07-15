@@ -43,6 +43,10 @@ export default function Skill() {
   const leftMarqueeRef = useRef(null);
   const rightMarqueeRef = useRef(null);
 
+  // Drag state for each row (kept in refs so the rAF loop doesn't re-render on every frame)
+  const leftDrag = useRef({ dragging: false, startX: 0, startPos: 0, pos: 0, halfWidth: 0 });
+  const rightDrag = useRef({ dragging: false, startX: 0, startPos: 0, pos: 0, halfWidth: 0 });
+
   // Detect dark mode
   useEffect(() => {
     // Initial check for dark mode
@@ -66,12 +70,83 @@ export default function Skill() {
     return () => observer.disconnect();
   }, []);
 
+  // JS-driven marquee: lets us pause and manually drag/swipe the rows,
+  // which a pure CSS @keyframes animation can't support.
   useEffect(() => {
-    if (leftMarqueeRef.current && rightMarqueeRef.current) {
-      leftMarqueeRef.current.style.animation = 'marquee-left 40s linear infinite';
-      rightMarqueeRef.current.style.animation = 'marquee-right 40s linear infinite';
-    }
+    const SPEED = 0.3; // px per frame
+
+    const measure = () => {
+      if (leftMarqueeRef.current) {
+        leftDrag.current.halfWidth = leftMarqueeRef.current.scrollWidth / 2;
+      }
+      if (rightMarqueeRef.current) {
+        rightDrag.current.halfWidth = rightMarqueeRef.current.scrollWidth / 2;
+        if (rightDrag.current.pos === 0) {
+          rightDrag.current.pos = -rightDrag.current.halfWidth;
+        }
+      }
+    };
+    measure();
+    window.addEventListener('resize', measure);
+
+    const wrap = (pos, width) => {
+      if (!width) return pos;
+      let p = pos % width;
+      if (p > 0) p -= width;
+      return p;
+    };
+
+    let frameId;
+    const tick = () => {
+      const left = leftDrag.current;
+      const right = rightDrag.current;
+
+      if (!left.dragging) {
+        left.pos = wrap(left.pos - SPEED, left.halfWidth);
+      }
+      if (!right.dragging) {
+        right.pos = wrap(right.pos + SPEED, right.halfWidth);
+      }
+
+      if (leftMarqueeRef.current) {
+        leftMarqueeRef.current.style.transform = `translateX(${left.pos}px)`;
+      }
+      if (rightMarqueeRef.current) {
+        rightMarqueeRef.current.style.transform = `translateX(${right.pos}px)`;
+      }
+
+      frameId = requestAnimationFrame(tick);
+    };
+    frameId = requestAnimationFrame(tick);
+
+    return () => {
+      cancelAnimationFrame(frameId);
+      window.removeEventListener('resize', measure);
+    };
   }, []);
+
+  const makeDragHandlers = (dragRef) => ({
+    onPointerDown: (e) => {
+      dragRef.current.dragging = true;
+      dragRef.current.startX = e.clientX;
+      dragRef.current.startPos = dragRef.current.pos;
+      e.currentTarget.setPointerCapture(e.pointerId);
+    },
+    onPointerMove: (e) => {
+      if (!dragRef.current.dragging) return;
+      const delta = e.clientX - dragRef.current.startX;
+      dragRef.current.pos = dragRef.current.startPos + delta;
+    },
+    onPointerUp: (e) => {
+      dragRef.current.dragging = false;
+      if (e.currentTarget.hasPointerCapture?.(e.pointerId)) {
+        e.currentTarget.releasePointerCapture(e.pointerId);
+      }
+    },
+    onPointerCancel: () => {
+      dragRef.current.dragging = false;
+    },
+  });
 
   return (
     <div className={isDarkMode ? 'dark' : ''}>
@@ -91,20 +166,25 @@ export default function Skill() {
         ></div>
 
         <div className="relative flex py-4 overflow-hidden sm:py-6">
-          <div ref={leftMarqueeRef} className="flex min-w-0 py-4 whitespace-nowrap">
+          <div
+            ref={leftMarqueeRef}
+            className="flex min-w-0 py-4 cursor-grab active:cursor-grabbing whitespace-nowrap touch-pan-y select-none"
+            style={{ willChange: 'transform' }}
+            {...makeDragHandlers(leftDrag)}
+          >
             {skills.map((skill, index) => (
-              <div 
-                key={index} 
-                className="relative inline-flex items-center justify-center flex-shrink-0 w-40 h-24 px-4 py-3 mx-2 text-white transition-transform duration-300 transform bg-black border border-gray-700 shadow-lg group sm:mx-4 sm:px-6 sm:py-4 rounded-xl hover:scale-105 sm:w-48 sm:h-28 dark:border-gray-600"
+              <div
+                key={index}
+                className="relative inline-flex items-center justify-center flex-shrink-0 w-28 h-16 px-3 py-2 mx-1.5 text-white transition-transform duration-300 transform bg-black border border-gray-700 shadow-lg cursor-pointer group sm:mx-3 sm:px-4 sm:py-3 rounded-xl hover:scale-105 sm:w-36 sm:h-20 dark:border-gray-600"
               >
-                <div 
-                  className="flex items-center justify-center flex-shrink-0 w-12 h-12 bg-white rounded-full sm:w-16 sm:h-16 dark:bg-gray-700"
+                <div
+                  className="flex items-center justify-center flex-shrink-0 w-9 h-9 bg-white rounded-full sm:w-12 sm:h-12 dark:bg-gray-700"
                   style={{ backgroundColor: skill.color }}
                 >
-                  <img 
-                    src={skill.icon} 
-                    alt={skill.name} 
-                    className="object-contain w-8 h-8 sm:w-12 sm:h-12"
+                  <img
+                    src={skill.icon}
+                    alt={skill.name}
+                    className="object-contain w-6 h-6 sm:w-8 sm:h-8"
                   />
                 </div>
                 <div className="absolute px-2 py-1 text-xs font-light text-white transition-opacity duration-200 transform -translate-x-1/2 bg-gray-800 rounded opacity-0 pointer-events-none -top-8 left-1/2 dark:bg-gray-200 dark:text-black font-inter group-hover:opacity-100">
@@ -113,18 +193,18 @@ export default function Skill() {
               </div>
             ))}
             {skills.map((skill, index) => (
-              <div 
-                key={`dup-${index}`} 
-                className="relative inline-flex items-center justify-center flex-shrink-0 w-40 h-24 px-4 py-3 mx-2 text-white transition-transform duration-300 transform bg-black border border-gray-700 shadow-lg group sm:mx-4 sm:px-6 sm:py-4 dark:bg-gray-800 rounded-xl hover:scale-105 sm:w-48 sm:h-28 dark:border-gray-600"
+              <div
+                key={`dup-${index}`}
+                className="relative inline-flex items-center justify-center flex-shrink-0 w-28 h-16 px-3 py-2 mx-1.5 text-white transition-transform duration-300 transform bg-black border border-gray-700 shadow-lg cursor-pointer group sm:mx-3 sm:px-4 sm:py-3 dark:bg-gray-800 rounded-xl hover:scale-105 sm:w-36 sm:h-20 dark:border-gray-600"
               >
-                <div 
-                  className="flex items-center justify-center flex-shrink-0 w-12 h-12 bg-white rounded-full sm:w-16 sm:h-16 dark:bg-gray-700"
+                <div
+                  className="flex items-center justify-center flex-shrink-0 w-9 h-9 bg-white rounded-full sm:w-12 sm:h-12 dark:bg-gray-700"
                   style={{ backgroundColor: skill.color }}
                 >
-                  <img 
-                    src={skill.icon} 
-                    alt={skill.name} 
-                    className="object-contain w-8 h-8 sm:w-12 sm:h-12"
+                  <img
+                    src={skill.icon}
+                    alt={skill.name}
+                    className="object-contain w-6 h-6 sm:w-8 sm:h-8"
                   />
                 </div>
                 <div className="absolute px-2 py-1 text-xs font-light text-white transition-opacity duration-200 transform -translate-x-1/2 bg-gray-800 rounded opacity-0 pointer-events-none -top-8 left-1/2 dark:bg-gray-200 dark:text-black font-inter group-hover:opacity-100">
@@ -136,20 +216,25 @@ export default function Skill() {
         </div>
 
         <div className="relative flex py-4 overflow-hidden sm:py-6">
-          <div ref={rightMarqueeRef} className="flex min-w-0 py-4 whitespace-nowrap">
+          <div
+            ref={rightMarqueeRef}
+            className="flex min-w-0 py-4 cursor-grab active:cursor-grabbing whitespace-nowrap touch-pan-y select-none"
+            style={{ willChange: 'transform' }}
+            {...makeDragHandlers(rightDrag)}
+          >
             {skills.slice().reverse().map((skill, index) => (
-              <div 
-                key={index} 
-                className="relative inline-flex items-center justify-center flex-shrink-0 w-40 h-24 px-4 py-3 mx-2 text-white transition-transform duration-300 transform bg-black border border-gray-700 shadow-lg group sm:mx-4 sm:px-6 sm:py-4 rounded-xl hover:scale-105 sm:w-48 sm:h-28 dark:border-gray-600"
+              <div
+                key={index}
+                className="relative inline-flex items-center justify-center flex-shrink-0 w-28 h-16 px-3 py-2 mx-1.5 text-white transition-transform duration-300 transform bg-black border border-gray-700 shadow-lg cursor-pointer group sm:mx-3 sm:px-4 sm:py-3 rounded-xl hover:scale-105 sm:w-36 sm:h-20 dark:border-gray-600"
               >
-                <div 
-                  className="flex items-center justify-center flex-shrink-0 w-12 h-12 bg-white rounded-full sm:w-16 sm:h-16 dark:bg-gray-700"
+                <div
+                  className="flex items-center justify-center flex-shrink-0 w-9 h-9 bg-white rounded-full sm:w-12 sm:h-12 dark:bg-gray-700"
                   style={{ backgroundColor: skill.color }}
                 >
-                  <img 
-                    src={skill.icon} 
-                    alt={skill.name} 
-                    className="object-contain w-8 h-8 sm:w-12 sm:h-12"
+                  <img
+                    src={skill.icon}
+                    alt={skill.name}
+                    className="object-contain w-6 h-6 sm:w-8 sm:h-8"
                   />
                 </div>
                 <div className="absolute px-2 py-1 text-xs font-light text-white transition-opacity duration-200 transform -translate-x-1/2 bg-gray-800 rounded opacity-0 pointer-events-none -top-8 left-1/2 dark:bg-gray-200 dark:text-black font-inter group-hover:opacity-100">
@@ -158,18 +243,18 @@ export default function Skill() {
               </div>
             ))}
             {skills.slice().reverse().map((skill, index) => (
-              <div 
-                key={`dup-${index}`} 
-                className="relative inline-flex items-center justify-center flex-shrink-0 w-40 h-24 px-4 py-3 mx-2 text-white transition-transform duration-300 transform bg-black border border-gray-300 shadow-lg group sm:mx-4 sm:px-6 sm:py-4 dark:bg-gray-800 rounded-xl hover:scale-105 sm:w-48 sm:h-28 dark:border-gray-600"
+              <div
+                key={`dup-${index}`}
+                className="relative inline-flex items-center justify-center flex-shrink-0 w-28 h-16 px-3 py-2 mx-1.5 text-white transition-transform duration-300 transform bg-black border border-gray-300 shadow-lg cursor-pointer group sm:mx-3 sm:px-4 sm:py-3 dark:bg-gray-800 rounded-xl hover:scale-105 sm:w-36 sm:h-20 dark:border-gray-600"
               >
-                <div 
-                  className="flex items-center justify-center flex-shrink-0 w-12 h-12 bg-white rounded-full sm:w-16 sm:h-16 dark:bg-gray-700"
+                <div
+                  className="flex items-center justify-center flex-shrink-0 w-9 h-9 bg-white rounded-full sm:w-12 sm:h-12 dark:bg-gray-700"
                   style={{ backgroundColor: skill.color }}
                 >
-                  <img 
-                    src={skill.icon} 
-                    alt={skill.name} 
-                    className="object-contain w-8 h-8 sm:w-12 sm:h-12"
+                  <img
+                    src={skill.icon}
+                    alt={skill.name}
+                    className="object-contain w-6 h-6 sm:w-8 sm:h-8"
                   />
                 </div>
                 <div className="absolute px-2 py-1 text-xs font-light text-white transition-opacity duration-200 transform -translate-x-1/2 bg-gray-800 rounded opacity-0 pointer-events-none -top-8 left-1/2 dark:bg-gray-200 dark:text-black font-inter group-hover:opacity-100">
@@ -180,21 +265,6 @@ export default function Skill() {
           </div>
         </div>
 
-        <style jsx>{`
-          @keyframes marquee-left {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-          }
-          @keyframes marquee-right {
-            0% { transform: translateX(-50%); }
-            100% { transform: translateX(0); }
-          }
-          @media (max-width: 640px) {
-            .marquee-left, .marquee-right {
-              animation-duration: 30s;
-            }
-          }
-        `}</style>
       </div>
     </div>
   );

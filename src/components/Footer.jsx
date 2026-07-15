@@ -253,123 +253,101 @@ export default function Footer() {
         }}
       />
 
-      <div className="relative z-10 max-w-6xl px-4 py-12 mx-auto">
-        {/* Main content grid */}
+      <div className="relative z-10 max-w-6xl px-6 py-10 mx-auto sm:px-8 sm:py-14">
+        {/* Top row: copyright + back to top */}
         <div
-          className={`grid grid-cols-1 md:grid-cols-2 gap-8 mb-8 transition-all duration-1000 ${
-            isVisible
-              ? 'translate-y-0 opacity-100'
-              : 'translate-y-10 opacity-0'
+          className={`flex items-center justify-between transition-all duration-1000 ${
+            isVisible ? 'translate-y-0 opacity-100' : 'translate-y-5 opacity-0'
           }`}
         >
-          {/* Brand section */}
-          <div className="space-y-4">
-            <div className="group">
-              <h3
-                className={`text-2xl font-bold bg-gradient-to-r bg-clip-text text-transparent ${
-                  isDarkMode
-                    ? 'from-white to-gray-300'
-                    : 'from-black to-gray-700'
-                } `}
-              >
-                Thisara Ariyawansha
-              </h3>
-            </div>
-            <p
-              className={`text-sm ${
-                isDarkMode ? 'text-gray-300' : 'text-gray-600'
-              } leading-relaxed`}
-            >
-              Full Stack Developer crafting digital experiences with modern web technologies.
-            </p>
-          </div>
-
-          {/* Social links */}
-          <div className="space-y-4">
-            <h4
-              className={`font-semibold ${
-                isDarkMode ? 'text-white' : 'text-black'
-              }`}
-            >
-              Get in Touch
-            </h4>
-            <div className="flex space-x-4">
-              {socialLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.url}
-                  target={link.name === 'Email' ? '_self' : '_blank'}
-                  rel={link.name === 'Email' ? '' : 'noopener noreferrer'}
-                  className={`group relative w-10 h-10 rounded-lg border transition-all duration-300 flex items-center justify-center hover:scale-110 hover:-translate-y-1 ${
-                    isDarkMode
-                      ? 'bg-gray-800/50 border-gray-600 hover:bg-gray-700/50 hover:border-gray-500'
-                      : 'bg-gray-100/50 border-gray-300 hover:bg-gray-200/50 hover:border-gray-400'
-                  }`}
-                  style={{
-                    animationDelay: link.delay,
-                    animation: isVisible ? 'bounceIn 0.8s ease-out forwards' : 'none',
-                  }}
-                  title={link.name}
-                >
-                  <span className="transition-transform duration-300 group-hover:scale-110">
-                    {link.icon}
-                  </span>
-                  
-                  <div
-                    className={`absolute -top-10 left-1/2 transform -translate-x-1/2 px-2 py-1 rounded text-xs opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none ${
-                      isDarkMode
-                        ? 'bg-gray-800 text-white border border-gray-600'
-                        : 'bg-white text-black border border-gray-300 shadow-lg'
-                    }`}
-                  >
-                    {link.name}
-                    <div className={`absolute w-0 h-0 transform -translate-x-1/2 border-t-4 border-l-4 border-r-4 border-transparent top-full left-1/2 ${
-                      isDarkMode ? 'border-t-gray-800' : 'border-t-white'
-                    }`}></div>
-                  </div>
-                </a>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Divider with animation */}
-        <div className="relative mb-6">
-          <div
-            className={`h-px ${
-              isDarkMode ? 'bg-gray-500' : 'bg-gray-500'
-            } transition-all duration-1000 ${
-              isVisible ? 'scale-x-100' : 'scale-x-0'
-            }`}
-            style={{ transformOrigin: 'center' }}
-          ></div>
-        </div>
-
-        {/* Copyright section */}
-        <div
-          className={`flex flex-col md:flex-row justify-between items-center space-y-2 md:space-y-0 transition-all duration-1000 delay-300 ${
-            isVisible
-              ? 'translate-y-0 opacity-100'
-              : 'translate-y-5 opacity-0'
-          }`}
-        >
-          <p
-            className={`text-sm ${
-              isDarkMode ? 'text-gray-400' : 'text-gray-600'
-            } font-mono`}
-          >
-            © {currentYear} Thisara Ariyawansha. All rights reserved.
+          <p className={`text-xs sm:text-sm tracking-wide ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+            © {currentYear}
           </p>
-          
-          <div className="flex items-center space-x-4 text-sm">
+
+          <button
+            onClick={scrollToTop}
+            className="flex items-center gap-3 group"
+            aria-label="Back to top"
+          >
             <span
-              className={`${
-                isDarkMode ? 'text-gray-400' : 'text-gray-600'
+              className={`text-xs sm:text-sm font-medium tracking-wide ${
+                isDarkMode ? 'text-gray-300' : 'text-gray-700'
               }`}
             >
-              Code That Shapes the Future
+              BACK TO TOP
             </span>
-          </div>
+            <span
+              className={`flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 rounded-full transition-transform duration-300 group-hover:-translate-y-1 ${
+                isDarkMode ? 'bg-white text-black' : 'bg-black text-white'
+              }`}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="m18 15-6-6-6 6"/>
+              </svg>
+            </span>
+          </button>
+        </div>
+
+        {/* Big CTA */}
+        <div
+          className={`mt-16 sm:mt-20 transition-all duration-1000 delay-150 ${
+            isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+          }`}
+        >
+          <p className={`text-xs sm:text-sm font-semibold tracking-widest ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+            HAVE A PROJECT IN MIND?
+          </p>
+          <a
+            href="#contact"
+            className={`block font-extrabold uppercase leading-none tracking-tight transition-colors duration-300 ${
+              isDarkMode ? 'text-gray-700 hover:text-white' : 'text-gray-200 hover:text-black'
+            }`}
+            style={{ fontSize: 'clamp(3rem, 12vw, 9rem)' }}
+          >
+            Let&apos;s Talk
+          </a>
+        </div>
+
+        {/* Social pills */}
+        <div
+          className={`flex flex-wrap gap-3 mt-10 sm:mt-14 transition-all duration-1000 delay-300 ${
+            isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+          }`}
+        >
+          {socialLinks.map((link) => (
+            <a
+              key={link.name}
+              href={link.url}
+              target={link.name === 'Email' ? '_self' : '_blank'}
+              rel={link.name === 'Email' ? '' : 'noopener noreferrer'}
+              className={`px-5 py-2.5 sm:px-6 sm:py-3 rounded-full border text-xs sm:text-sm font-semibold tracking-wide uppercase transition-all duration-300 hover:scale-105 ${
+                isDarkMode
+                  ? 'border-gray-600 text-gray-200 hover:bg-white hover:text-black hover:border-white'
+                  : 'border-gray-300 text-gray-700 hover:bg-black hover:text-white hover:border-black'
+              }`}
+            >
+              {link.name}
+            </a>
+          ))}
+        </div>
+
+        {/* Divider */}
+        <div
+          className={`h-px mt-12 sm:mt-16 transition-all duration-1000 delay-500 ${
+            isDarkMode ? 'bg-gray-700' : 'bg-gray-200'
+          } ${isVisible ? 'scale-x-100' : 'scale-x-0'}`}
+          style={{ transformOrigin: 'center' }}
+        ></div>
+
+        {/* Credit */}
+        <div
+          className={`flex justify-start md:justify-end pt-6 transition-all duration-1000 delay-500 ${
+            isVisible ? 'translate-y-0 opacity-100' : 'translate-y-5 opacity-0'
+          }`}
+        >
+          <p className={`text-xs sm:text-sm text-left md:text-right ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+            Design &amp; Development by Thisara Ariyawansha
+          </p>
         </div>
       </div>
 
