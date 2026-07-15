@@ -15,6 +15,7 @@ const ProjectsShowcase = () => {
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
+  const [visibleCount, setVisibleCount] = useState(9);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -606,16 +607,33 @@ const ProjectsShowcase = () => {
             </div>
           </div>
         ) : (
-          // Desktop grid layout - unchanged
-          <div
-            className={`grid gap-8 ${
-              isMobile ? 'grid-cols-1' : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
-            }`}
-          >
-            {projects.map((project) => (
-              <ProjectCard key={project.id} project={project} />
-            ))}
-          </div>
+          // Desktop grid layout
+          <>
+            <div
+              className={`grid gap-8 ${
+                isMobile ? 'grid-cols-1' : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
+              }`}
+            >
+              {projects.slice(0, visibleCount).map((project) => (
+                <ProjectCard key={project.id} project={project} />
+              ))}
+            </div>
+
+            {visibleCount < projects.length && (
+              <div className="flex justify-center mt-10">
+                <button
+                  onClick={() => setVisibleCount((prev) => prev + 6)}
+                  className={`px-6 py-3 rounded-xl text-sm font-semibold transition-all duration-300 hover:scale-105 ${
+                    isDarkMode
+                      ? 'bg-white text-black hover:bg-gray-100 border border-gray-300'
+                      : 'bg-black text-white hover:bg-gray-800'
+                  }`}
+                >
+                  Load More
+                </button>
+              </div>
+            )}
+          </>
         )}
       </div>
 
