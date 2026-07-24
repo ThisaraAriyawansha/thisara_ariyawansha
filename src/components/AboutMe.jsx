@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from 'react';
+import ShutterText from './ShutterText';
 
 export default function AboutMe() {
   const [currentFact, setCurrentFact] = useState(0);
@@ -64,9 +65,12 @@ export default function AboutMe() {
           
           {/* Header */}
           <div className="mb-12 text-center">
-            <h2 className={`mb-4 text-3xl font-light tracking-wide md:text-4xl lg:text-4xl ${isDarkMode ? 'text-white' : 'text-black'}`}>
-              About Me
-            </h2>
+            <ShutterText
+              lines={['About Me']}
+              fontSize="clamp(30px, 4vw, 36px)"
+              className="mb-4 font-heading tracking-wide"
+              color={isDarkMode ? '#ffffff' : '#000000'}
+            />
             <div className={`w-16 h-px mx-auto mb-6 ${isDarkMode ? "bg-gray-500" : "bg-gray-500"}`} />
             <p className={`max-w-xl mx-auto text-base leading-relaxed px-4 py-2 rounded-lg ${
               isDarkMode ? ' text-white' : ' text-black'

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
+import ShutterText from './ShutterText';
 
 const Hero = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -106,11 +107,13 @@ const Hero = () => {
             </div>
 
             <div className="animate-fade-in-up animation-delay-300">
-              <h1   className={`text-2xl font-bold leading-tight md:text-3xl lg:text-4xl ${
-                  isDarkMode ? 'text-white' : 'text-black'
-                }`}>
-                Full Stack <span className="text-indigo-600 dark:text-indigo-600">Developer</span>
-              </h1>
+              <ShutterText
+                lines={[[{ text: 'Full Stack ' }, { text: 'Developer', color: '#4F46E5' }]]}
+                fontSize="clamp(24px, 4vw, 36px)"
+                className="font-heading"
+                color={isDarkMode ? '#ffffff' : '#000000'}
+                align="left"
+              />
             </div>
 
             <div className="animate-fade-in-up animation-delay-500">

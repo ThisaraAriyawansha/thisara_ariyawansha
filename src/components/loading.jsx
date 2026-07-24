@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import ShutterText from './ShutterText';
 
 export default function ClientWrapper({ children }) {
   const [isLoading, setIsLoading] = useState(true);
@@ -66,9 +67,13 @@ export default function ClientWrapper({ children }) {
         <div className="relative z-10 text-center">
           {/* Name/Brand */}
           <div className="mb-8">
-            <h1 className="mb-2 text-4xl font-thin tracking-wider text-white md:text-6xl">
-              THISARA
-            </h1>
+            <ShutterText
+              lines={['THISARA']}
+              fontSize="clamp(36px, 6vw, 60px)"
+              className="mb-2 font-heading tracking-wider"
+              color="#ffffff"
+              triggerOnView={false}
+            />
             <div className="text-sm md:text-base tracking-[0.3em] text-gray-400 font-light">
               ARIYAWANSHA
             </div>

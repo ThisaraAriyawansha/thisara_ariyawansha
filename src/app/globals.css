@@ -1,5 +1,19 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Orbitron:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Orbitron:wght@400;600&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+@font-face {
+  font-family: 'Michroma';
+  src: url('/font/Michroma/Michroma-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+h1,
+h2,
+.font-heading {
+  font-family: 'Michroma', sans-serif;
+}
 
 :root {
   --background: #ffffff;
@@ -23,7 +37,7 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Poppins', Arial, Helvetica, sans-serif;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -45,6 +59,48 @@ body {
 
 .dark .text-black {
   color: #ffffff;
+}
+
+/* Shutter-text reveal animation (per-character blur + scanning slices) */
+.shutter-text-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.shutter-word {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.shutter-space {
+  display: inline-block;
+  flex-shrink: 0;
+  width: 0.25em;
+}
+
+.shutter-char {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+}
+
+.shutter-char-main {
+  display: inline-block;
+  line-height: 1.5;
+  padding-bottom: 0.2em;
+}
+
+.shutter-slice {
+  display: inline-block;
+  position: absolute;
+  inset: 0;
+  line-height: 1.5;
+  padding-bottom: 0.2em;
+  z-index: 10;
+  pointer-events: none;
 }
 
 

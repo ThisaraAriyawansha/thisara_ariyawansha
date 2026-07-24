@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from 'react';
+import ShutterText from './ShutterText';
 
 export default function SkillsExperience() {
   const [activeTab, setActiveTab] = useState('skills');
@@ -68,9 +69,12 @@ export default function SkillsExperience() {
           
           {/* Section Header */}
           <div className="mb-10 text-center">
-            <h2 className={`mb-3 text-2xl font-light tracking-wide md:text-3xl ${isDarkMode ? 'text-white' : 'text-black'}`}>
-              Skills & Experience
-            </h2>
+            <ShutterText
+              lines={['Skills & Experience']}
+              fontSize="clamp(24px, 4vw, 30px)"
+              className="mb-3 font-heading tracking-wide"
+              color={isDarkMode ? '#ffffff' : '#000000'}
+            />
             <div className={`w-16 h-px mx-auto mb-4 ${isDarkMode ? 'bg-gray-400' : 'bg-black'}`}></div>
             <p className={`max-w-2xl mx-auto text-sm md:text-base ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
               A comprehensive overview of my technical expertise and professional journey

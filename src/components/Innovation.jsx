@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from 'react';
+import ShutterText from './ShutterText';
 
 export default function Innovation() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -62,11 +63,13 @@ export default function Innovation() {
             {/* Frontend Side - Left */}
             <div className="space-y-8 text-center lg:text-right">
               <div className="space-y-6">
-                <h2 className={`text-5xl font-light tracking-wide lg:text-6xl ${
-                  isDarkMode ? 'text-white' : 'text-black'
-                }`}>
-                  frontend
-                </h2>
+                <ShutterText
+                  lines={['frontend']}
+                  fontSize="clamp(40px, 5vw, 60px)"
+                  className="font-heading tracking-wide"
+                  color={isDarkMode ? '#ffffff' : '#000000'}
+                  align="right"
+                />
                 <div className={`space-y-4 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
                   <p className="text-sm leading-relaxed">
                     Full Stack Developer specializing in<br />
@@ -160,11 +163,13 @@ export default function Innovation() {
             {/* Backend Side - Right */}
             <div className="space-y-8 text-center lg:text-left">
               <div className="space-y-6">
-                <h2 className={`text-5xl font-light tracking-wide lg:text-6xl ${
-                  isDarkMode ? 'text-white' : 'text-black'
-                }`}>
-                  backend
-                </h2>
+                <ShutterText
+                  lines={['backend']}
+                  fontSize="clamp(40px, 5vw, 60px)"
+                  className="font-heading tracking-wide"
+                  color={isDarkMode ? '#ffffff' : '#000000'}
+                  align="left"
+                />
                 <div className={`space-y-4 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
                   <p className="text-sm leading-relaxed">
                     Full Stack Developer experienced in<br />

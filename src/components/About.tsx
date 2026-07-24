@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import ShutterText from "./ShutterText";
 
 export default function About() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -77,16 +78,12 @@ export default function About() {
         {/* About Me Introduction */}
         <div className="max-w-4xl px-4 mx-auto sm:px-6 lg:px-8">
           <div className="text-center">
-            <h2 
-              className={`text-lg sm:text-xl md:text-2xl font-light   ${
-                isDarkMode ? "text-white" : "text-black"
-              }`}
-              style={{ 
-                fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif'
-              }}
-            >
-              TIMELINE
-            </h2>
+            <ShutterText
+              lines={['TIMELINE']}
+              fontSize="clamp(18px, 3vw, 24px)"
+              className="font-heading"
+              color={isDarkMode ? '#ffffff' : '#000000'}
+            />
             <div className={`w-16 h-px mx-auto mb-6 ${isDarkMode ? "bg-gray-500" : "bg-gray-500"}`} />
 
 

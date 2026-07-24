@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import ShutterText from "./ShutterText";
 
 export default function Contact() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -145,23 +146,18 @@ export default function Contact() {
 
               <div className="grid items-center grid-cols-1 gap-6 lg:grid-cols-3 sm:gap-8 lg:gap-12">
                 <div className="lg:col-span-2">
-                  <h1 
-                    className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-light mb-4 sm:mb-6 leading-tight ${
-                      isDarkMode ? "text-white" : "text-black"
-                    }`}
-                    style={{ 
-                      fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif',
-                      letterSpacing: '-0.02em'
-                    }}
-                  >
-                    Let's Build
-                    <br />
-                    <span className={`${isDarkMode ? "text-gray-400" : "text-gray-600"}`}>
-                      Something
-                    </span>
-                    <br />
-                    Amazing
-                  </h1>
+                  <ShutterText
+                    lines={[
+                      [{ text: "Let's Build" }],
+                      [{ text: 'Something', color: isDarkMode ? '#9ca3af' : '#4b5563' }],
+                      [{ text: 'Amazing' }],
+                    ]}
+                    fontSize="clamp(24px, 5vw, 60px)"
+                    className="mb-4 font-heading sm:mb-6"
+                    color={isDarkMode ? '#ffffff' : '#000000'}
+                    align="left"
+                    style={{ letterSpacing: '-0.02em' }}
+                  />
                   
                   <p 
                     className={`text-sm sm:text-base lg:text-lg max-w-lg leading-relaxed ${

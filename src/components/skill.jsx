@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from 'react';
+import ShutterText from './ShutterText';
 
 export default function Skill() {
   const skills = [
@@ -156,9 +157,13 @@ export default function Skill() {
             isDarkMode ? 'bg-black text-white' : 'bg-white text-black'
           }`}
         >
-        <h2 className="mb-4 text-2xl font-bold text-center sm:text-3xl sm:mb-4">
-          Technology Skills
-        </h2>
+        <ShutterText
+          lines={['Technology Skills']}
+          fontSize="clamp(24px, 4vw, 30px)"
+          className="mb-4 font-bold sm:mb-4 font-heading"
+          color={isDarkMode ? '#ffffff' : '#000000'}
+          revealColor="#1E3A8A"
+        />
         <div
           className={`w-24 h-1 mx-auto mb-8 rounded sm:mb-12 ${
             isDarkMode ? 'bg-gray-100' : 'bg-gray-900'
