@@ -198,7 +198,7 @@ const ShowcaseSection = () => {
         </h1>
 
         {/* Subtitle */}
-        <p className="max-w-xl px-4 py-2 mt-4 text-sm text-center text-gray-600 sm:text-base md:text-base lg:text-lg">
+        <p className="max-w-xl px-4 py-2 mt-4 mx-auto text-sm text-center text-gray-600 sm:text-base md:text-base lg:text-lg">
           A curated collection of my work, featuring innovative solutions and cutting-edge technologies.
         </p>
       </div>
