@@ -149,6 +149,27 @@ export default function Skill() {
     },
   });
 
+  const renderCard = (skill, index) => (
+    <div
+      key={index}
+      className="relative inline-flex items-center justify-center flex-shrink-0 w-28 h-16 px-3 py-2 mx-1.5 text-white transition-transform duration-300 transform bg-black border border-gray-700 shadow-lg cursor-pointer group sm:mx-3 sm:px-4 sm:py-3 rounded-xl hover:scale-105 sm:w-36 sm:h-20"
+    >
+      <div
+        className="flex items-center justify-center flex-shrink-0 w-9 h-9 rounded-full sm:w-12 sm:h-12"
+        style={{ backgroundColor: skill.color }}
+      >
+        <img
+          src={skill.icon}
+          alt={skill.name}
+          className="object-contain w-6 h-6 sm:w-8 sm:h-8"
+        />
+      </div>
+      <div className="absolute px-2 py-1 text-xs font-light text-white transition-opacity duration-200 transform -translate-x-1/2 bg-gray-800 rounded opacity-0 pointer-events-none -top-8 left-1/2 dark:bg-gray-200 dark:text-black font-inter group-hover:opacity-100">
+        {skill.name.charAt(0).toUpperCase() + skill.name.slice(1)}
+      </div>
+    </div>
+  );
+
   return (
     <div className={isDarkMode ? 'dark' : ''}>
       <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap" rel="stylesheet" />
@@ -170,105 +191,21 @@ export default function Skill() {
           }`}
         ></div>
 
-        <div className="relative flex py-4 overflow-hidden sm:py-6">
-          <div
-            ref={leftMarqueeRef}
-            className="flex min-w-0 py-4 cursor-grab active:cursor-grabbing whitespace-nowrap touch-pan-y select-none"
-            style={{ willChange: 'transform' }}
-            {...makeDragHandlers(leftDrag)}
-          >
-            {skills.map((skill, index) => (
-              <div
-                key={index}
-                className="relative inline-flex items-center justify-center flex-shrink-0 w-28 h-16 px-3 py-2 mx-1.5 text-white transition-transform duration-300 transform bg-black border border-gray-700 shadow-lg cursor-pointer group sm:mx-3 sm:px-4 sm:py-3 rounded-xl hover:scale-105 sm:w-36 sm:h-20 dark:border-gray-600"
-              >
-                <div
-                  className="flex items-center justify-center flex-shrink-0 w-9 h-9 bg-white rounded-full sm:w-12 sm:h-12 dark:bg-gray-700"
-                  style={{ backgroundColor: skill.color }}
-                >
-                  <img
-                    src={skill.icon}
-                    alt={skill.name}
-                    className="object-contain w-6 h-6 sm:w-8 sm:h-8"
-                  />
-                </div>
-                <div className="absolute px-2 py-1 text-xs font-light text-white transition-opacity duration-200 transform -translate-x-1/2 bg-gray-800 rounded opacity-0 pointer-events-none -top-8 left-1/2 dark:bg-gray-200 dark:text-black font-inter group-hover:opacity-100">
-                  {skill.name.charAt(0).toUpperCase() + skill.name.slice(1)}
-                </div>
-              </div>
-            ))}
-            {skills.map((skill, index) => (
-              <div
-                key={`dup-${index}`}
-                className="relative inline-flex items-center justify-center flex-shrink-0 w-28 h-16 px-3 py-2 mx-1.5 text-white transition-transform duration-300 transform bg-black border border-gray-700 shadow-lg cursor-pointer group sm:mx-3 sm:px-4 sm:py-3 dark:bg-gray-800 rounded-xl hover:scale-105 sm:w-36 sm:h-20 dark:border-gray-600"
-              >
-                <div
-                  className="flex items-center justify-center flex-shrink-0 w-9 h-9 bg-white rounded-full sm:w-12 sm:h-12 dark:bg-gray-700"
-                  style={{ backgroundColor: skill.color }}
-                >
-                  <img
-                    src={skill.icon}
-                    alt={skill.name}
-                    className="object-contain w-6 h-6 sm:w-8 sm:h-8"
-                  />
-                </div>
-                <div className="absolute px-2 py-1 text-xs font-light text-white transition-opacity duration-200 transform -translate-x-1/2 bg-gray-800 rounded opacity-0 pointer-events-none -top-8 left-1/2 dark:bg-gray-200 dark:text-black font-inter group-hover:opacity-100">
-                  {skill.name.charAt(0).toUpperCase() + skill.name.slice(1)}
-                </div>
-              </div>
-            ))}
+        {[
+          { ref: leftMarqueeRef, drag: leftDrag, list: skills },
+          { ref: rightMarqueeRef, drag: rightDrag, list: skills.slice().reverse() },
+        ].map((row, rowIndex) => (
+          <div key={rowIndex} className="relative flex py-4 overflow-hidden sm:py-6">
+            <div
+              ref={row.ref}
+              className="flex min-w-0 py-4 cursor-grab active:cursor-grabbing whitespace-nowrap touch-pan-y select-none"
+              style={{ willChange: 'transform' }}
+              {...makeDragHandlers(row.drag)}
+            >
+              {[...row.list, ...row.list].map((skill, index) => renderCard(skill, index))}
+            </div>
           </div>
-        </div>
-
-        <div className="relative flex py-4 overflow-hidden sm:py-6">
-          <div
-            ref={rightMarqueeRef}
-            className="flex min-w-0 py-4 cursor-grab active:cursor-grabbing whitespace-nowrap touch-pan-y select-none"
-            style={{ willChange: 'transform' }}
-            {...makeDragHandlers(rightDrag)}
-          >
-            {skills.slice().reverse().map((skill, index) => (
-              <div
-                key={index}
-                className="relative inline-flex items-center justify-center flex-shrink-0 w-28 h-16 px-3 py-2 mx-1.5 text-white transition-transform duration-300 transform bg-black border border-gray-700 shadow-lg cursor-pointer group sm:mx-3 sm:px-4 sm:py-3 rounded-xl hover:scale-105 sm:w-36 sm:h-20 dark:border-gray-600"
-              >
-                <div
-                  className="flex items-center justify-center flex-shrink-0 w-9 h-9 bg-white rounded-full sm:w-12 sm:h-12 dark:bg-gray-700"
-                  style={{ backgroundColor: skill.color }}
-                >
-                  <img
-                    src={skill.icon}
-                    alt={skill.name}
-                    className="object-contain w-6 h-6 sm:w-8 sm:h-8"
-                  />
-                </div>
-                <div className="absolute px-2 py-1 text-xs font-light text-white transition-opacity duration-200 transform -translate-x-1/2 bg-gray-800 rounded opacity-0 pointer-events-none -top-8 left-1/2 dark:bg-gray-200 dark:text-black font-inter group-hover:opacity-100">
-                  {skill.name.charAt(0).toUpperCase() + skill.name.slice(1)}
-                </div>
-              </div>
-            ))}
-            {skills.slice().reverse().map((skill, index) => (
-              <div
-                key={`dup-${index}`}
-                className="relative inline-flex items-center justify-center flex-shrink-0 w-28 h-16 px-3 py-2 mx-1.5 text-white transition-transform duration-300 transform bg-black border border-gray-300 shadow-lg cursor-pointer group sm:mx-3 sm:px-4 sm:py-3 dark:bg-gray-800 rounded-xl hover:scale-105 sm:w-36 sm:h-20 dark:border-gray-600"
-              >
-                <div
-                  className="flex items-center justify-center flex-shrink-0 w-9 h-9 bg-white rounded-full sm:w-12 sm:h-12 dark:bg-gray-700"
-                  style={{ backgroundColor: skill.color }}
-                >
-                  <img
-                    src={skill.icon}
-                    alt={skill.name}
-                    className="object-contain w-6 h-6 sm:w-8 sm:h-8"
-                  />
-                </div>
-                <div className="absolute px-2 py-1 text-xs font-light text-white transition-opacity duration-200 transform -translate-x-1/2 bg-gray-800 rounded opacity-0 pointer-events-none -top-8 left-1/2 dark:bg-gray-200 dark:text-black font-inter group-hover:opacity-100">
-                  {skill.name.charAt(0).toUpperCase() + skill.name.slice(1)}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+        ))}
 
       </div>
     </div>
